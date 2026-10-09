@@ -4,4 +4,4 @@ dist
 .DS_Store
 
 # Original phone photos (unedited; may show people)
-public/pictures/IMG_*
+IMG_*
