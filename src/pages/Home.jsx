@@ -36,7 +36,7 @@ export default function Home() {
           transform: `scale(${heroScale})`,
         }}>
           <img
-            src="/pictures/neelpaakhi-gateview.jpeg"
+            src="/pictures/neelpaakhi-hero.jpeg"
             alt="The garden and hills at Neel Paakhi, seen from the gate"
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", display: "block" }}
           />
