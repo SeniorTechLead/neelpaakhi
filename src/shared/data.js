@@ -33,9 +33,9 @@ export const curatedExperiences = [
 ];
 
 export const retreatPackages = [
-  { title: "Corporate Offsite", subtitle: "Team Retreats & Strategy Sessions", label: "FOR SMALL TEAMS",
-    desc: "Turn your next offsite into something your team actually remembers. A private two-storey chang ghar, campfire circles, a private dining room, and zero cubicle energy. Mornings for strategy, afternoons for bamboo craft or river walks, evenings around the campfire with live acoustic music. We handle logistics \u2014 you bring the agenda.",
-    highlights: ["Full retreat buyout (exclusive use)", "Dedicated dining for private team meals", "Campfire bonding sessions with acoustic music", "Curated team activities \u2014 boat rides, weaving, bamboo craft", "Yoga and meditation sessions on request", "AV setup for presentations in the restaurant space"],
+  { title: "Corporate Day Offsite", subtitle: "Team Days & Strategy Sessions", label: "DAY PROGRAM",
+    desc: "Turn your next offsite into a day your team actually remembers. Arrive in the morning, leave after the campfire. A private dining room, the garden and courtyard to yourselves, and zero cubicle energy. Mornings for strategy, afternoons for bamboo craft or river walks, and an early evening around the campfire with live acoustic music. We handle logistics \u2014 you bring the agenda.",
+    highlights: ["Exclusive use of the retreat for the day", "Working lunch and high tea in the private dining room", "Campfire session with acoustic music to close the day", "Curated team activities \u2014 boat rides, weaving, bamboo craft", "Morning yoga or guided meditation on request", "AV setup for presentations in the restaurant space"],
     cta: "Enquire for your dates" },
   { title: "Yoga & Meditation Camp", subtitle: "Multi-Day Wellness Retreats", label: "2, 3, OR 5-DAY PROGRAMS",
     desc: "A structured retreat for those who came to slow down. Daily sunrise yoga on the covered bamboo deck, guided meditation by the plunge pool, Assamese vegetarian meals, and digital detox protocols. Led by visiting practitioners. No phones at the campfire \u2014 just the sound of the river and the guitar.",

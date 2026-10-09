@@ -2,3 +2,6 @@ node_modules
 dist
 .env
 .DS_Store
+
+# Original phone photos (unedited; may show people)
+public/pictures/IMG_*
