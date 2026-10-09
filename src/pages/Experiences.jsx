@@ -33,7 +33,7 @@ export default function Experiences() {
             {[
               { title: "Yoga Deck", Svg: YogaDeckSVG, desc: "A covered bamboo platform open to the morning sky. Daily sessions at sunrise. The paddy fields are your horizon line." },
               { title: "Plunge Pool", Svg: PlungePoolSVG, desc: "A courtyard plunge pool surrounded by tropical landscaping. Wooden deck with loungers. The perfect reset between afternoon exploration and evening campfire." },
-              { title: "Campfire Circle", Svg: CampfireCircleSVG, desc: "Two campfire areas nestled among the cottages. Stargazing with zero light pollution. Acoustic guitars, rice beer, and stories under an Assamese sky." },
+              { title: "Campfire Circle", Svg: CampfireCircleSVG, desc: "Campfire areas tucked into the garden. Stargazing with zero light pollution. Acoustic guitars, rice beer, and stories under an Assamese sky." },
             ].map((w, i) => (
               <FadeIn key={i} delay={i * 0.15}>
                 <div style={{

@@ -27,13 +27,13 @@ export default function OurStory() {
                 <div style={{ width: 50, height: 1, background: P.gold, marginBottom: 24 }} />
                 <p style={{ fontFamily: font.accent, fontSize: 17, lineHeight: 1.9, color: P.muted, marginBottom: 16 }}>
                   There was a time when evenings smelled of incense and river water.
-                  When a Bhupen Hazarika song on the radio could stop an entire household.
+                  When a song on the radio could stop an entire household.
                   When letters arrived by post and tea was brewed slow.
                 </p>
                 <p style={{ fontFamily: font.accent, fontSize: 17, lineHeight: 1.9, color: P.muted, marginBottom: 16 }}>
                   Neel Paakhi is built on the belief that that time didn't pass — we just
                   stopped listening. This is a place where the unhurried magic of the 1970s
-                  never ended, where Jayanta Hazarika's melodies still drift across paddy fields
+                  never ended, where old Assamese melodies still drift across paddy fields
                   at dusk, and a campfire under the stars is the only evening plan you need.
                 </p>
                 <p style={{ fontFamily: font.accent, fontSize: 17, lineHeight: 1.9, color: P.muted }}>
@@ -80,7 +80,7 @@ export default function OurStory() {
             <FadeIn>
               <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 24 }}>
                 {[
-                  { title: "Remember", icon: "\u{1F4FB}", text: "The golden age of Assamese and Bengali music lives here. Bhupen da, Jayanta da, Hemanta — not as nostalgia, but as the present." },
+                  { title: "Remember", icon: "\u{1F4FB}", text: "The golden age of Assamese and Bengali music lives here — the old songs and the great voices, not as nostalgia, but as the present." },
                   { title: "Listen", icon: "\u{1F3B5}", text: "The acoustic stage is the heart. Live music every evening — from folk to Rabindrasangeet — flows through the courtyard into your room." },
                   { title: "Root", icon: "\u{1F331}", text: "Bamboo, river stone, Muga silk, gamosa patterns. Every surface tells an Assamese story from a time when craft was slow and honest." },
                   { title: "Breathe", icon: "\u{1F32C}\uFE0F", text: "No screens, no rush. Campfire, stargazing, yoga at dawn. A rhythm that belongs to the 1970s and refuses to leave." },

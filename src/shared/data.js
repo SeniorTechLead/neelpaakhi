@@ -1,22 +1,19 @@
 export const rooms = [
-  { name: "Boundary Cottage", size: "297 sq ft", count: 11, type: "boundary",
-    desc: "A-frame bamboo cottage with woven walls, rain shower, and 5ft open verandah facing the courtyard. 4ft back porch overhangs the walking trail \u2014 shade for morning walkers, privacy for you. Handwoven Assamese cotton bedlinen. Morning birdsong is your alarm.",
-    price: "5,000", originalPrice: "7,500" },
-  { name: "Campfire Cottage", size: "204 sq ft", count: 4, type: "campfire",
-    desc: "Compact bamboo retreat with the campfire just steps from your verandah. Rain shower, Muga silk accents, and the sound of crackling fire and acoustic guitar drifting through the night air. Cozy fireside living.",
+  { name: "The Chang Ghar Suite", type: "suite",
+    desc: "A two-storey chang ghar \u2014 the traditional Assamese house raised on stilts \u2014 reimagined as a single private suite. Bamboo and timber, lifted above the garden, with the hills on the horizon. Rain shower, handwoven Assamese cotton bedlinen, and the whole retreat quiet around you. Morning birdsong is your alarm.",
     price: "5,000", originalPrice: "7,500" },
 ];
 
 export const musicSchedule = [
-  { day: "Xomoy Fridays", desc: "Assamese folk night. Jayanta Hazarika tributes, Bhupen da classics, Bihu rhythms around the fire. Local artists and guest musicians.", icon: "\u{1F3B6}" },
+  { day: "Xomoy Fridays", desc: "Assamese folk night. Tributes to the great Assamese composers, timeless classics, Bihu rhythms around the fire. Local artists and guest musicians.", icon: "\u{1F3B6}" },
   { day: "Purano Din Saturdays", desc: "Bengali evening by candlelight. Rabindrasangeet, Hemanta Mukherjee covers, Manna Dey, Nachiketa, Anjan Dutt. Tagore set to acoustic guitar.", icon: "\u{1F56F}\uFE0F" },
   { day: "Pahadi Sundays", desc: "Nepali and Naga hill songs. Narayan Gopal classics, Alobo Naga covers, Tetseo Sisters\u2013style folk harmonies. New-age Northeast indie. Acoustic and intimate.", icon: "\u26F0\uFE0F" },
 ];
 
 export const dailyMusic = [
-  { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 Jayanta Hazarika melodies, Zubeen Garg acoustic covers, Bhupen Hazarika classics" },
-  { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Instrumental sitar, flute, lo-fi Nepali ballads, Jayanta Hazarika deep cuts" },
-  { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 Jayanta Hazarika favourites, old Hindi covers, Bengali classics, campfire requests" },
+  { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 classic Assamese melodies, Zubeen Garg acoustic covers, old radio favourites" },
+  { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Instrumental sitar, flute, lo-fi Nepali ballads, Assamese golden-era deep cuts" },
+  { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 Assamese favourites, old Hindi covers, Bengali classics, campfire requests" },
   { time: "Night", icon: "\u{1F319}", desc: "Campfire jams \u2014 Nepali, Naga, Assamese, Hindi soul. Guest requests." },
 ];
 
@@ -30,22 +27,22 @@ export const curatedExperiences = [
   { title: "North Guwahati Heritage Walk", icon: "\u{1F9ED}", duration: "Half day", season: "Oct \u2013 Mar",
     desc: "A curated walk through the old north bank \u2014 Ashwaklanta Temple, Madan Kamdev ruins, and the ferry ghats that connected the two banks before the bridges. Led by a local historian. Ends with a traditional Assamese lunch." },
   { title: "Bamboo Craft Session", icon: "\u{1F38D}", duration: "2 hours", season: "Year-round",
-    desc: "Sit with local bamboo artisans and learn the craft that built your cottage. Make a small lamp, basket, or flute from fresh-cut bamboo. A tactile, meditative afternoon." },
+    desc: "Sit with local bamboo artisans and learn the craft behind your chang ghar. Make a small lamp, basket, or flute from fresh-cut bamboo. A tactile, meditative afternoon." },
   { title: "Sunrise at Nilachal Hill", icon: "\u{1F305}", duration: "Early morning", season: "Year-round",
     desc: "A 20-minute drive to Nilachal Hill \u2014 home of Kamakhya Temple. Watch the sun rise over the Brahmaputra valley, visit the temple complex, and return to the retreat for breakfast." },
 ];
 
 export const retreatPackages = [
-  { title: "Corporate Offsite", subtitle: "Team Retreats & Strategy Sessions", label: "FOR TEAMS OF 8\u201315",
-    desc: "Turn your next offsite into something your team actually remembers. Fifteen bamboo cottages, two campfire circles, a private dining room, and zero cubicle energy. Mornings for strategy, afternoons for bamboo craft or river walks, evenings around the campfire with live acoustic music. We handle logistics \u2014 you bring the agenda.",
-    highlights: ["Full retreat buyout (15 cottages, exclusive use)", "Dedicated dining for private team meals", "Campfire bonding sessions with acoustic music", "Curated team activities \u2014 boat rides, weaving, bamboo craft", "Yoga and meditation sessions on request", "AV setup for presentations in the restaurant space"],
+  { title: "Corporate Offsite", subtitle: "Team Retreats & Strategy Sessions", label: "FOR SMALL TEAMS",
+    desc: "Turn your next offsite into something your team actually remembers. A private two-storey chang ghar, campfire circles, a private dining room, and zero cubicle energy. Mornings for strategy, afternoons for bamboo craft or river walks, evenings around the campfire with live acoustic music. We handle logistics \u2014 you bring the agenda.",
+    highlights: ["Full retreat buyout (exclusive use)", "Dedicated dining for private team meals", "Campfire bonding sessions with acoustic music", "Curated team activities \u2014 boat rides, weaving, bamboo craft", "Yoga and meditation sessions on request", "AV setup for presentations in the restaurant space"],
     cta: "Enquire for your dates" },
   { title: "Yoga & Meditation Camp", subtitle: "Multi-Day Wellness Retreats", label: "2, 3, OR 5-DAY PROGRAMS",
     desc: "A structured retreat for those who came to slow down. Daily sunrise yoga on the covered bamboo deck, guided meditation by the plunge pool, Assamese vegetarian meals, and digital detox protocols. Led by visiting practitioners. No phones at the campfire \u2014 just the sound of the river and the guitar.",
     highlights: ["Daily sunrise yoga and sunset meditation", "Pranayama and breathwork sessions", "Sattvic Assamese meals designed for the program", "Guided nature walks and Brahmaputra contemplation", "Sound healing with traditional instruments", "Personal consultation with the visiting practitioner"],
     cta: "Register interest" },
-  { title: "Hazarika Weekend", subtitle: "A Musical Pilgrimage", label: "MONTHLY SPECIAL",
-    desc: "A two-night stay built around our signature monthly Hazarika Night. Arrive Friday for Xomoy evening, spend Saturday exploring the north bank, and experience the full Hazarika Night under the jacaranda tree. A celebration of Bhupen Hazarika and Jayanta Hazarika\u2019s legacy with guest artists from across Assam.",
-    highlights: ["Two nights in a bamboo cottage", "Xomoy Friday + Hazarika Night Saturday", "Curated playlist and listening notes in your cottage", "Guided visit to Bhupen Hazarika Museum (Guwahati)", "Assamese thali dinner with traditional rice beer", "Acoustic jam session \u2014 requests welcome"],
+  { title: "Golden Era Weekend", subtitle: "A Musical Pilgrimage", label: "MONTHLY SPECIAL",
+    desc: "A two-night stay built around our signature monthly Golden Era Night. Arrive Friday for Xomoy evening, spend Saturday exploring the north bank, and experience the full Golden Era Night under the jacaranda tree. A celebration of Assam\u2019s musical legacy with guest artists from across the region.",
+    highlights: ["Two nights in the chang ghar suite", "Xomoy Friday + Golden Era Night Saturday", "Curated playlist and listening notes in your suite", "Guided visit to Guwahati\u2019s music and cultural landmarks", "Assamese thali dinner with traditional rice beer", "Acoustic jam session \u2014 requests welcome"],
     cta: "Check upcoming dates" },
 ];

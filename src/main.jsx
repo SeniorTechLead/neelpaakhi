@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import NeelPaakhiMasterPlan from './MasterPlan.jsx'
 import Home from './pages/Home.jsx'
 import Rooms from './pages/Rooms.jsx'
 import Dining from './pages/Dining.jsx'
@@ -11,7 +10,6 @@ const path = window.location.pathname
 
 function App() {
   switch (path) {
-    case '/masterplan': return <NeelPaakhiMasterPlan />;
     case '/rooms': return <Rooms />;
     case '/dining': return <Dining />;
     case '/experiences': return <Experiences />;

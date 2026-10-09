@@ -70,9 +70,8 @@ export default function Dining() {
                   The Jacaranda Stage
                 </h3>
                 <p style={{ fontFamily: font.accent, fontSize: 15, lineHeight: 1.8, color: P.muted }}>
-                  A raised stage beneath the old jacaranda tree, nestled between the cottages.
-                  Campfire cottage guests watch from their verandahs {"\u2014"} front row seats.
-                  Boundary cottage guests pull up a chair. No food, no bar {"\u2014"} just music,
+                  A raised stage beneath the old jacaranda tree in the courtyard.
+                  Pull up a chair by the fire. No food, no bar {"\u2014"} just music,
                   the tree{"\u2019"}s canopy overhead, and the stars beyond it.
                   On Fridays, Saturdays, and Sundays the performance moves here.
                 </p>
@@ -158,8 +157,8 @@ export default function Dining() {
               background: `${P.gold}08`, border: `1px solid ${P.gold}22`,
             }}>
               <p style={{ fontFamily: font.accent, fontSize: 15, fontStyle: "italic", color: P.goldLight }}>
-                Monthly Hazarika Nights — a dedicated evening celebrating
-                the legacy of Bhupen da and Jayanta da, with guest artists from across Assam.
+                Monthly Golden Era Nights — a dedicated evening celebrating
+                the great composers and voices of Assam, with guest artists from across the region.
               </p>
             </div>
           </FadeIn>
@@ -196,7 +195,7 @@ export default function Dining() {
                   </p>
                   <p style={{ fontFamily: font.accent, fontSize: 15, lineHeight: 1.9, color: `${P.cream}cc`, marginTop: 16, marginBottom: 0 }}>
                     <strong style={{ color: P.goldLight }}>Outside</strong> {"\u2014"} the jacaranda stage,
-                    nestled between the cottages. The cottage verandahs are the gallery.
+                    in the courtyard. The garden is the gallery.
                     No food, no bar {"\u2014"} just the performer and anyone who wants to listen.
                     The bigger nights live here.
                   </p>

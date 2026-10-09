@@ -17,7 +17,6 @@ const navLinks = [
   { label: "Rooms", href: "/rooms" },
   { label: "Dining", href: "/dining" },
   { label: "Experiences", href: "/experiences" },
-  { label: "Master Plan", href: "/masterplan" },
 ];
 
 export default function Nav() {
@@ -46,7 +45,7 @@ export default function Nav() {
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         padding: "16px 32px",
-        background: scrollY > 100 ? `${P.deep}ee` : "transparent",
+        background: scrollY > 100 ? `${P.deep}ee` : "linear-gradient(180deg, rgba(13,27,30,0.7) 0%, rgba(13,27,30,0) 100%)",
         backdropFilter: scrollY > 100 ? "blur(12px)" : "none",
         transition: "all 0.5s ease",
         display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -73,12 +72,12 @@ export default function Nav() {
             {navLinks.map((link) => (
               <a key={link.label} href={link.href} aria-current={path === link.href ? "page" : undefined} style={{
                 textDecoration: "none",
-                fontFamily: font.body, fontSize: 11, letterSpacing: 2, color: path === link.href ? P.gold : P.muted,
+                fontFamily: font.body, fontSize: 11, letterSpacing: 2, color: path === link.href ? P.gold : P.sand,
                 cursor: "pointer", textTransform: "uppercase", fontWeight: 400,
                 transition: "color 0.3s", borderBottom: path === link.href ? `1px solid ${P.gold}` : "1px solid transparent",
               }}
               onMouseEnter={(e) => { e.target.style.color = P.gold; e.target.style.borderBottomColor = P.gold; }}
-              onMouseLeave={(e) => { if (path !== link.href) { e.target.style.color = P.muted; e.target.style.borderBottomColor = "transparent"; } }}
+              onMouseLeave={(e) => { if (path !== link.href) { e.target.style.color = P.sand; e.target.style.borderBottomColor = "transparent"; } }}
               >{link.label}</a>
             ))}
             <button type="button" onClick={handleReserve} style={{

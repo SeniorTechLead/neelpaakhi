@@ -30,11 +30,10 @@ export default function Footer() {
         <div style={{ textAlign: mobile ? "left" : "right" }}>
           <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 3, color: P.gold, marginBottom: 12 }}>EXPLORE</div>
           <div style={{ fontFamily: font.accent, fontSize: 13, color: P.muted, lineHeight: 2 }}>
-            <div><a href="/rooms" style={{ color: "inherit", textDecoration: "none" }}>Cottages</a></div>
+            <div><a href="/rooms" style={{ color: "inherit", textDecoration: "none" }}>The Suite</a></div>
             <div><a href="/dining" style={{ color: "inherit", textDecoration: "none" }}>Dining</a></div>
             <div><a href="/experiences" style={{ color: "inherit", textDecoration: "none" }}>Experiences</a></div>
             <div><a href="/our-story" style={{ color: "inherit", textDecoration: "none" }}>Our Story</a></div>
-            <div><a href="/masterplan" style={{ color: "inherit", textDecoration: "none" }}>Master Plan</a></div>
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@ export default function Newsletter() {
         <div style={{ width: 60, height: 1, background: P.gold, margin: "0 auto 32px" }} />
         <p style={{ fontFamily: font.accent, fontSize: 17, color: P.muted, maxWidth: 480, margin: "0 auto 40px", lineHeight: 1.8 }}>
           Register your interest and we will reach out with exclusive
-          pre-opening rates and an invitation to our first Hazarika Night.
+          pre-opening rates and an invitation to our first Golden Era Night.
         </p>
         <div style={{ display: "flex", flexDirection: mobile ? "column" : "row", gap: 0, justifyContent: "center", maxWidth: 460, margin: "0 auto" }}>
           <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"

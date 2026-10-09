@@ -1,114 +1,71 @@
-export function BoundaryCottageSVG() {
+export function ChangGharSVG() {
   return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice">
+    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar on stilts">
       <defs>
-        <linearGradient id="bc-sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1a2a3a"/>
-          <stop offset="60%" stopColor="#2a4a5a"/>
-          <stop offset="100%" stopColor="#3a5a4a"/>
+        <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#a9cfe0"/>
+          <stop offset="65%" stopColor="#e8dcc8"/>
+          <stop offset="100%" stopColor="#f0d9b5"/>
         </linearGradient>
-        <radialGradient id="bc-glow" cx="50%" cy="80%" r="50%">
-          <stop offset="0%" stopColor="#d4b85e" stopOpacity="0.12"/>
-          <stop offset="100%" stopColor="#d4b85e" stopOpacity="0"/>
-        </radialGradient>
-        <pattern id="bc-bamboo" width="6" height="30" patternUnits="userSpaceOnUse">
-          <line x1="2" y1="0" x2="2" y2="30" stroke="#6b8f5e" strokeWidth="0.4" opacity="0.25"/>
-          <line x1="4.5" y1="0" x2="4.5" y2="30" stroke="#4a6741" strokeWidth="0.3" opacity="0.15"/>
+        <pattern id="cg-bamboo" width="6" height="30" patternUnits="userSpaceOnUse">
+          <line x1="2" y1="0" x2="2" y2="30" stroke="#5a4028" strokeWidth="0.5" opacity="0.35"/>
+          <line x1="4.5" y1="0" x2="4.5" y2="30" stroke="#8a6a44" strokeWidth="0.4" opacity="0.3"/>
         </pattern>
       </defs>
-      <rect width="400" height="300" fill="url(#bc-sky)"/>
-      {[[40,25,1],[120,18,0.8],[200,30,1.2],[300,15,0.7],[350,35,0.9]].map(([cx,cy,r],i) =>
-        <circle key={i} cx={cx} cy={cy} r={r} fill="#f5f0e8" opacity="0.5"/>
-      )}
-      <path d="M0,120 Q50,100 100,115 Q150,95 200,110 Q250,100 300,115 Q350,105 400,120 L400,160 L0,160Z" fill="#2a4a3a" opacity="0.5"/>
-      <path d="M0,200 Q100,195 200,198 Q300,193 400,200 L400,300 L0,300Z" fill="#1a2a1a" opacity="0.7"/>
-      <rect x="0" y="188" width="400" height="14" fill="#8a7a6a" opacity="0.08" rx="2"/>
-      <path d="M0,195 Q100,193 200,195 Q300,193 400,195" fill="none" stroke="#f5f0e8" strokeWidth="0.3" opacity="0.15"/>
-      {[[80,140],[140,130],[310,135],[360,138]].map(([cx,cy],i) => (
+      <rect width="400" height="300" fill="url(#cg-sky)"/>
+      {/* Hills */}
+      <path d="M0,150 Q60,95 130,120 Q200,80 270,112 Q330,90 400,125 L400,200 L0,200Z" fill="#6f8f7a" opacity="0.55"/>
+      <path d="M0,175 Q100,150 200,165 Q300,148 400,170 L400,210 L0,210Z" fill="#5f8a5a" opacity="0.6"/>
+      {/* Garden ground */}
+      <path d="M0,228 Q100,222 200,226 Q300,220 400,228 L400,300 L0,300Z" fill="#7aaa6e"/>
+      <path d="M0,240 Q200,232 400,242 L400,300 L0,300Z" fill="#6a9a5e" opacity="0.6"/>
+      {/* Trees */}
+      {[[50,170,18],[92,182,12],[330,174,16],[368,186,11]].map(([cx,cy,r],i) => (
         <g key={i}>
-          <line x1={cx} y1={cy} x2={cx} y2={cy+55} stroke="#5a4a3a" strokeWidth="2" opacity="0.4"/>
-          <ellipse cx={cx} cy={cy-5} rx={12} ry={16} fill="#3a5a3a" opacity="0.4"/>
+          <line x1={cx} y1={cy} x2={cx} y2={cy+50} stroke="#6a4a2a" strokeWidth="2.5"/>
+          <ellipse cx={cx} cy={cy} rx={r} ry={r*1.25} fill={i%2 ? "#4a7a44" : "#3f6b3a"}/>
         </g>
       ))}
-      <g transform="translate(200, 120)">
-        <rect x="-55" y="68" width="110" height="6" fill="#6a5a4a" opacity="0.8" rx="1"/>
-        <rect x="-45" y="20" width="90" height="50" fill="#3a2a1a" opacity="0.9" rx="1"/>
-        <rect x="-45" y="20" width="90" height="50" fill="url(#bc-bamboo)" opacity="0.25"/>
-        <path d="M-58,22 L0,-25 L58,22" fill="#5a4a3a" opacity="0.9"/>
-        <path d="M-58,22 L0,-25 L58,22" fill="none" stroke="#4a6741" strokeWidth="1" opacity="0.4"/>
-        <path d="M-52,20 L0,-20 L52,20" fill="#3a6a8a" opacity="0.25"/>
-        <rect x="-15" y="35" width="12" height="16" fill="#d4b85e" opacity="0.12" rx="1"/>
-        <rect x="5" y="35" width="12" height="16" fill="#d4b85e" opacity="0.08" rx="1"/>
-        <rect x="-5" y="42" width="10" height="28" fill="#d4b85e" opacity="0.1" rx="1"/>
-        <rect x="-50" y="68" width="100" height="10" fill="#4a6741" opacity="0.15"/>
-        <text x="0" y="76" textAnchor="middle" fill="#7aaa6e" fontSize="5" fontFamily="'DM Sans', sans-serif" opacity="0.5">4ft back porch → trail</text>
-        <rect x="-48" y="8" width="96" height="14" fill="#d4b85e" opacity="0.08"/>
-        <text x="0" y="17" textAnchor="middle" fill="#d4b85e" fontSize="5" fontFamily="'DM Sans', sans-serif" opacity="0.4">5ft verandah</text>
+      <g transform="translate(200, 0)">
+        {/* Stilts */}
+        {[-70,-40,-10,20,50,70].map(x => (
+          <rect key={x} x={x-2.5} y="186" width="5" height="44" fill="#6a4a2a"/>
+        ))}
+        <line x1="-70" y1="214" x2="70" y2="214" stroke="#6a4a2a" strokeWidth="2" opacity="0.7"/>
+        {/* Stairs to the raised floor */}
+        {[0,1,2,3,4,5].map(i => (
+          <rect key={i} x={84+i*4} y={190+i*7} width="16" height="3" fill="#8a6a44"/>
+        ))}
+        <line x1="82" y1="188" x2="106" y2="230" stroke="#6a4a2a" strokeWidth="2"/>
+        {/* Ground (raised) floor */}
+        <rect x="-80" y="180" width="168" height="7" fill="#8a6a44"/>
+        <rect x="-74" y="132" width="148" height="48" fill="#c9a46a"/>
+        <rect x="-74" y="132" width="148" height="48" fill="url(#cg-bamboo)"/>
+        <rect x="-58" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
+        <rect x="-18" y="142" width="26" height="38" fill="#5a4028" rx="1"/>
+        <rect x="26" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
+        {/* Upper floor verandah + railing */}
+        <rect x="-86" y="126" width="172" height="6" fill="#8a6a44"/>
+        <rect x="-66" y="84" width="132" height="42" fill="#d4b37a"/>
+        <rect x="-66" y="84" width="132" height="42" fill="url(#cg-bamboo)"/>
+        <rect x="-48" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
+        <rect x="-10" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
+        <rect x="28" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
+        <line x1="-86" y1="114" x2="86" y2="114" stroke="#6a4a2a" strokeWidth="1.5"/>
+        {Array.from({ length: 18 }, (_, i) => -84 + i * 10).map(x => (
+          <line key={x} x1={x} y1="114" x2={x} y2="126" stroke="#6a4a2a" strokeWidth="1"/>
+        ))}
+        {/* Steep thatched roof */}
+        <path d="M-98,88 L0,30 L98,88Z" fill="#9a7a42"/>
+        <path d="M-98,88 L0,30 L98,88" fill="none" stroke="#6a4a2a" strokeWidth="2"/>
+        {[-72, -48, -24, 0, 24, 48, 72].map(x => (
+          <line key={x} x1="0" y1="34" x2={x} y2="86" stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>
+        ))}
       </g>
-      <rect width="400" height="300" fill="url(#bc-glow)"/>
-      {[[100,230],[120,235],[260,228],[280,233]].map(([cx,cy],i) =>
-        <ellipse key={i} cx={cx} cy={cy} rx={5} ry={2} fill="#8a7a6a" opacity="0.12"/>
+      {/* Path */}
+      {[[290,252],[300,262],[312,272],[326,284]].map(([cx,cy],i) =>
+        <ellipse key={i} cx={cx} cy={cy} rx={9} ry={3.5} fill="#e8dcc8" opacity="0.8"/>
       )}
-    </svg>
-  );
-}
-
-export function CampfireCottageSVG() {
-  return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="cf-sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1a2030"/>
-          <stop offset="50%" stopColor="#2a3a4a"/>
-          <stop offset="100%" stopColor="#1a2a2a"/>
-        </linearGradient>
-        <radialGradient id="cf-fireglow" cx="50%" cy="70%" r="40%">
-          <stop offset="0%" stopColor="#d4956e" stopOpacity="0.2"/>
-          <stop offset="50%" stopColor="#c4714a" stopOpacity="0.08"/>
-          <stop offset="100%" stopColor="#c4714a" stopOpacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#cf-sky)"/>
-      {[[30,20,1.2],[80,35,0.7],[150,12,1],[240,25,0.9],[310,18,1.1],[370,30,0.6],[180,40,0.5]].map(([cx,cy,r],i) =>
-        <circle key={i} cx={cx} cy={cy} r={r} fill="#f5f0e8" opacity="0.6"/>
-      )}
-      <path d="M0,180 Q100,175 200,178 Q300,173 400,180 L400,300 L0,300Z" fill="#1a2a1a" opacity="0.7"/>
-      {[[-1,130],[1,320]].map(([side, tx], ci) => (
-        <g key={ci} transform={`translate(${tx}, 110)`}>
-          <rect x="-30" y="15" width="60" height="38" fill="#3a2a1a" opacity="0.8" rx="1"/>
-          <path d={`M-38,17 L0,-10 L38,17`} fill="#5a4a3a" opacity="0.85"/>
-          <path d={`M-34,16 L0,-7 L34,16`} fill="#3a6a8a" opacity="0.2"/>
-          <rect x="-5" y="30" width="10" height="23" fill="#d4b85e" opacity="0.1" rx="1"/>
-          <rect x="-28" y="52" width="56" height="4" fill="#6a5a4a" opacity="0.5" rx="1"/>
-        </g>
-      ))}
-      <g transform="translate(200, 210)">
-        {[[-14,4],[-10,7],[0,8],[10,7],[14,4],[10,1],[0,0],[-10,1]].map(([cx,cy],i) =>
-          <circle key={i} cx={cx} cy={cy} r={3} fill="#6a5a4a" opacity="0.5"/>
-        )}
-        <ellipse cx="0" cy="0" rx="30" ry="18" fill="#d4b85e" opacity="0.05"/>
-        <ellipse cx="0" cy="-2" rx="14" ry="10" fill="#c4714a" opacity="0.12"/>
-        <path d="M-5,2 Q-7,-10 -3,-18 Q0,-12 3,-18 Q7,-10 5,2Z" fill="#d4956e" opacity="0.6"/>
-        <path d="M-3,1 Q-4,-7 0,-14 Q4,-7 3,1Z" fill="#d4b85e" opacity="0.5"/>
-        <path d="M-1,0 Q0,-6 1,0Z" fill="#f5f0e8" opacity="0.4"/>
-        <g transform="translate(-35, -8)" opacity="0.5">
-          <ellipse cx="0" cy="8" rx="5" ry="2" fill="#5a4a3a" opacity="0.5"/>
-          <path d="M-3,3 Q-3,-3 -1,-8 L2,-8 Q4,-3 3,3Z" fill="#1a1a12"/>
-          <ellipse cx="0.5" cy="-11" rx="3" ry="3.5" fill="#1a1a12"/>
-        </g>
-        <g transform="translate(35, -6)" opacity="0.45">
-          <ellipse cx="0" cy="8" rx="5" ry="2" fill="#5a4a3a" opacity="0.5"/>
-          <path d="M-3,3 Q-3,-3 -1,-8 L2,-8 Q4,-3 3,3Z" fill="#1a1a12"/>
-          <ellipse cx="0.5" cy="-11" rx="3" ry="3.5" fill="#1a1a12"/>
-        </g>
-        <g transform="translate(-55, -10)" opacity="0.4">
-          <path d="M-3,3 Q-3,-3 -1,-8 L2,-8 Q4,-3 3,3Z" fill="#1a1a12"/>
-          <ellipse cx="0.5" cy="-11" rx="3" ry="3.5" fill="#1a1a12"/>
-          <ellipse cx="7" cy="-1" rx="4" ry="5" fill="#3a2a1a" opacity="0.7"/>
-          <line x1="4" y1="-6" x2="-6" y2="-14" stroke="#3a2a1a" strokeWidth="1.2"/>
-        </g>
-      </g>
-      <rect width="400" height="300" fill="url(#cf-fireglow)"/>
     </svg>
   );
 }
