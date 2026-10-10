@@ -53,7 +53,7 @@ export default function Nav() {
         <a href="/" aria-label="Neel Paakhi home" style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
           <AzureFeather size={26} />
           <div>
-            <div style={{ fontFamily: font.accent, fontSize: 22, fontWeight: 300, letterSpacing: 3, color: P.gold }}>
+            <div style={{ fontFamily: font.accent, fontSize: 22, fontWeight: 400, letterSpacing: 3, color: P.emberLight }}>
               NEEL PAAKHI
             </div>
             <div style={{ fontFamily: font.body, fontSize: 10, fontWeight: 500, letterSpacing: 3, color: P.sand, marginTop: 1, textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}>

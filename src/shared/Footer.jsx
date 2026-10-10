@@ -21,7 +21,7 @@ export default function Footer() {
     }}>
       <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr 1fr", gap: 40 }}>
         <div>
-          <div style={{ fontFamily: font.accent, fontSize: 26, color: P.goldLight, letterSpacing: 3, marginBottom: 14 }}>NEEL PAAKHI</div>
+          <div style={{ fontFamily: font.accent, fontSize: 26, color: P.emberLight, letterSpacing: 3, marginBottom: 14 }}>NEEL PAAKHI</div>
           <p style={{ fontFamily: font.accent, fontSize: 17, color: P.sand, lineHeight: 1.7 }}>
             A boutique retreat<br />
             Fulung, North Guwahati<br />

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { P, font } from "../shared/theme.js";
 
 // Darker tones for text on the light section (gold alone is too faint on cream)
-const LIGHT = { accent: "#8a6a1e", body: "#4a4238" };
+const LIGHT = { accent: "#5e4a8b", body: "#4a4238" };
 import { useMobile } from "../shared/hooks.js";
 import FadeIn from "../shared/FadeIn.jsx";
 import PageShell from "../shared/PageShell.jsx";
@@ -70,7 +70,7 @@ export default function Home() {
           <div style={{
             fontFamily: font.display, fontSize: "clamp(32px, 5vw, 52px)",
             fontWeight: 400, fontStyle: "italic",
-            color: P.goldLight, margin: "0 0 32px",
+            color: P.emberLight, margin: "0 0 32px",
             animation: "fadeUp 1s ease 0.7s both",
             textShadow: "0 2px 30px rgba(0,0,0,0.4)",
           }}>
