@@ -234,37 +234,36 @@ export function FishPondSVG() {
         <ellipse key={i} cx={cx} cy={cy} rx={rx} ry={ry} fill="#3a5a3a" opacity="0.45"/>
       )}
       <rect x="0" y="130" width="400" height="170" fill="#22331f" opacity="0.7"/>
-      <g transform="translate(200,205) scale(1.3) translate(-200,-205)">
-      {/* River-stone edge */}
-      {Array.from({ length: 22 }, (_, i) => {
-        const a = (i / 22) * Math.PI * 2;
-        return <ellipse key={i} cx={200 + Math.cos(a) * 138} cy={205 + Math.sin(a) * 62} rx="11" ry="6" fill="#8a7a6a" opacity="0.55"/>;
-      })}
-      {/* Pond */}
-      <ellipse cx="200" cy="205" rx="130" ry="56" fill="url(#fp-water)"/>
-      <path d="M110,200 Q160,194 210,200 Q250,195 290,201" fill="none" stroke="#f5f0e8" strokeWidth="0.5" opacity="0.18"/>
-      <path d="M130,222 Q180,216 230,222 Q260,218 280,222" fill="none" stroke="#f5f0e8" strokeWidth="0.4" opacity="0.12"/>
+      {/* Stone coping around a rectangular pond */}
+      <rect x="62" y="148" width="276" height="118" rx="3" fill="#8a7a6a" opacity="0.6"/>
+      {Array.from({ length: 12 }, (_, i) => (
+        <line key={i} x1={62 + i * 23} y1="148" x2={62 + i * 23} y2="160" stroke="#5a4a3a" strokeWidth="1" opacity="0.5"/>
+      ))}
+      {/* Water */}
+      <rect x="76" y="160" width="248" height="94" rx="2" fill="url(#fp-water)"/>
+      <rect x="76" y="160" width="248" height="94" rx="2" fill="none" stroke="#1a3a4a" strokeWidth="2" opacity="0.6"/>
+      <path d="M95,185 Q150,180 205,185 Q260,180 305,185" fill="none" stroke="#f5f0e8" strokeWidth="0.6" opacity="0.18"/>
+      <path d="M105,230 Q160,225 215,230 Q265,226 300,230" fill="none" stroke="#f5f0e8" strokeWidth="0.5" opacity="0.12"/>
       {/* Lily pads */}
-      {[[130,190,14],[150,226,10],[268,218,13],[250,188,9]].map(([cx,cy,r],i) => (
+      {[[105,180,15],[120,236,12],[292,226,16],[270,178,11]].map(([cx,cy,r],i) => (
         <path key={i} d={`M${cx},${cy} L${cx+r},${cy-2} A${r},${r*0.55} 0 1,1 ${cx+r*0.9},${cy+3} Z`} fill="#5a8a4a" opacity="0.85"/>
       ))}
-      <circle cx="268" cy="214" r="3.5" fill="#e8b4c8" opacity="0.9"/>
+      <circle cx="292" cy="221" r="4.5" fill="#e8b4c8" opacity="0.9"/>
       {/* Fish */}
-      {[[190,198,1],[222,214,-1],[176,222,1]].map(([x,y,d],i) => (
-        <g key={i} transform={`translate(${x},${y}) scale(${d},1)`}>
+      {[[185,196,1],[232,214,-1],[165,226,1]].map(([x,y,d],i) => (
+        <g key={i} transform={`translate(${x},${y}) scale(${d * 1.3},1.3)`}>
           <ellipse cx="0" cy="0" rx="9" ry="3.5" fill={i === 1 ? "#f5f0e8" : "#d4743a"} opacity="0.9"/>
           <path d="M-8,0 L-14,-4 L-14,4 Z" fill={i === 1 ? "#f5f0e8" : "#d4743a"} opacity="0.9"/>
           {i === 1 && <ellipse cx="2" cy="-0.5" rx="3" ry="1.6" fill="#d4743a"/>}
         </g>
       ))}
       {/* Reeds */}
-      {[[72,190],[80,186],[330,192],[338,188]].map(([x,y],i) => (
+      {[[50,170],[56,166],[346,172],[352,168]].map(([x,y],i) => (
         <g key={i}>
           <line x1={x} y1={y+30} x2={x+(i%2?3:-3)} y2={y-18} stroke="#6a8a4a" strokeWidth="1.5" opacity="0.7"/>
           <ellipse cx={x+(i%2?3:-3)} cy={y-20} rx="2" ry="5" fill="#7a5a3a" opacity="0.8"/>
         </g>
       ))}
-      </g>
     </svg>
   );
 }

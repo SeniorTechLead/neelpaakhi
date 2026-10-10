@@ -32,7 +32,7 @@ export default function Experiences() {
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(3, 1fr)", gap: 24 }}>
             {[
               { title: "Yoga Deck", Svg: YogaDeckSVG, desc: "A covered bamboo platform open to the morning sky. Daily sessions at sunrise. The paddy fields are your horizon line." },
-              { title: "Fish Pond", Svg: FishPondSVG, desc: "A quiet garden pond edged with river stones and lily pads. Sit at the water\u2019s edge and watch the fish drift by \u2014 the perfect pause before the evening campfire." },
+              { title: "Fish Pond", Svg: FishPondSVG, desc: "A quiet rectangular garden pond with a stone edge and lily pads. Sit at the water\u2019s edge and watch the fish drift by \u2014 the perfect pause before the evening campfire." },
               { title: "Campfire Circle", Svg: CampfireCircleSVG, desc: "Campfire areas tucked into the garden. Stargazing with zero light pollution. Acoustic guitars, rice beer, and stories under an Assamese sky." },
             ].map((w, i) => (
               <FadeIn key={i} delay={i * 0.15}>
