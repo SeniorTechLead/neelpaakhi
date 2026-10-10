@@ -33,7 +33,7 @@ export default function Dining() {
                   <RestaurantSVG />
                   <div style={{
                     position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px 16px 16px",
-                    background: "linear-gradient(transparent, rgba(13,27,30,0.7))",
+                    background: "linear-gradient(transparent, rgba(25,20,40,0.7))",
                   }}>
                     <div style={{ fontFamily: font.accent, fontSize: 13, color: P.gold, letterSpacing: 2 }}>
                       RESTAURANT &middot; BAR
@@ -59,7 +59,7 @@ export default function Dining() {
                   <BarCampfireSVG />
                   <div style={{
                     position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px 16px 16px",
-                    background: "linear-gradient(transparent, rgba(13,27,30,0.7))",
+                    background: "linear-gradient(transparent, rgba(25,20,40,0.7))",
                   }}>
                     <div style={{ fontFamily: font.accent, fontSize: 13, color: P.gold, letterSpacing: 2 }}>
                       COURTYARD &middot; LIVE MUSIC

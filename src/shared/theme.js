@@ -2,8 +2,8 @@ export const P = {
   river: "#1a3a4a", riverLight: "#3a7a8a", bamboo: "#4a6741", bambooLight: "#7aaa6e",
   terracotta: "#c4714a", terracottaLight: "#d4956e", cream: "#f5f0e8", sand: "#e8dcc8",
   // Accent is jacaranda blossom; the name "gold" is kept so every page picks it up.
-  gold: "#9a7cc4", goldLight: "#c3b0ea", charcoal: "#1a1a1a", warm: "#2a2420",
-  deep: "#0d1b1e", text: "#f5f0e8", muted: "#a09888",
+  gold: "#9a7cc4", goldLight: "#c3b0ea", charcoal: "#1a1a1a", warm: "#251e34",
+  deep: "#191428", text: "#f5f0e8", muted: "#a09888",
   // Warm gold kept for the Neel Paakhi name, fire and lamps
   ember: "#b8943e", emberLight: "#d4b85e",
 };

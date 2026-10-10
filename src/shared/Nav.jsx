@@ -45,7 +45,7 @@ export default function Nav() {
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         padding: "16px 32px",
-        background: scrollY > 100 ? `${P.deep}ee` : "linear-gradient(180deg, rgba(13,27,30,0.7) 0%, rgba(13,27,30,0) 100%)",
+        background: scrollY > 100 ? `${P.deep}ee` : "linear-gradient(180deg, rgba(25,20,40,0.7) 0%, rgba(25,20,40,0) 100%)",
         backdropFilter: scrollY > 100 ? "blur(12px)" : "none",
         transition: "all 0.5s ease",
         display: "flex", justifyContent: "space-between", alignItems: "center",

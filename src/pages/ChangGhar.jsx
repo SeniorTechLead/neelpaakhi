@@ -46,7 +46,7 @@ export default function ChangGhar() {
                     <ChangGharSVG />
                     <div style={{
                       position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px 16px 12px",
-                      background: "linear-gradient(transparent, rgba(13,27,30,0.8))",
+                      background: "linear-gradient(transparent, rgba(25,20,40,0.8))",
                     }}>
                       <div style={{ fontFamily: font.body, fontSize: 9, letterSpacing: 3, color: P.gold }}>
                         TWO-STOREY CHANG GHAR

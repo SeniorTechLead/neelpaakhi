@@ -32,7 +32,7 @@ export default function Home() {
         />
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(180deg, rgba(13,27,30,0.58) 0%, rgba(13,27,30,0.45) 40%, rgba(13,27,30,0.62) 100%)",
+          background: "linear-gradient(180deg, rgba(25,20,40,0.58) 0%, rgba(25,20,40,0.45) 40%, rgba(25,20,40,0.62) 100%)",
         }} />
       </div>
 
@@ -114,9 +114,9 @@ export default function Home() {
       {/* TEASER CARDS */}
       <section style={{
         position: "relative", zIndex: 1,
-        padding: "120px 24px",
-        background: "linear-gradient(180deg, rgba(245,240,232,0.86) 0%, rgba(232,220,200,0.92) 100%)",
-        backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
+        padding: "180px 24px",
+        // Fades in and out so the cream panel blends into the photo instead of starting on a hard line
+        background: "linear-gradient(180deg, rgba(245,240,232,0) 0px, rgba(245,240,232,0.9) 160px, rgba(236,226,210,0.92) calc(100% - 160px), rgba(236,226,210,0) 100%)",
       }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <FadeIn>

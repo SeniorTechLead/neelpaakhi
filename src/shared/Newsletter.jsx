@@ -38,7 +38,7 @@ export default function Newsletter() {
     <section id="book" style={{
       position: "relative", zIndex: 1,
       padding: "120px 24px",
-      background: `linear-gradient(180deg, ${P.deep} 0%, ${P.river}44 50%, ${P.deep} 100%)`,
+      background: "linear-gradient(180deg, rgba(25,20,40,0) 0%, rgba(43,33,64,0.65) 45%, rgba(25,20,40,0.95) 100%)",
       textAlign: "center",
     }}>
       <FadeIn>
