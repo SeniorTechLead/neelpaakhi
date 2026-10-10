@@ -38,7 +38,7 @@ export const retreatPackages = [
     highlights: ["Exclusive use of the retreat for the day", "Working lunch and high tea in the private dining room", "Campfire session with acoustic music to close the day", "Curated team activities \u2014 boat rides, weaving, bamboo craft", "Morning yoga or guided meditation on request", "AV setup for presentations in the restaurant space"],
     cta: "Enquire for your dates" },
   { title: "Yoga & Meditation Camp", subtitle: "Multi-Day Wellness Retreats", label: "2, 3, OR 5-DAY PROGRAMS",
-    desc: "A structured retreat for those who came to slow down. Daily sunrise yoga on the covered bamboo deck, guided meditation by the plunge pool, Assamese vegetarian meals, and digital detox protocols. Led by visiting practitioners. No phones at the campfire \u2014 just the sound of the river and the guitar.",
+    desc: "A structured retreat for those who came to slow down. Daily sunrise yoga on the covered bamboo deck, guided meditation by the fish pond, Assamese vegetarian meals, and digital detox protocols. Led by visiting practitioners. No phones at the campfire \u2014 just the sound of the river and the guitar.",
     highlights: ["Daily sunrise yoga and sunset meditation", "Pranayama and breathwork sessions", "Sattvic Assamese meals designed for the program", "Guided nature walks and Brahmaputra contemplation", "Sound healing with traditional instruments", "Personal consultation with the visiting practitioner"],
     cta: "Register interest" },
   { title: "Golden Era Weekend", subtitle: "A Musical Pilgrimage", label: "MONTHLY SPECIAL",

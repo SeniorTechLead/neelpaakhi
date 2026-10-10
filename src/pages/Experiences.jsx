@@ -4,7 +4,7 @@ import FadeIn from "../shared/FadeIn.jsx";
 import PageShell from "../shared/PageShell.jsx";
 import Newsletter from "../shared/Newsletter.jsx";
 import { curatedExperiences, retreatPackages } from "../shared/data.js";
-import { YogaDeckSVG, PlungePoolSVG, CampfireCircleSVG } from "../shared/svgs.jsx";
+import { YogaDeckSVG, FishPondSVG, CampfireCircleSVG } from "../shared/svgs.jsx";
 
 export default function Experiences() {
   const mobile = useMobile();
@@ -32,7 +32,7 @@ export default function Experiences() {
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(3, 1fr)", gap: 24 }}>
             {[
               { title: "Yoga Deck", Svg: YogaDeckSVG, desc: "A covered bamboo platform open to the morning sky. Daily sessions at sunrise. The paddy fields are your horizon line." },
-              { title: "Plunge Pool", Svg: PlungePoolSVG, desc: "A courtyard plunge pool surrounded by tropical landscaping. Wooden deck with loungers. The perfect reset between afternoon exploration and evening campfire." },
+              { title: "Fish Pond", Svg: FishPondSVG, desc: "A quiet garden pond edged with river stones and lily pads. Sit at the water\u2019s edge and watch the fish drift by \u2014 the perfect pause before the evening campfire." },
               { title: "Campfire Circle", Svg: CampfireCircleSVG, desc: "Campfire areas tucked into the garden. Stargazing with zero light pollution. Acoustic guitars, rice beer, and stories under an Assamese sky." },
             ].map((w, i) => (
               <FadeIn key={i} delay={i * 0.15}>
