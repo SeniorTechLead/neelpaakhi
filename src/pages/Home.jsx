@@ -131,10 +131,10 @@ export default function Home() {
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: 24 }}>
             {[
               {
-                title: "The Suite",
+                title: "The Chang Ghar",
                 desc: "One two-storey chang ghar — the traditional Assamese stilt house — for a single party at a time. Handcrafted. Unhurried.",
-                link: "/rooms",
-                label: "ACCOMMODATIONS",
+                link: "/chang-ghar",
+                label: "YOUR STAY",
                 Svg: ChangGharSVG,
               },
               {

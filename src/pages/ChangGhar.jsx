@@ -6,7 +6,7 @@ import Newsletter from "../shared/Newsletter.jsx";
 import { rooms } from "../shared/data.js";
 import { ChangGharSVG } from "../shared/svgs.jsx";
 
-export default function Rooms() {
+export default function ChangGhar() {
   const mobile = useMobile();
 
   return (
@@ -19,7 +19,7 @@ export default function Rooms() {
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: 60 }}>
-              <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 5, color: P.gold, marginBottom: 16 }}>ACCOMMODATIONS</div>
+              <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 5, color: P.gold, marginBottom: 16 }}>YOUR STAY</div>
               <h2 style={{ fontFamily: font.display, fontSize: 42, fontWeight: 400, color: P.cream }}>
                 One suite. <span style={{ fontStyle: "italic", color: P.goldLight }}>Two storeys.</span>
               </h2>

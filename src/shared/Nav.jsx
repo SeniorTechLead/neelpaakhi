@@ -14,7 +14,7 @@ function AzureFeather({ size = 32 }) {
 
 const navLinks = [
   { label: "Our Story", href: "/our-story" },
-  { label: "Rooms", href: "/rooms" },
+  { label: "The Chang Ghar", href: "/chang-ghar" },
   { label: "Dining", href: "/dining" },
   { label: "Experiences", href: "/experiences" },
 ];
