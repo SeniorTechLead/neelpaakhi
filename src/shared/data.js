@@ -5,15 +5,15 @@ export const rooms = [
 ];
 
 export const musicSchedule = [
-  { day: "Xomoy Fridays", desc: "Assamese folk night. Tributes to the great Assamese composers, timeless classics, Bihu rhythms around the fire. Local artists and guest musicians.", icon: "\u{1F3B6}" },
+  { day: "Xomoy Fridays", desc: "Assamese folk night. Timeless classics and Bihu rhythms around the fire. Local artists and guest musicians.", icon: "\u{1F3B6}" },
   { day: "Purano Din Saturdays", desc: "Bengali evening by candlelight. Rabindrasangeet, Hemanta Mukherjee covers, Manna Dey, Nachiketa, Anjan Dutt. Tagore set to acoustic guitar.", icon: "\u{1F56F}\uFE0F" },
   { day: "Pahadi Sundays", desc: "Nepali and Naga hill songs. Narayan Gopal classics, Alobo Naga covers, Tetseo Sisters\u2013style folk harmonies. New-age Northeast indie. Acoustic and intimate.", icon: "\u26F0\uFE0F" },
 ];
 
 export const dailyMusic = [
-  { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 classic Assamese melodies, Zubeen Garg acoustic covers, old radio favourites" },
-  { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Instrumental sitar, flute, lo-fi Nepali ballads, Assamese golden-era deep cuts" },
-  { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 Assamese favourites, old Hindi covers, Bengali classics, campfire requests" },
+  { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 old melodies, Zubeen Garg acoustic covers, old radio favourites" },
+  { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Instrumental sitar, flute, lo-fi Nepali ballads, golden-era deep cuts" },
+  { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 old favourites, old Hindi covers, Bengali classics, campfire requests" },
   { time: "Night", icon: "\u{1F319}", desc: "Campfire jams \u2014 Nepali, Naga, Assamese, Hindi soul. Guest requests." },
 ];
 
@@ -42,7 +42,7 @@ export const retreatPackages = [
     highlights: ["Daily sunrise yoga and sunset meditation", "Pranayama and breathwork sessions", "Sattvic Assamese meals designed for the program", "Guided nature walks and Brahmaputra contemplation", "Sound healing with traditional instruments", "Personal consultation with the visiting practitioner"],
     cta: "Register interest" },
   { title: "Golden Era Weekend", subtitle: "A Musical Pilgrimage", label: "MONTHLY SPECIAL",
-    desc: "A two-night stay built around our signature monthly Golden Era Night. Arrive Friday for Xomoy evening, spend Saturday exploring the north bank, and experience the full Golden Era Night under the jacaranda tree. A celebration of Assam\u2019s musical legacy with guest artists from across the region.",
-    highlights: ["Two nights in the chang ghar suite", "Xomoy Friday + Golden Era Night Saturday", "Curated playlist and listening notes in your suite", "Guided visit to Guwahati\u2019s music and cultural landmarks", "Assamese thali dinner with traditional rice beer", "Acoustic jam session \u2014 requests welcome"],
+    desc: "A two-night stay built around our signature monthly Golden Era Night. Arrive Friday for Xomoy evening, spend Saturday exploring the north bank, and experience the full Golden Era Night under the jacaranda tree. A celebration of timeless music with guest artists.",
+    highlights: ["Two nights in the chang ghar suite", "Xomoy Friday + Golden Era Night Saturday", "Curated playlist and listening notes in your suite", "Guided visit to Guwahati\u2019s cultural landmarks", "Assamese thali dinner with traditional rice beer", "Acoustic jam session \u2014 requests welcome"],
     cta: "Check upcoming dates" },
 ];

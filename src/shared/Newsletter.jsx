@@ -36,6 +36,7 @@ export default function Newsletter() {
 
   return (
     <section id="book" style={{
+      position: "relative", zIndex: 1,
       padding: "120px 24px",
       background: `linear-gradient(180deg, ${P.deep} 0%, ${P.river}44 50%, ${P.deep} 100%)`,
       textAlign: "center",

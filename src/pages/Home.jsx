@@ -20,39 +20,35 @@ export default function Home() {
   }, []);
 
   const heroOpacity = Math.max(0, 1 - scrollY / 600);
-  const heroScale = 1 + scrollY * 0.0003;
 
   return (
     <PageShell>
+      {/* Fixed photo backdrop; the page content scrolls over it */}
+      <div aria-hidden="true" style={{ position: "fixed", inset: 0, zIndex: 0 }}>
+        <img
+          src="/pictures/neelpaakhi-hero.jpeg"
+          alt=""
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", display: "block" }}
+        />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(180deg, rgba(13,27,30,0.58) 0%, rgba(13,27,30,0.45) 40%, rgba(13,27,30,0.62) 100%)",
+        }} />
+      </div>
+
       {/* HERO */}
       <section style={{
-        height: "100vh", position: "relative", overflow: "hidden",
+        height: "88vh", minHeight: 560, position: "relative", overflow: "hidden",
         display: "flex", alignItems: "center", justifyContent: "center",
         zIndex: 1,
       }}>
-        {/* Hero photo */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 0,
-          transform: `scale(${heroScale})`,
-        }}>
-          <img
-            src="/pictures/neelpaakhi-hero.jpeg"
-            alt="The garden and hills at Neel Paakhi, seen from the gate"
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", display: "block" }}
-          />
-          {/* Light scrim so text stays readable over the bright photo */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(180deg, rgba(13,27,30,0.35) 0%, rgba(13,27,30,0.1) 35%, rgba(13,27,30,0.25) 65%, rgba(13,27,30,0.6) 100%)",
-          }} />
-        </div>
 
         {/* Hero text content */}
         <div style={{
           position: "relative", zIndex: 2, textAlign: "center",
           opacity: heroOpacity, transform: `translateY(${scrollY * 0.15}px)`,
           maxWidth: 800, padding: "0 24px",
-          marginTop: "18vh",
+          marginTop: "8vh",
         }}>
           <div style={{
             fontFamily: font.accent, fontSize: 13, letterSpacing: 8,
@@ -117,8 +113,10 @@ export default function Home() {
 
       {/* TEASER CARDS */}
       <section style={{
+        position: "relative", zIndex: 1,
         padding: "120px 24px",
-        background: `linear-gradient(180deg, ${P.cream} 0%, ${P.sand} 100%)`,
+        background: "linear-gradient(180deg, rgba(245,240,232,0.86) 0%, rgba(232,220,200,0.92) 100%)",
+        backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
       }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <FadeIn>

@@ -157,8 +157,8 @@ export default function Dining() {
               background: `${P.gold}08`, border: `1px solid ${P.gold}22`,
             }}>
               <p style={{ fontFamily: font.accent, fontSize: 15, fontStyle: "italic", color: P.goldLight }}>
-                Monthly Golden Era Nights — a dedicated evening celebrating
-                the great composers and voices of Assam, with guest artists from across the region.
+                Monthly Golden Era Nights — a dedicated evening of timeless songs,
+                with guest artists and an open invitation to sing along.
               </p>
             </div>
           </FadeIn>
