@@ -56,7 +56,7 @@ export default function Nav() {
             <div style={{ fontFamily: font.accent, fontSize: 22, fontWeight: 300, letterSpacing: 3, color: P.gold }}>
               NEEL PAAKHI
             </div>
-            <div style={{ fontFamily: font.accent, fontSize: 9, letterSpacing: 4, color: P.muted, marginTop: -2 }}>
+            <div style={{ fontFamily: font.body, fontSize: 10, fontWeight: 500, letterSpacing: 3, color: P.sand, marginTop: 1, textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}>
               THE AZURE FEATHER
             </div>
           </div>

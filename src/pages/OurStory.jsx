@@ -63,7 +63,7 @@ export default function OurStory() {
                       <div style={{ fontFamily: font.display, fontSize: 26, fontStyle: "italic", letterSpacing: 2, color: P.gold, opacity: 0.9, textAlign: "center" }}>
                         Neel Paakhi
                       </div>
-                      <div style={{ fontFamily: font.body, fontSize: 9, letterSpacing: 5, color: P.muted, opacity: 0.6, textAlign: "center", marginTop: 4 }}>THE AZURE FEATHER</div>
+                      <div style={{ fontFamily: font.body, fontSize: 11, fontWeight: 500, letterSpacing: 4, color: P.sand, textAlign: "center", marginTop: 6 }}>THE AZURE FEATHER</div>
                     </div>
                   </div>
                 </div>
