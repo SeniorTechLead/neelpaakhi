@@ -38,11 +38,11 @@ export default function Newsletter() {
     <section id="book" style={{
       position: "relative", zIndex: 1,
       padding: "120px 24px",
-      background: "linear-gradient(180deg, rgba(25,20,40,0) 0%, rgba(43,33,64,0.65) 45%, rgba(25,20,40,0.95) 100%)",
+      background: "linear-gradient(180deg, rgba(25,20,40,0) 0%, rgba(37,29,56,0.82) 30%, rgba(25,20,40,0.94) 60%, rgba(25,20,40,0.97) 100%)",
       textAlign: "center",
     }}>
       <FadeIn>
-        <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 5, color: P.gold, marginBottom: 20 }}>OPENING JANUARY 2027</div>
+        <div style={{ fontFamily: font.body, fontSize: 12, fontWeight: 500, letterSpacing: 5, color: P.goldLight, marginBottom: 20 }}>OPENING JANUARY 2027</div>
         <h2 style={{ fontFamily: font.display, fontSize: "clamp(32px, 6vw, 52px)", fontWeight: 400, color: P.cream, marginBottom: 12 }}>
           Be among the first to
         </h2>
@@ -50,7 +50,7 @@ export default function Newsletter() {
           hear the azure feather fall
         </h2>
         <div style={{ width: 60, height: 1, background: P.gold, margin: "0 auto 32px" }} />
-        <p style={{ fontFamily: font.accent, fontSize: 17, color: P.muted, maxWidth: 480, margin: "0 auto 40px", lineHeight: 1.8 }}>
+        <p style={{ fontFamily: font.accent, fontSize: 19, color: P.sand, maxWidth: 560, margin: "0 auto 40px", lineHeight: 1.8 }}>
           Register your interest and we will reach out with exclusive
           pre-opening rates and an invitation to our first Golden Era Night.
         </p>
