@@ -19,13 +19,14 @@ export function ChangGharSVG() {
       {/* Garden ground */}
       <path d="M0,228 Q100,222 200,226 Q300,220 400,228 L400,300 L0,300Z" fill="#7aaa6e"/>
       <path d="M0,240 Q200,232 400,242 L400,300 L0,300Z" fill="#6a9a5e" opacity="0.6"/>
-      {/* Narrow road along the left side, lined with trees */}
-      <path d="M62,226 L76,226 L52,300 L4,300 Z" fill="#d9c9a8"/>
-      <path d="M62,226 L4,300 M76,226 L52,300" stroke="#b8a888" strokeWidth="1" fill="none"/>
-      {[[58,228,7],[46,242,9],[32,259,12],[14,281,16]].map(([bx,by,r],i) => (
+      {/* Lane along the left side, lined with trees */}
+      <rect x="44" y="228" width="22" height="72" fill="#d9c9a8"/>
+      <line x1="44" y1="228" x2="44" y2="300" stroke="#b8a888" strokeWidth="1"/>
+      <line x1="66" y1="228" x2="66" y2="300" stroke="#b8a888" strokeWidth="1"/>
+      {[214, 242, 270].map((cy, i) => (
         <g key={`r${i}`}>
-          <line x1={bx} y1={by - r * 2.2} x2={bx} y2={by} stroke="#6a4a2a" strokeWidth={1.2 + i * 0.6}/>
-          <ellipse cx={bx} cy={by - r * 2.4} rx={r} ry={r * 1.25} fill={i % 2 ? "#4a7a44" : "#3f6b3a"}/>
+          <line x1="28" y1={cy} x2="28" y2={cy + 24} stroke="#6a4a2a" strokeWidth="2"/>
+          <ellipse cx="28" cy={cy} rx="11" ry="13" fill={i % 2 ? "#4a7a44" : "#3f6b3a"}/>
         </g>
       ))}
       {/* Garden tree on the right, clear of the staircase */}
@@ -72,18 +73,20 @@ export function ChangGharSVG() {
         ))}
       </g>
       {/* Path on the right, leading to the outside staircase */}
-      <path d="M344,232 L364,232 L356,300 L300,300 Z" fill="#d9c9a8"/>
-      <path d="M344,232 L300,300 M364,232 L356,300" stroke="#b8a888" strokeWidth="1" fill="none"/>
-      {/* Outside staircase up to the upper balcony */}
-      <rect x="300" y="170" width="16" height="5" fill="#8a6a44"/>
-      <rect x="312" y="175" width="4" height="54" fill="#6a4a2a"/>
-      <line x1="314" y1="173" x2="362" y2="231" stroke="#6a4a2a" strokeWidth="2.5"/>
+      <rect x="322" y="230" width="22" height="70" fill="#d9c9a8"/>
+      <line x1="322" y1="230" x2="322" y2="300" stroke="#b8a888" strokeWidth="1"/>
+      <line x1="344" y1="230" x2="344" y2="300" stroke="#b8a888" strokeWidth="1"/>
+      {/* Outside staircase: a straight flight up, then a landing turning left into the upper storey */}
+      <rect x="322" y="172" width="3" height="58" fill="#6a4a2a"/>
+      <rect x="341" y="172" width="3" height="58" fill="#6a4a2a"/>
       {Array.from({ length: 8 }, (_, i) => i).map(i => (
-        <rect key={i} x={316 + i * 5.8} y={176 + i * 7} width="15" height="3" fill="#8a6a44"/>
+        <rect key={i} x="325" y={222 - i * 7} width="16" height="3" fill="#8a6a44"/>
       ))}
-      <line x1="314" y1="161" x2="362" y2="219" stroke="#6a4a2a" strokeWidth="1.5"/>
-      {[322, 340, 358].map(x => (
-        <line key={x} x1={x} y1={161 + (x - 314) * 1.21} x2={x} y2={173 + (x - 314) * 1.21} stroke="#6a4a2a" strokeWidth="1"/>
+      <line x1="346" y1="160" x2="346" y2="230" stroke="#6a4a2a" strokeWidth="1.5"/>
+      <rect x="298" y="168" width="46" height="5" fill="#8a6a44"/>
+      <line x1="298" y1="158" x2="346" y2="158" stroke="#6a4a2a" strokeWidth="1.5"/>
+      {[306, 314, 322, 330, 338].map(x => (
+        <line key={x} x1={x} y1="158" x2={x} y2="168" stroke="#6a4a2a" strokeWidth="1"/>
       ))}
     </svg>
   );
