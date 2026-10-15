@@ -1,6 +1,6 @@
 export function ChangGharSVG() {
   return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar with balconies on both floors and an outside staircase">
+    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with balconies on both floors and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -13,11 +13,26 @@ export function ChangGharSVG() {
         </pattern>
       </defs>
       <rect width="400" height="300" fill="url(#cg-sky)"/>
-      {/* Hills */}
-      <path d="M0,150 Q60,95 130,120 Q200,80 270,112 Q330,90 400,125 L400,200 L0,200Z" fill="#6f8f7a" opacity="0.55"/>
-      <path d="M0,175 Q100,150 200,165 Q300,148 400,170 L400,210 L0,210Z" fill="#5f8a5a" opacity="0.6"/>
+      {/* Treetops beyond the compound */}
+      {[[20,172,22],[110,168,26],[190,170,20],[290,166,26],[372,172,22]].map(([cx,cy,r],i) => (
+        <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
+      ))}
+      {/* Compound wall to the north of the ghar */}
+      <rect x="0" y="180" width="400" height="48" fill="#ece6da"/>
+      <rect x="0" y="177" width="400" height="4" fill="#cfc6b6"/>
+      {[96, 160, 224, 288, 352].map(x => (
+        <rect key={x} x={x} y="174" width="8" height="54" fill="#ddd5c6"/>
+      ))}
+      {/* 8 ft gate where the lane meets the wall */}
+      <rect x="29" y="170" width="8" height="58" fill="#ddd5c6"/>
+      <rect x="73" y="170" width="8" height="58" fill="#ddd5c6"/>
+      <rect x="37" y="186" width="36" height="42" fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="1"/>
+      <line x1="55" y1="186" x2="55" y2="228" stroke="#b8b0a2" strokeWidth="1"/>
+      {[192, 199, 206, 213, 220].map(y => (
+        <line key={y} x1="37" y1={y} x2="73" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>
+      ))}
       {/* Garden ground */}
-      <path d="M0,228 Q100,222 200,226 Q300,220 400,228 L400,300 L0,300Z" fill="#7aaa6e"/>
+      <rect x="0" y="226" width="400" height="74" fill="#7aaa6e"/>
       <path d="M0,240 Q200,232 400,242 L400,300 L0,300Z" fill="#6a9a5e" opacity="0.6"/>
       {/* Lane along the left side, lined with trees */}
       <rect x="44" y="228" width="22" height="72" fill="#d9c9a8"/>
