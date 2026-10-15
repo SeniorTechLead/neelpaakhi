@@ -108,15 +108,12 @@ export function RestaurantSVG() {
             <rect x={x+2} y={y+2} width={w-4} height={h-4} rx="1" fill="#d4b85e" opacity="0.03"/>
           </g>
         ))}
-        <rect x="40" y="140" width="50" height="30" fill="#5a4a3a" opacity="0.6" rx="1"/>
-        <rect x="38" y="137" width="54" height="5" fill="#6b8f5e" opacity="0.4" rx="1"/>
-        <path d="M35,125 Q65,112 95,125" fill="none" stroke="#6b8f5e" strokeWidth="1.5" opacity="0.4"/>
-        <g transform="translate(62, 148)" opacity="0.5" fill="#1a1a12">
-          <ellipse cx="0" cy="-10" rx="3.5" ry="4"/>
-          <path d="M-4,-6 L-5,6 L5,6 L4,-6Z"/>
-          <ellipse cx="6" cy="0" rx="4.5" ry="5.5" fill="#3a2a1a" opacity="0.7"/>
-          <line x1="3" y1="-7" x2="10" y2="4" stroke="#3a2a1a" strokeWidth="1"/>
-        </g>
+        {/* Bar counter */}
+        <rect x="44" y="140" width="70" height="30" fill="#5a4a3a" opacity="0.6" rx="1"/>
+        <rect x="42" y="137" width="74" height="4" fill="#8a6a44" opacity="0.6" rx="1"/>
+        {[52,62,70,80,90,100].map((x,i) =>
+          <rect key={x} x={x} y={i%2 ? 127 : 124} width="4" height={i%2 ? 10 : 13} rx="1" fill="#d4b85e" opacity="0.25"/>
+        )}
       </g>
       <path d="M0,240 L400,240 L400,300 L0,300Z" fill="#1a2a1a" opacity="0.5"/>
       <rect width="400" height="300" fill="url(#rs-warm)"/>

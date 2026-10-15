@@ -19,17 +19,17 @@ export default function Dining() {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: 60 }}>
-              <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 5, color: P.gold, marginBottom: 16 }}>THE TABLE & THE STAGE</div>
+              <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 5, color: P.gold, marginBottom: 16 }}>THE TABLE</div>
               <h2 style={{ fontFamily: font.display, fontSize: 42, fontWeight: 400, color: P.cream }}>
                 Where <span style={{ fontStyle: "italic", color: P.goldLight }}>every meal becomes a memory</span>
               </h2>
             </div>
           </FadeIn>
 
-          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? 40 : 48, marginBottom: 80 }}>
+          <div style={{ marginBottom: 40 }}>
             <FadeIn>
-              <div>
-                <div style={{ aspectRatio: "4/3", marginBottom: 24, position: "relative", overflow: "hidden" }}>
+              <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? 24 : 48, alignItems: "center" }}>
+                <div style={{ aspectRatio: "4/3", position: "relative", overflow: "hidden" }}>
                   <RestaurantSVG />
                   <div style={{
                     position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px 16px 16px",
@@ -40,6 +40,7 @@ export default function Dining() {
                     </div>
                   </div>
                 </div>
+                <div>
                 <h3 style={{ fontFamily: font.display, fontSize: 24, color: P.cream, marginBottom: 12 }}>
                   The Restaurant + Bar
                 </h3>
@@ -48,33 +49,9 @@ export default function Dining() {
                   44-48 seats on the ground floor of the main building.
                   The menu moves with the seasons: river fish, bamboo shoot preparations,
                   smoked pork from the hills, and Assamese thalis that honor the land.
-                  In the corner, a small raised stage (6ft {"\u00D7"} 4ft) {"\u2014"} just enough
-                  room for a guitarist on a stool. Intimate, unhurried music while you eat.
+                  A quiet room for long, unhurried meals.
                 </p>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <div>
-                <div style={{ aspectRatio: "4/3", marginBottom: 24, position: "relative", overflow: "hidden" }}>
-                  <BarCampfireSVG />
-                  <div style={{
-                    position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px 16px 16px",
-                    background: "linear-gradient(transparent, rgba(25,20,40,0.7))",
-                  }}>
-                    <div style={{ fontFamily: font.accent, fontSize: 13, color: P.gold, letterSpacing: 2 }}>
-                      COURTYARD &middot; LIVE MUSIC
-                    </div>
-                  </div>
                 </div>
-                <h3 style={{ fontFamily: font.display, fontSize: 24, color: P.cream, marginBottom: 12 }}>
-                  The Jacaranda Stage
-                </h3>
-                <p style={{ fontFamily: font.accent, fontSize: 15, lineHeight: 1.8, color: P.muted }}>
-                  A raised stage beneath the old jacaranda tree in the courtyard.
-                  Pull up a chair by the fire. No food, no bar {"\u2014"} just music,
-                  the tree{"\u2019"}s canopy overhead, and the stars beyond it.
-                  On Fridays, Saturdays, and Sundays the performance moves here.
-                </p>
               </div>
             </FadeIn>
           </div>
@@ -96,9 +73,36 @@ export default function Dining() {
               </h2>
               <p style={{ fontFamily: font.accent, fontSize: 16, color: P.muted, marginTop: 16, maxWidth: 560, margin: "16px auto 0", lineHeight: 1.8 }}>
                 The 70s and 80s gave us music that didn't need amplifiers — just a voice,
-                a guitar, and a room willing to listen. At Neel Paakhi, every evening is a doorway
+                a guitar, and a room willing to listen. At Neel Paakhi, every weekend is a doorway
                 back to that era.
               </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? 24 : 48, alignItems: "center", marginBottom: 56 }}>
+              <div style={{ aspectRatio: "4/3", position: "relative", overflow: "hidden" }}>
+                <BarCampfireSVG />
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px 16px 16px",
+                  background: "linear-gradient(transparent, rgba(25,20,40,0.7))",
+                }}>
+                  <div style={{ fontFamily: font.accent, fontSize: 13, color: P.gold, letterSpacing: 2 }}>
+                    COURTYARD &middot; LIVE MUSIC
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 style={{ fontFamily: font.display, fontSize: 24, color: P.cream, marginBottom: 12 }}>
+                  The Jacaranda Stage
+                </h3>
+                <p style={{ fontFamily: font.accent, fontSize: 15, lineHeight: 1.8, color: P.muted }}>
+                  A raised stage beneath the old jacaranda tree in the courtyard.
+                  Pull up a chair by the fire. No food, no bar {"\u2014"} just music,
+                  the tree{"\u2019"}s canopy overhead, and the stars beyond it.
+                  Live music on Fridays, Saturdays, and Sundays.
+                </p>
+              </div>
             </div>
           </FadeIn>
 
@@ -141,46 +145,6 @@ export default function Dining() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.2}>
-            <div style={{
-              marginTop: 48, padding: mobile ? "32px 24px" : "40px 48px",
-              background: `linear-gradient(135deg, ${P.warm}44 0%, ${P.river}33 100%)`,
-              border: `1px solid ${P.gold}15`,
-              position: "relative",
-            }}>
-              <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "auto 1fr", gap: mobile ? 16 : 32, alignItems: "start" }}>
-                <div style={{ textAlign: "center" }}>
-                  <svg width="40" height="40" viewBox="0 0 40 40" style={{ opacity: 0.7 }}>
-                    <ellipse cx="20" cy="28" rx="11" ry="9" fill="none" stroke="#d4b85e" strokeWidth="1.2"/>
-                    <ellipse cx="20" cy="22" rx="8" ry="6.5" fill="none" stroke="#d4b85e" strokeWidth="1.2"/>
-                    <circle cx="20" cy="27" r="3" fill="none" stroke="#d4b85e" strokeWidth="0.8" opacity="0.6"/>
-                    <rect x="18.5" y="4" width="3" height="19" fill="none" stroke="#d4b85e" strokeWidth="1" rx="1"/>
-                    <rect x="17.5" y="1" width="5" height="4" fill="none" stroke="#d4b85e" strokeWidth="0.8" rx="1"/>
-                    <circle cx="18" cy="2.5" r="0.8" fill="#d4b85e" opacity="0.5"/>
-                    <circle cx="22" cy="2.5" r="0.8" fill="#d4b85e" opacity="0.5"/>
-                    <line x1="19" y1="5" x2="19" y2="35" stroke="#d4b85e" strokeWidth="0.3" opacity="0.4"/>
-                    <line x1="20" y1="5" x2="20" y2="36" stroke="#d4b85e" strokeWidth="0.3" opacity="0.4"/>
-                    <line x1="21" y1="5" x2="21" y2="35" stroke="#d4b85e" strokeWidth="0.3" opacity="0.4"/>
-                    <line x1="17" y1="33" x2="23" y2="33" stroke="#d4b85e" strokeWidth="0.8" opacity="0.5"/>
-                  </svg>
-                </div>
-                <div>
-                  <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 4, color: P.gold, marginBottom: 12 }}>TWO STAGES, ONE SOUL</div>
-                  <p style={{ fontFamily: font.accent, fontSize: 15, lineHeight: 1.9, color: `${P.cream}cc`, margin: 0 }}>
-                    <strong style={{ color: P.goldLight }}>Inside</strong> {"\u2014"} a 6ft {"\u00D7"} 4ft raised
-                    platform in the corner of the restaurant. A mic stand, a stool,
-                    a guitar rack, warm amber light. Every evening while you eat and drink.
-                  </p>
-                  <p style={{ fontFamily: font.accent, fontSize: 15, lineHeight: 1.9, color: `${P.cream}cc`, marginTop: 16, marginBottom: 0 }}>
-                    <strong style={{ color: P.goldLight }}>Outside</strong> {"\u2014"} the jacaranda stage,
-                    in the courtyard. The garden is the gallery.
-                    No food, no bar {"\u2014"} just the performer and anyone who wants to listen.
-                    The bigger nights live here.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
         </div>
       </section>
 

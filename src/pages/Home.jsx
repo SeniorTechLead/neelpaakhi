@@ -139,7 +139,7 @@ export default function Home() {
               },
               {
                 title: "Dining & Music",
-                desc: "A restaurant and bar with a stage in the corner, and a second stage under the jacaranda tree where the courtyard becomes the gallery.",
+                desc: "A seasonal Assamese kitchen and bar. And, on weekend nights, live acoustic music under the jacaranda tree in the courtyard.",
                 link: "/dining",
                 label: "THE TABLE & THE STAGE",
                 Svg: RestaurantSVG,
