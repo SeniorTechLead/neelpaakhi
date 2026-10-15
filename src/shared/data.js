@@ -14,7 +14,7 @@ export const dailyMusic = [
   { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 gentle melodies, acoustic covers and old radio favourites" },
   { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Instrumental sitar and flute, lo-fi acoustic ballads, golden-era deep cuts" },
   { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 Hindi and Bengali classics, much-loved favourites, campfire requests" },
-  { time: "Night", icon: "\u{1F319}", desc: "Campfire jams \u2014 Assamese, Hindi and Northeast soul. Guest requests." },
+  { time: "Night", icon: "\u{1F319}", desc: "Campfire jams \u2014 Assamese, Bengali, Hindi and Northeast soul. Guest requests." },
 ];
 
 export const curatedExperiences = [
