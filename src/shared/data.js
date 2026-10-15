@@ -6,14 +6,14 @@ export const rooms = [
 
 export const musicSchedule = [
   { day: "Xomoy Fridays", desc: "Assamese folk night. Timeless classics and Bihu rhythms around the fire. Local artists and guest musicians.", icon: "\u{1F3B6}" },
-  { day: "Purano Din Saturdays", desc: "Bengali evening by candlelight. Rabindrasangeet, Hemanta Mukherjee covers, Manna Dey, Nachiketa, Anjan Dutt. Tagore set to acoustic guitar.", icon: "\u{1F56F}\uFE0F" },
-  { day: "Pahadi Sundays", desc: "Nepali and Naga hill songs. Narayan Gopal classics, Alobo Naga covers, Tetseo Sisters\u2013style folk harmonies. New-age Northeast indie. Acoustic and intimate.", icon: "\u26F0\uFE0F" },
+  { day: "Purano Din Saturdays", desc: "Bengali evening by candlelight. Beloved songs and classic ballads, reimagined on acoustic guitar.", icon: "\u{1F56F}\uFE0F" },
+  { day: "Pahadi Sundays", desc: "Nepali and Naga hill songs. Folk classics, close harmonies and new-age Northeast indie. Acoustic and intimate.", icon: "\u26F0\uFE0F" },
 ];
 
 export const dailyMusic = [
-  { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 old melodies, Zubeen Garg acoustic covers, old radio favourites" },
-  { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Instrumental sitar, flute, lo-fi Nepali ballads, golden-era deep cuts" },
-  { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 old favourites, old Hindi covers, Bengali classics, campfire requests" },
+  { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 gentle melodies, acoustic covers and old radio favourites" },
+  { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Instrumental sitar and flute, lo-fi Nepali ballads, golden-era deep cuts" },
+  { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 Hindi and Bengali classics, much-loved favourites, campfire requests" },
   { time: "Night", icon: "\u{1F319}", desc: "Campfire jams \u2014 Nepali, Naga, Assamese, Hindi soul. Guest requests." },
 ];
 
