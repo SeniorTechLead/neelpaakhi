@@ -1,109 +1,147 @@
 export function ChangGharSVG() {
+  // Oblique view from the front-left: D is the depth vector (front to back) for the house.
+  const D = [-26, -16];
+  const at = ([x, y], t) => [x + D[0] * t, y + D[1] * t];
+  const pts = (...ps) => ps.map(([x, y]) => `${x},${y}`).join(" ");
+  // Pond: 10 ft wide (lane is 5 ft = 22px), 8 ft deep
+  const pond = { fl: [18, 286], fr: [62, 286], br: [50, 262], bl: [6, 262] };
   return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with balconies on both floors and an outside staircase">
+    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
-          <stop offset="65%" stopColor="#e8dcc8"/>
-          <stop offset="100%" stopColor="#f0d9b5"/>
+          <stop offset="100%" stopColor="#e8e2d2"/>
         </linearGradient>
         <pattern id="cg-bamboo" width="6" height="30" patternUnits="userSpaceOnUse">
           <line x1="2" y1="0" x2="2" y2="30" stroke="#5a4028" strokeWidth="0.5" opacity="0.35"/>
           <line x1="4.5" y1="0" x2="4.5" y2="30" stroke="#8a6a44" strokeWidth="0.4" opacity="0.3"/>
         </pattern>
+        <linearGradient id="cg-water" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#4a8a9a"/>
+          <stop offset="100%" stopColor="#2a5a6a"/>
+        </linearGradient>
       </defs>
       <rect width="400" height="300" fill="url(#cg-sky)"/>
+      {/* Whole scene lifted so the foreground clears the caption */}
+      <g transform="translate(0, -40)">
       {/* Treetops beyond the compound */}
-      {[[20,172,22],[110,168,26],[190,170,20],[290,166,26],[372,172,22]].map(([cx,cy,r],i) => (
+      {[[20,150,22],[150,146,24],[250,150,20],[370,148,24]].map(([cx,cy,r],i) => (
         <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
       ))}
-      {/* Compound wall to the north of the ghar */}
-      <rect x="0" y="180" width="400" height="48" fill="#ece6da"/>
-      <rect x="0" y="177" width="400" height="4" fill="#cfc6b6"/>
-      {[96, 160, 224, 288, 352].map(x => (
-        <rect key={x} x={x} y="174" width="8" height="54" fill="#ddd5c6"/>
-      ))}
+      {/* Compound wall to the north */}
+      <rect x="0" y="158" width="400" height="42" fill="#ece6da"/>
+      <rect x="0" y="155" width="400" height="4" fill="#cfc6b6"/>
+      {[140, 204, 268, 332].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
       {/* 8 ft gate where the lane meets the wall */}
-      <rect x="29" y="170" width="8" height="58" fill="#ddd5c6"/>
-      <rect x="73" y="170" width="8" height="58" fill="#ddd5c6"/>
-      <rect x="37" y="186" width="36" height="42" fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="1"/>
-      <line x1="55" y1="186" x2="55" y2="228" stroke="#b8b0a2" strokeWidth="1"/>
-      {[192, 199, 206, 213, 220].map(y => (
-        <line key={y} x1="37" y1={y} x2="73" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>
-      ))}
+      <rect x="64" y="148" width="8" height="52" fill="#ddd5c6"/>
+      <rect x="108" y="148" width="8" height="52" fill="#ddd5c6"/>
+      <rect x="72" y="162" width="36" height="38" fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="1"/>
+      <line x1="90" y1="162" x2="90" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
+      {[168, 175, 182, 189].map(y => <line key={y} x1="72" y1={y} x2="108" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
       {/* Garden ground */}
-      <rect x="0" y="226" width="400" height="74" fill="#7aaa6e"/>
-      <path d="M0,240 Q200,232 400,242 L400,300 L0,300Z" fill="#6a9a5e" opacity="0.6"/>
-      {/* Lane along the left side, lined with trees */}
-      <rect x="44" y="228" width="22" height="72" fill="#d9c9a8"/>
-      <line x1="44" y1="228" x2="44" y2="300" stroke="#b8a888" strokeWidth="1"/>
-      <line x1="66" y1="228" x2="66" y2="300" stroke="#b8a888" strokeWidth="1"/>
-      {[214, 242, 270].map((cy, i) => (
-        <g key={`r${i}`}>
-          <line x1="28" y1={cy} x2="28" y2={cy + 24} stroke="#6a4a2a" strokeWidth="2"/>
-          <ellipse cx="28" cy={cy} rx="11" ry="13" fill={i % 2 ? "#4a7a44" : "#3f6b3a"}/>
+      <rect x="0" y="198" width="400" height="142" fill="#7aaa6e"/>
+      {/* Lane from the gate, lined with trees */}
+      <rect x="79" y="200" width="22" height="140" fill="#d9c9a8"/>
+      <line x1="79" y1="200" x2="79" y2="340" stroke="#b8a888" strokeWidth="1"/>
+      <line x1="101" y1="200" x2="101" y2="340" stroke="#b8a888" strokeWidth="1"/>
+      {[[66,214,9],[66,240,10],[114,214,9]].map(([x,by,r],i) => (
+        <g key={`t${i}`}>
+          <line x1={x} y1={by - r * 2} x2={x} y2={by} stroke="#6a4a2a" strokeWidth="2"/>
+          <ellipse cx={x} cy={by - r * 2.2} rx={r} ry={r * 1.25} fill={i % 2 ? "#4a7a44" : "#3f6b3a"}/>
         </g>
       ))}
-      {/* Garden tree on the right, clear of the staircase */}
-      {[[384,182,12]].map(([cx,cy,r],i) => (
-        <g key={i}>
-          <line x1={cx} y1={cy} x2={cx} y2={cy+50} stroke="#6a4a2a" strokeWidth="2.5"/>
-          <ellipse cx={cx} cy={cy} rx={r} ry={r*1.25} fill={i%2 ? "#4a7a44" : "#3f6b3a"}/>
+      {/* Fish pond, 10 ft x 8 ft, left of the lane */}
+      <polygon points={pts([pond.fl[0]-4, pond.fl[1]+3], [pond.fr[0]+4, pond.fr[1]+3], [pond.br[0]+4, pond.br[1]-3], [pond.bl[0]-4, pond.bl[1]-3])} fill="#a89a88"/>
+      <polygon points={pts(pond.fl, pond.fr, pond.br, pond.bl)} fill="url(#cg-water)"/>
+      <ellipse cx="24" cy="270" rx="5" ry="2.5" fill="#5a8a4a"/>
+      <ellipse cx="48" cy="278" rx="4" ry="2" fill="#5a8a4a"/>
+      {[[30,277,1],[40,268,-1]].map(([x,y,d],i) => (
+        <g key={`f${i}`} transform={`translate(${x},${y}) scale(${d},1)`}>
+          <ellipse cx="0" cy="0" rx="4" ry="1.6" fill={i ? "#f5f0e8" : "#d4743a"}/>
+          <path d="M-3.5,0 L-6.5,-2 L-6.5,2 Z" fill={i ? "#f5f0e8" : "#d4743a"}/>
         </g>
       ))}
-      <g transform="translate(200, 44)">
-        {/* Ground-floor deck, with the entrance step on the left, facing the lane */}
-        <rect x="-98" y="180" width="196" height="8" fill="#8a6a44"/>
-        <rect x="-110" y="183" width="14" height="5" fill="#8a6a44"/>
-        {/* Ground floor */}
-        <rect x="-74" y="132" width="148" height="48" fill="#c9a46a"/>
-        <rect x="-74" y="132" width="148" height="48" fill="url(#cg-bamboo)"/>
-        <rect x="-58" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        <rect x="-11" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        <rect x="26" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        {/* Ground-floor balcony: corner posts and railing, open at the left-side entrance */}
-        {[-95, 91].map(x => <rect key={x} x={x} y="132" width="4" height="48" fill="#6a4a2a"/>)}
-        <line x1="-78" y1="166" x2="96" y2="166" stroke="#6a4a2a" strokeWidth="1.5"/>
-        {Array.from({ length: 23 }, (_, i) => -75 + i * 7.5).map(x => (
-          <line key={x} x1={x} y1="166" x2={x} y2="180" stroke="#6a4a2a" strokeWidth="1"/>
-        ))}
-        {/* Entrance in the left wall, seen edge-on */}
-        <rect x="-78" y="142" width="4" height="38" fill="#5a4028"/>
-        {/* Upper floor and its balcony */}
-        <rect x="-98" y="126" width="196" height="6" fill="#8a6a44"/>
-        <rect x="-66" y="84" width="132" height="42" fill="#d4b37a"/>
-        <rect x="-66" y="84" width="132" height="42" fill="url(#cg-bamboo)"/>
-        <rect x="-48" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        <rect x="-10" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        <rect x="28" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        {[-95, 91].map(x => <rect key={x} x={x} y="88" width="4" height="38" fill="#6a4a2a"/>)}
-        <line x1="-96" y1="114" x2="96" y2="114" stroke="#6a4a2a" strokeWidth="1.5"/>
-        {Array.from({ length: 25 }, (_, i) => -90 + i * 7.5).map(x => (
-          <line key={x} x1={x} y1="114" x2={x} y2="126" stroke="#6a4a2a" strokeWidth="1"/>
-        ))}
-        {/* Steep thatched roof, wide enough to shelter the balcony */}
-        <path d="M-108,88 L0,30 L108,88Z" fill="#9a7a42"/>
-        <path d="M-108,88 L0,30 L108,88" fill="none" stroke="#6a4a2a" strokeWidth="2"/>
-        {[-80, -54, -27, 0, 27, 54, 80].map(x => (
-          <line key={x} x1="0" y1="34" x2={x} y2="86" stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>
-        ))}
+
+      {/* === The chang ghar === */}
+      {(() => {
+        const G = 262;                       // ground-floor deck level (front)
+        const deck = [156, 334];             // balcony deck, front edge
+        const gw = [172, 318];               // ground-floor walls
+        const uw = [182, 308];               // upper-floor walls
+        const U = 212;                       // upper-floor level
+        const T = 166;                       // top of upper walls / eaves
+        const wood = "#8a6a44", post = "#6a4a2a";
+        const railing = (a, b, y0, h, n, skip) => {
+          const out = [<line key="r" x1={a[0]} y1={a[1] - h} x2={b[0]} y2={b[1] - h} stroke={post} strokeWidth="1.5"/>];
+          for (let i = 1; i < n; i++) {
+            const t = i / n; if (skip && t > skip[0] && t < skip[1]) continue;
+            const x = a[0] + (b[0] - a[0]) * t, y = a[1] + (b[1] - a[1]) * t;
+            out.push(<line key={i} x1={x} y1={y - h} x2={x} y2={y} stroke={post} strokeWidth="1"/>);
+          }
+          return out;
+        };
+        const fl = [deck[0], G], fr = [deck[1], G];
+        const ufl = [deck[0], U], ufr = [deck[1], U];
+        // Roof corners (eaves) and ridge
+        const eFL = [144, T + 2], eFR = [346, T + 2], eBL = at(eFL, 1), eBR = at(eFR, 1);
+        const rL = [192, 110], rR = [272, 110];
+        const doorBot = (t) => at([gw[0], G], t);
+        return (
+          <g>
+            {/* Ground deck (front edge + side surface) */}
+            <polygon points={pts(fl, fr, at(fr, 1), at(fl, 1))} fill="#a07c50"/>
+            <rect x={deck[0]} y={G} width={deck[1] - deck[0]} height="7" fill={wood}/>
+            {/* Ground-floor left wall (with entrance) and front wall */}
+            <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="#b08c5a"/>
+            <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="url(#cg-bamboo)"/>
+            <polygon points={pts(doorBot(0.3), doorBot(0.62), [doorBot(0.62)[0], doorBot(0.62)[1] - 36], [doorBot(0.3)[0], doorBot(0.3)[1] - 36])} fill="#5a4028"/>
+            <rect x={gw[0]} y={U} width={gw[1] - gw[0]} height={G - U} fill="#c9a46a"/>
+            <rect x={gw[0]} y={U} width={gw[1] - gw[0]} height={G - U} fill="url(#cg-bamboo)"/>
+            {[188, 234, 280].map(x => <rect key={x} x={x} y={U + 14} width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>)}
+            {/* Ground-floor balcony railings: front, and left side (open at the entrance) */}
+            {railing(at(fl, 1), fl, 0, 13, 6, [0.25, 0.7])}
+            {railing(fl, fr, 0, 13, 24)}
+            {/* Posts at the deck corners, up to the upper floor */}
+            {[fl, fr, at(fl, 1)].map(([x, y], i) => <rect key={i} x={x - 2} y={y - (G - U)} width="4" height={G - U} fill={post}/>)}
+
+            {/* Upper deck */}
+            <polygon points={pts(ufl, ufr, at(ufr, 1), at(ufl, 1))} fill="#a07c50"/>
+            <rect x={deck[0]} y={U} width={deck[1] - deck[0]} height="6" fill={wood}/>
+            {/* Upper-floor left and front walls */}
+            <polygon points={pts([uw[0], T], [uw[0], U], at([uw[0], U], 1), at([uw[0], T], 1))} fill="#b8966a"/>
+            <polygon points={pts([uw[0], T], [uw[0], U], at([uw[0], U], 1), at([uw[0], T], 1))} fill="url(#cg-bamboo)"/>
+            <rect x={uw[0]} y={T} width={uw[1] - uw[0]} height={U - T} fill="#d4b37a"/>
+            <rect x={uw[0]} y={T} width={uw[1] - uw[0]} height={U - T} fill="url(#cg-bamboo)"/>
+            {[196, 235, 274].map(x => <rect key={x} x={x} y={T + 10} width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>)}
+            {/* Upper balcony railings: front and left side */}
+            {railing(at(ufl, 1), ufl, 0, 12, 6)}
+            {railing(ufl, ufr, 0, 12, 24)}
+            {[ufl, ufr, at(ufl, 1)].map(([x, y], i) => <rect key={i} x={x - 2} y={T} width="4" height={y - T} fill={post}/>)}
+
+            {/* Hip roof: right and front faces, then the left face */}
+            <polygon points={pts(eFR, eBR, rR)} fill="#8a6a36"/>
+            <polygon points={pts(eFL, eFR, rR, rL)} fill="#9a7a42"/>
+            <polygon points={pts(eBL, eFL, rL)} fill="#7a5a2e"/>
+            <path d={`M${pts(eBL, eFL, eFR)} M${pts(eFL, rL, rR, eFR)}`} fill="none" stroke={post} strokeWidth="1.5"/>
+            {[0.2, 0.4, 0.6, 0.8].map(t => {
+              const a = [eFL[0] + (eFR[0] - eFL[0]) * t, eFL[1]];
+              const b = [rL[0] + (rR[0] - rL[0]) * t, rL[1]];
+              return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>;
+            })}
+
+            {/* Outside staircase: straight up beside the house, then a landing left into the upper floor */}
+            <rect x="346" y={U} width="3" height={G - U + 6} fill={post}/>
+            <rect x="365" y={U} width="3" height={G - U + 6} fill={post}/>
+            {Array.from({ length: 8 }, (_, i) => <rect key={i} x="349" y={G - 2 - i * 6.5} width="16" height="3" fill={wood}/>)}
+            <rect x={deck[1]} y={U - 2} width="34" height="5" fill={wood}/>
+            <line x1={deck[1]} y1={U - 13} x2="370" y2={U - 13} stroke={post} strokeWidth="1.5"/>
+            <line x1="370" y1={U - 13} x2="370" y2={G + 6} stroke={post} strokeWidth="1.5"/>
+          </g>
+        );
+      })()}
+      {/* Path on the right to the foot of the staircase */}
+      <rect x="346" y="268" width="22" height="72" fill="#d9c9a8"/>
       </g>
-      {/* Path on the right, leading to the outside staircase */}
-      <rect x="322" y="230" width="22" height="70" fill="#d9c9a8"/>
-      <line x1="322" y1="230" x2="322" y2="300" stroke="#b8a888" strokeWidth="1"/>
-      <line x1="344" y1="230" x2="344" y2="300" stroke="#b8a888" strokeWidth="1"/>
-      {/* Outside staircase: a straight flight up, then a landing turning left into the upper storey */}
-      <rect x="322" y="172" width="3" height="58" fill="#6a4a2a"/>
-      <rect x="341" y="172" width="3" height="58" fill="#6a4a2a"/>
-      {Array.from({ length: 8 }, (_, i) => i).map(i => (
-        <rect key={i} x="325" y={222 - i * 7} width="16" height="3" fill="#8a6a44"/>
-      ))}
-      <line x1="346" y1="160" x2="346" y2="230" stroke="#6a4a2a" strokeWidth="1.5"/>
-      <rect x="298" y="168" width="46" height="5" fill="#8a6a44"/>
-      <line x1="298" y1="158" x2="346" y2="158" stroke="#6a4a2a" strokeWidth="1.5"/>
-      {[306, 314, 322, 330, 338].map(x => (
-        <line key={x} x1={x} y1="158" x2={x} y2="168" stroke="#6a4a2a" strokeWidth="1"/>
-      ))}
     </svg>
   );
 }
