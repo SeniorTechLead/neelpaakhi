@@ -19,8 +19,17 @@ export function ChangGharSVG() {
       {/* Garden ground */}
       <path d="M0,228 Q100,222 200,226 Q300,220 400,228 L400,300 L0,300Z" fill="#7aaa6e"/>
       <path d="M0,240 Q200,232 400,242 L400,300 L0,300Z" fill="#6a9a5e" opacity="0.6"/>
-      {/* Trees */}
-      {[[50,170,18],[92,182,12],[330,174,16],[368,186,11]].map(([cx,cy,r],i) => (
+      {/* Narrow road along the left side, lined with trees */}
+      <path d="M62,226 L76,226 L52,300 L4,300 Z" fill="#d9c9a8"/>
+      <path d="M62,226 L4,300 M76,226 L52,300" stroke="#b8a888" strokeWidth="1" fill="none"/>
+      {[[58,228,7],[46,242,9],[32,259,12],[14,281,16]].map(([bx,by,r],i) => (
+        <g key={`r${i}`}>
+          <line x1={bx} y1={by - r * 2.2} x2={bx} y2={by} stroke="#6a4a2a" strokeWidth={1.2 + i * 0.6}/>
+          <ellipse cx={bx} cy={by - r * 2.4} rx={r} ry={r * 1.25} fill={i % 2 ? "#4a7a44" : "#3f6b3a"}/>
+        </g>
+      ))}
+      {/* Garden trees on the right */}
+      {[[330,174,16],[368,186,11]].map(([cx,cy,r],i) => (
         <g key={i}>
           <line x1={cx} y1={cy} x2={cx} y2={cy+50} stroke="#6a4a2a" strokeWidth="2.5"/>
           <ellipse cx={cx} cy={cy} rx={r} ry={r*1.25} fill={i%2 ? "#4a7a44" : "#3f6b3a"}/>
