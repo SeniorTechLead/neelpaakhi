@@ -3,8 +3,6 @@ export function ChangGharSVG() {
   const D = [-26, -16];
   const at = ([x, y], t) => [x + D[0] * t, y + D[1] * t];
   const pts = (...ps) => ps.map(([x, y]) => `${x},${y}`).join(" ");
-  // Pond: 10 ft wide (lane is 5 ft = 22px), 8 ft deep
-  const pond = { fl: [18, 286], fr: [62, 286], br: [50, 262], bl: [6, 262] };
   return (
     <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
@@ -50,15 +48,16 @@ export function ChangGharSVG() {
           <ellipse cx={x} cy={by - r * 2.2} rx={r} ry={r * 1.25} fill={i % 2 ? "#4a7a44" : "#3f6b3a"}/>
         </g>
       ))}
-      {/* Fish pond, 10 ft x 8 ft, left of the lane */}
-      <polygon points={pts([pond.fl[0]-4, pond.fl[1]+3], [pond.fr[0]+4, pond.fr[1]+3], [pond.br[0]+4, pond.br[1]-3], [pond.bl[0]-4, pond.bl[1]-3])} fill="#a89a88"/>
-      <polygon points={pts(pond.fl, pond.fr, pond.br, pond.bl)} fill="url(#cg-water)"/>
-      <ellipse cx="24" cy="270" rx="5" ry="2.5" fill="#5a8a4a"/>
-      <ellipse cx="48" cy="278" rx="4" ry="2" fill="#5a8a4a"/>
-      {[[30,277,1],[40,268,-1]].map(([x,y,d],i) => (
-        <g key={`f${i}`} transform={`translate(${x},${y}) scale(${d},1)`}>
-          <ellipse cx="0" cy="0" rx="4" ry="1.6" fill={i ? "#f5f0e8" : "#d4743a"}/>
-          <path d="M-3.5,0 L-6.5,-2 L-6.5,2 Z" fill={i ? "#f5f0e8" : "#d4743a"}/>
+      {/* Fish pond: a long rectangle running parallel to the lane, on its left */}
+      <rect x="10" y="204" width="44" height="88" rx="1" fill="#a89a88"/>
+      <rect x="15" y="209" width="34" height="78" fill="url(#cg-water)"/>
+      <ellipse cx="24" cy="222" rx="5" ry="3" fill="#5a8a4a"/>
+      <ellipse cx="40" cy="250" rx="4.5" ry="2.8" fill="#5a8a4a"/>
+      <ellipse cx="26" cy="274" rx="4" ry="2.5" fill="#5a8a4a"/>
+      {[[30,236,1],[36,262,-1],[24,256,1]].map(([x,y,d],i) => (
+        <g key={`f${i}`} transform={`translate(${x},${y}) rotate(90) scale(${d},1)`}>
+          <ellipse cx="0" cy="0" rx="4" ry="1.6" fill={i === 1 ? "#f5f0e8" : "#d4743a"}/>
+          <path d="M-3.5,0 L-6.5,-2 L-6.5,2 Z" fill={i === 1 ? "#f5f0e8" : "#d4743a"}/>
         </g>
       ))}
 
