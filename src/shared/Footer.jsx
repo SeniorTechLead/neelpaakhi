@@ -41,6 +41,7 @@ export default function Footer() {
           <div style={{ fontFamily: font.accent, fontSize: 17, color: P.sand, lineHeight: 1.9 }}>
             <div><a href="/chang-ghar" style={linkStyle} {...hover}>The Chang Ghar</a></div>
             <div><a href="/dining" style={linkStyle} {...hover}>Dining</a></div>
+            <div><a href="/music" style={linkStyle} {...hover}>Music</a></div>
             <div><a href="/experiences" style={linkStyle} {...hover}>Experiences</a></div>
             <div><a href="/our-story" style={linkStyle} {...hover}>Our Story</a></div>
           </div>

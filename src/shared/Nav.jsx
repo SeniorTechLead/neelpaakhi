@@ -16,11 +16,13 @@ const navLinks = [
   { label: "Our Story", href: "/our-story" },
   { label: "The Chang Ghar", href: "/chang-ghar" },
   { label: "Dining", href: "/dining" },
+  { label: "Music", href: "/music" },
   { label: "Experiences", href: "/experiences" },
 ];
 
 export default function Nav() {
-  const mobile = useMobile();
+  // Five menu items need more room than the page layouts, so collapse earlier
+  const mobile = useMobile(960);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const path = window.location.pathname;

@@ -7,7 +7,7 @@ import { useMobile } from "../shared/hooks.js";
 import FadeIn from "../shared/FadeIn.jsx";
 import PageShell from "../shared/PageShell.jsx";
 import Newsletter from "../shared/Newsletter.jsx";
-import { ChangGharSVG, RestaurantSVG, YogaDeckSVG } from "../shared/svgs.jsx";
+import { ChangGharSVG, RestaurantSVG, BarCampfireSVG, YogaDeckSVG } from "../shared/svgs.jsx";
 
 export default function Home() {
   const mobile = useMobile();
@@ -138,11 +138,18 @@ export default function Home() {
                 Svg: ChangGharSVG,
               },
               {
-                title: "Dining & Music",
-                desc: "A seasonal Assamese kitchen and bar. And, on weekend nights, live acoustic music under the jacaranda tree in the courtyard.",
+                title: "Dining",
+                desc: "A seasonal Assamese kitchen and bar. River fish, bamboo shoot, smoked pork from the hills, and thalis that honor the land.",
                 link: "/dining",
-                label: "THE TABLE & THE STAGE",
+                label: "THE TABLE",
                 Svg: RestaurantSVG,
+              },
+              {
+                title: "Music",
+                desc: "Live acoustic music under the jacaranda tree, Friday to Sunday. Assamese folk, Bengali and Hindi classics, and songs from the hills.",
+                link: "/music",
+                label: "THE SOUNDTRACK",
+                Svg: BarCampfireSVG,
               },
               {
                 title: "Experiences & Retreats",
@@ -150,24 +157,6 @@ export default function Home() {
                 link: "/experiences",
                 label: "EXPERIENCES & RETREATS",
                 Svg: YogaDeckSVG,
-              },
-              {
-                title: "Our Story",
-                desc: "Built for those who remember a slower world — where a song on the radio could stop an entire household.",
-                link: "/our-story",
-                label: "THE AZURE FEATHER",
-                icon: (
-                  <div style={{
-                    aspectRatio: "4/3",
-                    background: `linear-gradient(135deg, ${P.river} 0%, ${P.bamboo}88 50%, ${P.terracotta}44 100%)`,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                  }}>
-                    <svg width="48" height="64" viewBox="0 0 48 64" style={{ opacity: 0.7 }}>
-                      <path d="M24,62 Q23,50 22,38 Q20,28 16,20 Q12,12 6,6 Q14,10 20,16 Q24,20 26,28 Q27,20 30,14 Q34,8 42,4 Q36,12 32,20 Q28,28 26,38 Q25,50 24,62Z" fill={P.gold} opacity="0.75"/>
-                      <path d="M24,62 Q23,42 20,24 Q16,14 6,6" fill="none" stroke={P.goldLight} strokeWidth="1" opacity="0.6"/>
-                    </svg>
-                  </div>
-                ),
               },
             ].map((card, i) => (
               <FadeIn key={i} delay={i * 0.12}>
