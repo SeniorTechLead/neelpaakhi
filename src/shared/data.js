@@ -1,6 +1,6 @@
 export const rooms = [
   { name: "The Chang Ghar Suite", type: "suite",
-    desc: "A two-storey chang ghar \u2014 the traditional Assamese house raised on stilts \u2014 reimagined as a single private suite. Bamboo and timber, lifted above the garden, with the hills on the horizon. Rain shower, handwoven Assamese cotton bedlinen, and the whole retreat quiet around you. Morning birdsong is your alarm.",
+    desc: "A two-storey chang ghar, inspired by the traditional Assamese home and reimagined as a single private suite. Bamboo and timber, set in the garden, with the hills on the horizon. Rain shower, handwoven Assamese cotton bedlinen, and the whole retreat quiet around you. Morning birdsong is your alarm.",
     price: "5,000", originalPrice: "7,500" },
 ];
 

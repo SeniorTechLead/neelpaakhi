@@ -24,7 +24,7 @@ export default function ChangGhar() {
                 One suite. <span style={{ fontStyle: "italic", color: P.goldLight }}>Two storeys.</span>
               </h2>
               <p style={{ fontFamily: font.accent, fontSize: 16, color: P.muted, marginTop: 12, maxWidth: 600, margin: "12px auto 0" }}>
-                A single two-storey chang ghar, the traditional Assamese stilt house,
+                A single two-storey chang ghar, inspired by traditional Assamese homes,
                 for one party at a time. Handcrafted in bamboo and timber.
               </p>
             </div>

@@ -1,6 +1,6 @@
 export function ChangGharSVG() {
   return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar on stilts">
+    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a garden">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -26,19 +26,11 @@ export function ChangGharSVG() {
           <ellipse cx={cx} cy={cy} rx={r} ry={r*1.25} fill={i%2 ? "#4a7a44" : "#3f6b3a"}/>
         </g>
       ))}
-      <g transform="translate(200, 0)">
-        {/* Stilts */}
-        {[-70,-40,-10,20,50,70].map(x => (
-          <rect key={x} x={x-2.5} y="186" width="5" height="44" fill="#6a4a2a"/>
-        ))}
-        <line x1="-70" y1="214" x2="70" y2="214" stroke="#6a4a2a" strokeWidth="2" opacity="0.7"/>
-        {/* Stairs to the raised floor */}
-        {[0,1,2,3,4,5].map(i => (
-          <rect key={i} x={84+i*4} y={190+i*7} width="16" height="3" fill="#8a6a44"/>
-        ))}
-        <line x1="82" y1="188" x2="106" y2="230" stroke="#6a4a2a" strokeWidth="2"/>
-        {/* Ground (raised) floor */}
-        <rect x="-80" y="180" width="168" height="7" fill="#8a6a44"/>
+      <g transform="translate(200, 44)">
+        {/* Low plinth and front step */}
+        <rect x="-80" y="180" width="160" height="8" fill="#8a6a44"/>
+        <rect x="-14" y="188" width="18" height="4" fill="#8a6a44"/>
+        {/* Ground floor */}
         <rect x="-74" y="132" width="148" height="48" fill="#c9a46a"/>
         <rect x="-74" y="132" width="148" height="48" fill="url(#cg-bamboo)"/>
         <rect x="-58" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>

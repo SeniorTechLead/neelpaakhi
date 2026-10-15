@@ -132,7 +132,7 @@ export default function Home() {
             {[
               {
                 title: "The Chang Ghar",
-                desc: "One two-storey chang ghar — the traditional Assamese stilt house — for a single party at a time. Handcrafted. Unhurried.",
+                desc: "One two-storey chang ghar, inspired by traditional Assamese homes, for a single party at a time. Handcrafted. Unhurried.",
                 link: "/chang-ghar",
                 label: "YOUR STAY",
                 Svg: ChangGharSVG,
