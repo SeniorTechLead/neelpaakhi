@@ -1,6 +1,6 @@
 export function ChangGharSVG() {
   return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a garden">
+    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar with balconies on both floors">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -27,30 +27,38 @@ export function ChangGharSVG() {
         </g>
       ))}
       <g transform="translate(200, 44)">
-        {/* Low plinth and front step */}
-        <rect x="-80" y="180" width="160" height="8" fill="#8a6a44"/>
-        <rect x="-14" y="188" width="18" height="4" fill="#8a6a44"/>
+        {/* Ground-floor deck and front step */}
+        <rect x="-98" y="180" width="196" height="8" fill="#8a6a44"/>
+        <rect x="-16" y="188" width="22" height="4" fill="#8a6a44"/>
         {/* Ground floor */}
         <rect x="-74" y="132" width="148" height="48" fill="#c9a46a"/>
         <rect x="-74" y="132" width="148" height="48" fill="url(#cg-bamboo)"/>
         <rect x="-58" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
         <rect x="-18" y="142" width="26" height="38" fill="#5a4028" rx="1"/>
         <rect x="26" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        {/* Upper floor verandah + railing */}
-        <rect x="-86" y="126" width="172" height="6" fill="#8a6a44"/>
+        {/* Ground-floor balcony: corner posts and railing, open at the door */}
+        {[-95, 91].map(x => <rect key={x} x={x} y="132" width="4" height="48" fill="#6a4a2a"/>)}
+        <line x1="-96" y1="166" x2="-22" y2="166" stroke="#6a4a2a" strokeWidth="1.5"/>
+        <line x1="12" y1="166" x2="96" y2="166" stroke="#6a4a2a" strokeWidth="1.5"/>
+        {[...Array.from({ length: 10 }, (_, i) => -90 + i * 7.5), ...Array.from({ length: 11 }, (_, i) => 16 + i * 7.5)].map(x => (
+          <line key={x} x1={x} y1="166" x2={x} y2="180" stroke="#6a4a2a" strokeWidth="1"/>
+        ))}
+        {/* Upper floor and its balcony */}
+        <rect x="-98" y="126" width="196" height="6" fill="#8a6a44"/>
         <rect x="-66" y="84" width="132" height="42" fill="#d4b37a"/>
         <rect x="-66" y="84" width="132" height="42" fill="url(#cg-bamboo)"/>
         <rect x="-48" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
         <rect x="-10" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
         <rect x="28" y="94" width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        <line x1="-86" y1="114" x2="86" y2="114" stroke="#6a4a2a" strokeWidth="1.5"/>
-        {Array.from({ length: 18 }, (_, i) => -84 + i * 10).map(x => (
+        {[-95, 91].map(x => <rect key={x} x={x} y="88" width="4" height="38" fill="#6a4a2a"/>)}
+        <line x1="-96" y1="114" x2="96" y2="114" stroke="#6a4a2a" strokeWidth="1.5"/>
+        {Array.from({ length: 25 }, (_, i) => -90 + i * 7.5).map(x => (
           <line key={x} x1={x} y1="114" x2={x} y2="126" stroke="#6a4a2a" strokeWidth="1"/>
         ))}
-        {/* Steep thatched roof */}
-        <path d="M-98,88 L0,30 L98,88Z" fill="#9a7a42"/>
-        <path d="M-98,88 L0,30 L98,88" fill="none" stroke="#6a4a2a" strokeWidth="2"/>
-        {[-72, -48, -24, 0, 24, 48, 72].map(x => (
+        {/* Steep thatched roof, wide enough to shelter the balcony */}
+        <path d="M-108,88 L0,30 L108,88Z" fill="#9a7a42"/>
+        <path d="M-108,88 L0,30 L108,88" fill="none" stroke="#6a4a2a" strokeWidth="2"/>
+        {[-80, -54, -27, 0, 27, 54, 80].map(x => (
           <line key={x} x1="0" y1="34" x2={x} y2="86" stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>
         ))}
       </g>

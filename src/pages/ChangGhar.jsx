@@ -25,7 +25,7 @@ export default function ChangGhar() {
               </h2>
               <p style={{ fontFamily: font.accent, fontSize: 16, color: P.muted, marginTop: 12, maxWidth: 600, margin: "12px auto 0" }}>
                 A single two-storey chang ghar, inspired by traditional Assamese homes,
-                for one party at a time. Handcrafted in bamboo and timber.
+                for one party at a time. Balconies on every side, upstairs and down.
               </p>
             </div>
           </FadeIn>
