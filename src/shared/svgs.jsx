@@ -1,6 +1,6 @@
 export function ChangGharSVG() {
   return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar with balconies on both floors">
+    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar with balconies on both floors and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -28,8 +28,8 @@ export function ChangGharSVG() {
           <ellipse cx={bx} cy={by - r * 2.4} rx={r} ry={r * 1.25} fill={i % 2 ? "#4a7a44" : "#3f6b3a"}/>
         </g>
       ))}
-      {/* Garden trees on the right */}
-      {[[330,174,16],[368,186,11]].map(([cx,cy,r],i) => (
+      {/* Garden tree on the right, clear of the staircase */}
+      {[[384,182,12]].map(([cx,cy,r],i) => (
         <g key={i}>
           <line x1={cx} y1={cy} x2={cx} y2={cy+50} stroke="#6a4a2a" strokeWidth="2.5"/>
           <ellipse cx={cx} cy={cy} rx={r} ry={r*1.25} fill={i%2 ? "#4a7a44" : "#3f6b3a"}/>
@@ -71,10 +71,20 @@ export function ChangGharSVG() {
           <line key={x} x1="0" y1="34" x2={x} y2="86" stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>
         ))}
       </g>
-      {/* Path */}
-      {[[290,252],[300,262],[312,272],[326,284]].map(([cx,cy],i) =>
-        <ellipse key={i} cx={cx} cy={cy} rx={9} ry={3.5} fill="#e8dcc8" opacity="0.8"/>
-      )}
+      {/* Path on the right, leading to the outside staircase */}
+      <path d="M344,232 L364,232 L356,300 L300,300 Z" fill="#d9c9a8"/>
+      <path d="M344,232 L300,300 M364,232 L356,300" stroke="#b8a888" strokeWidth="1" fill="none"/>
+      {/* Outside staircase up to the upper balcony */}
+      <rect x="300" y="170" width="16" height="5" fill="#8a6a44"/>
+      <rect x="312" y="175" width="4" height="54" fill="#6a4a2a"/>
+      <line x1="314" y1="173" x2="362" y2="231" stroke="#6a4a2a" strokeWidth="2.5"/>
+      {Array.from({ length: 8 }, (_, i) => i).map(i => (
+        <rect key={i} x={316 + i * 5.8} y={176 + i * 7} width="15" height="3" fill="#8a6a44"/>
+      ))}
+      <line x1="314" y1="161" x2="362" y2="219" stroke="#6a4a2a" strokeWidth="1.5"/>
+      {[322, 340, 358].map(x => (
+        <line key={x} x1={x} y1={161 + (x - 314) * 1.21} x2={x} y2={173 + (x - 314) * 1.21} stroke="#6a4a2a" strokeWidth="1"/>
+      ))}
     </svg>
   );
 }
