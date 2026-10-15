@@ -36,7 +36,7 @@ export const retreatPackages = [
     highlights: ["Daily sunrise yoga and sunset meditation", "Pranayama and breathwork sessions", "Sattvic Assamese meals designed for the program", "Guided nature walks and Brahmaputra contemplation", "Sound healing with traditional instruments", "Personal consultation with the visiting practitioner"],
     cta: "Register interest" },
   { title: "Golden Era Weekend", subtitle: "A Musical Pilgrimage", label: "MONTHLY SPECIAL",
-    desc: "A two-night stay built around our signature monthly Golden Era Night. Arrive Friday for Xomoy evening, spend Saturday exploring the north bank, and experience the full Golden Era Night under the jacaranda tree. A celebration of timeless music with guest artists.",
+    desc: "A two-night stay built around our signature monthly Golden Era Night. Arrive Friday for Xomoy evening, spend Saturday exploring the north bank, and experience the full Golden Era Night around the campfire. A celebration of timeless music with guest artists.",
     highlights: ["Two nights in the chang ghar suite", "Xomoy Friday + Golden Era Night Saturday", "Curated playlist and listening notes in your suite", "Guided visit to Guwahati\u2019s cultural landmarks", "Assamese thali dinner with traditional rice beer", "Acoustic jam session \u2014 requests welcome"],
     cta: "Check upcoming dates" },
 ];

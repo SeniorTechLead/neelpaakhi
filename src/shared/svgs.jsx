@@ -121,56 +121,6 @@ export function RestaurantSVG() {
   );
 }
 
-export function BarCampfireSVG() {
-  return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="bar-sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1a2030"/>
-          <stop offset="100%" stopColor="#2a3a3a"/>
-        </linearGradient>
-        <radialGradient id="bar-glow" cx="65%" cy="55%" r="45%">
-          <stop offset="0%" stopColor="#d4b85e" stopOpacity="0.1"/>
-          <stop offset="100%" stopColor="#d4b85e" stopOpacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#bar-sky)"/>
-      {[[50,15,1],[130,28,0.7],[220,10,1.1],[320,22,0.8],[380,32,0.6]].map(([cx,cy,r],i) =>
-        <circle key={i} cx={cx} cy={cy} r={r} fill="#f5f0e8" opacity="0.5"/>
-      )}
-      <g transform="translate(0, 80)">
-        <rect x="180" y="20" width="200" height="100" fill="#2a2a22" opacity="0.7" rx="1"/>
-        {[40,65,90].map(y => (
-          <g key={y}>
-            <rect x="190" y={y} width="180" height="2" fill="#6a5a4a" opacity="0.4"/>
-            {[200,220,240,260,280,300,320,340,350].map((bx,i) =>
-              <rect key={i} x={bx} y={y-12} width={4} height={12} fill="#d4b85e" opacity={0.05 + (i%3)*0.03} rx="0.5"/>
-            )}
-          </g>
-        ))}
-        <rect x="50" y="115" width="330" height="10" fill="#5a4a3a" opacity="0.8" rx="2"/>
-        <rect x="55" y="117" width="320" height="5" fill="#d4b85e" opacity="0.04"/>
-        {[90,140,190,240,290,340].map(x => (
-          <g key={x}>
-            <rect x={x-3} y="126" width="6" height="20" fill="#4a3a2a" opacity="0.5" rx="1"/>
-            <rect x={x-6} y="124" width="12" height="4" fill="#5a4a3a" opacity="0.6" rx="1"/>
-          </g>
-        ))}
-        {[100,160,220,280,340].map((cx,i) =>
-          <circle key={cx} cx={cx} cy="18" r="2.5" fill="#d4b85e" opacity={0.3 + (i%2)*0.1}/>
-        )}
-      </g>
-      <rect x="20" y="100" width="130" height="80" fill="#1a2a2a" opacity="0.3" rx="2"/>
-      <g transform="translate(80, 100)" opacity="0.3">
-        <path d="M0,60 Q-1,40 0,20 Q1,5 3,-5" fill="none" stroke="#5a4a3a" strokeWidth="2"/>
-        <ellipse cx="3" cy="-10" rx="20" ry="14" fill="#3a5a3a" opacity="0.5"/>
-      </g>
-      <rect x="0" y="250" width="400" height="50" fill="#1a2a1a" opacity="0.5"/>
-      <rect width="400" height="300" fill="url(#bar-glow)"/>
-    </svg>
-  );
-}
-
 export function YogaDeckSVG() {
   return (
     <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice">
@@ -284,10 +234,11 @@ export function CampfireCircleSVG() {
         <circle key={i} cx={cx} cy={cy} r={r} fill="#f5f0e8" opacity="0.6"/>
       )}
       <path d="M0,170 Q100,165 200,168 Q300,163 400,170 L400,300 L0,300Z" fill="#1a2a1a" opacity="0.6"/>
-      {[[80,140,30],[320,145,28]].map(([cx,cy,w],i) => (
-        <g key={i} opacity="0.25">
-          <rect x={cx-w/2} y={cy} width={w} height={20} fill="#2a2a1a"/>
-          <path d={`M${cx-w/2-4},${cy+2} L${cx},${cy-12} L${cx+w/2+4},${cy+2}`} fill="#3a3a2a"/>
+      {/* Trees around the garden */}
+      {[[70,150,16],[110,158,11],[300,152,14],[340,160,10]].map(([cx,cy,r],i) => (
+        <g key={i} opacity="0.35">
+          <line x1={cx} y1={cy} x2={cx} y2={cy+20} stroke="#2a2a1a" strokeWidth="2"/>
+          <ellipse cx={cx} cy={cy} rx={r} ry={r*1.2} fill="#2a3a2a"/>
         </g>
       ))}
       <g transform="translate(200, 200)">

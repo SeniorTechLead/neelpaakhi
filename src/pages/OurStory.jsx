@@ -81,7 +81,7 @@ export default function OurStory() {
               <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 24 }}>
                 {[
                   { title: "Remember", icon: "\u{1F4FB}", text: "The golden age of music lives here — the old songs, not as nostalgia, but as the present." },
-                  { title: "Listen", icon: "\u{1F3B5}", text: "The jacaranda stage is the heart. Live music on Fridays, Saturdays, and Sundays — from folk to Bengali classics — flows through the courtyard." },
+                  { title: "Listen", icon: "\u{1F3B5}", text: "Music is the heart. Live acoustic sets on Fridays, Saturdays, and Sundays — from folk to Bengali classics — around the campfire in the garden." },
                   { title: "Root", icon: "\u{1F331}", text: "Bamboo, river stone, Muga silk, gamosa patterns. Every surface tells an Assamese story from a time when craft was slow and honest." },
                   { title: "Breathe", icon: "\u{1F32C}\uFE0F", text: "No screens, no rush. Campfire, stargazing, yoga at dawn. A rhythm that belongs to the 1970s and refuses to leave." },
                 ].map((p, i) => (

@@ -7,7 +7,7 @@ import { useMobile } from "../shared/hooks.js";
 import FadeIn from "../shared/FadeIn.jsx";
 import PageShell from "../shared/PageShell.jsx";
 import Newsletter from "../shared/Newsletter.jsx";
-import { ChangGharSVG, RestaurantSVG, BarCampfireSVG, YogaDeckSVG } from "../shared/svgs.jsx";
+import { ChangGharSVG, RestaurantSVG, CampfireCircleSVG, YogaDeckSVG } from "../shared/svgs.jsx";
 
 export default function Home() {
   const mobile = useMobile();
@@ -146,10 +146,10 @@ export default function Home() {
               },
               {
                 title: "Music",
-                desc: "Live acoustic music under the jacaranda tree, Friday to Sunday. Assamese folk, Bengali and Hindi classics, and songs from the hills.",
+                desc: "Live acoustic music around the campfire, Friday to Sunday. Assamese folk, Bengali and Hindi classics, and songs from the hills.",
                 link: "/music",
                 label: "THE SOUNDTRACK",
-                Svg: BarCampfireSVG,
+                Svg: CampfireCircleSVG,
               },
               {
                 title: "Experiences & Retreats",

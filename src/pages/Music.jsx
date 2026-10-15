@@ -4,7 +4,7 @@ import FadeIn from "../shared/FadeIn.jsx";
 import PageShell from "../shared/PageShell.jsx";
 import Newsletter from "../shared/Newsletter.jsx";
 import { musicSchedule } from "../shared/data.js";
-import { BarCampfireSVG } from "../shared/svgs.jsx";
+import { CampfireCircleSVG } from "../shared/svgs.jsx";
 
 export default function Music() {
   const mobile = useMobile();
@@ -34,25 +34,24 @@ export default function Music() {
           <FadeIn>
             <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? 24 : 48, alignItems: "center", marginBottom: 56 }}>
               <div style={{ aspectRatio: "4/3", position: "relative", overflow: "hidden" }}>
-                <BarCampfireSVG />
+                <CampfireCircleSVG />
                 <div style={{
                   position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px 16px 16px",
                   background: "linear-gradient(transparent, rgba(25,20,40,0.7))",
                 }}>
                   <div style={{ fontFamily: font.accent, fontSize: 13, color: P.gold, letterSpacing: 2 }}>
-                    COURTYARD &middot; LIVE MUSIC
+                    GARDEN &middot; LIVE MUSIC
                   </div>
                 </div>
               </div>
               <div>
                 <h3 style={{ fontFamily: font.display, fontSize: 24, color: P.cream, marginBottom: 12 }}>
-                  The Jacaranda Stage
+                  Music by the Fire
                 </h3>
                 <p style={{ fontFamily: font.accent, fontSize: 15, lineHeight: 1.8, color: P.muted }}>
-                  A raised stage beneath the old jacaranda tree in the courtyard.
-                  Pull up a chair by the fire. No food, no bar {"\u2014"} just music,
-                  the tree{"\u2019"}s canopy overhead, and the stars beyond it.
-                  Live music on Fridays, Saturdays, and Sundays.
+                  Live acoustic music in the garden, around the campfire.
+                  Pull up a chair by the fire. No food, no bar {"\u2014"} just music
+                  and the stars overhead. Fridays, Saturdays, and Sundays.
                 </p>
               </div>
             </div>
