@@ -5,17 +5,11 @@ export const rooms = [
 ];
 
 export const musicSchedule = [
-  { day: "Xomoy Fridays", desc: "Assamese folk night. Timeless classics and Bihu rhythms around the fire. Local artists and guest musicians.", icon: "\u{1F3B6}" },
-  { day: "Purano Din Saturdays", desc: "Bengali evening by candlelight. Beloved songs and classic ballads, reimagined on acoustic guitar.", icon: "\u{1F56F}\uFE0F" },
-  { day: "Pahadi Sundays", desc: "Songs from the hills of the Northeast. Folk classics, close harmonies, and new-age indie. Acoustic and intimate.", icon: "\u26F0\uFE0F" },
+  { day: "Xomoy Fridays", desc: "Assamese folk night. Gentle melodies, acoustic covers, old radio favourites, and Bihu rhythms around the fire. Local artists and guest musicians.", icon: "\u{1F3B6}" },
+  { day: "Purano Din Saturdays", desc: "Bengali and Hindi classics by candlelight. Beloved ballads and hidden gems from the 70s and 80s, reimagined on acoustic guitar.", icon: "\u{1F56F}\uFE0F" },
+  { day: "Pahadi Sundays", desc: "Songs from the hills of the Northeast. Folk classics, close harmonies, and new-age indie, ending in a campfire jam with your requests.", icon: "\u26F0\uFE0F" },
 ];
 
-export const dailyMusic = [
-  { time: "Morning", icon: "\u{1F305}", desc: "Soft Assamese folk \u2014 gentle melodies, acoustic covers, and old radio favourites" },
-  { time: "Afternoon", icon: "\u2600\uFE0F", desc: "Soft instrumentals, lo-fi acoustic ballads, and hidden gems from the 70s and 80s" },
-  { time: "Evening", icon: "\u{1F306}", desc: "Live acoustic \u2014 Hindi and Bengali classics, much-loved favourites, campfire requests" },
-  { time: "Night", icon: "\u{1F319}", desc: "Campfire jams \u2014 Assamese, Bengali, Hindi, and Northeast soul. Guest requests." },
-];
 
 export const curatedExperiences = [
   { title: "Brahmaputra Boat Ride", icon: "\u26F5", duration: "2\u20133 hours", season: "Oct \u2013 Apr",

@@ -3,7 +3,7 @@ import { useMobile } from "../shared/hooks.js";
 import FadeIn from "../shared/FadeIn.jsx";
 import PageShell from "../shared/PageShell.jsx";
 import Newsletter from "../shared/Newsletter.jsx";
-import { musicSchedule, dailyMusic } from "../shared/data.js";
+import { musicSchedule } from "../shared/data.js";
 import { RestaurantSVG, BarCampfireSVG } from "../shared/svgs.jsx";
 
 export default function Dining() {
@@ -99,28 +99,6 @@ export default function Dining() {
                 a guitar, and a room willing to listen. At Neel Paakhi, every evening is a doorway
                 back to that era.
               </p>
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div style={{ marginBottom: 48 }}>
-              <div style={{ fontFamily: font.body, fontSize: 10, letterSpacing: 4, color: P.muted, marginBottom: 20, textAlign: "center" }}>THROUGH THE DAY</div>
-              <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 12 }}>
-                {dailyMusic.map((m, i) => (
-                  <div key={i} style={{
-                    padding: "20px 16px", textAlign: "center",
-                    background: `${P.river}22`, border: `1px solid ${P.gold}0a`,
-                    transition: "all 0.4s ease",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${P.gold}22`; e.currentTarget.style.background = `${P.river}44`; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${P.gold}0a`; e.currentTarget.style.background = `${P.river}22`; }}
-                  >
-                    <div style={{ fontSize: 24, marginBottom: 8 }}>{m.icon}</div>
-                    <div style={{ fontFamily: font.display, fontSize: 16, color: P.goldLight, marginBottom: 8 }}>{m.time}</div>
-                    <p style={{ fontFamily: font.accent, fontSize: 12, lineHeight: 1.6, color: P.muted, margin: 0 }}>{m.desc}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </FadeIn>
 
