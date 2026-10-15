@@ -37,22 +37,23 @@ export function ChangGharSVG() {
         </g>
       ))}
       <g transform="translate(200, 44)">
-        {/* Ground-floor deck and front step */}
+        {/* Ground-floor deck, with the entrance step on the left, facing the lane */}
         <rect x="-98" y="180" width="196" height="8" fill="#8a6a44"/>
-        <rect x="-16" y="188" width="22" height="4" fill="#8a6a44"/>
+        <rect x="-110" y="183" width="14" height="5" fill="#8a6a44"/>
         {/* Ground floor */}
         <rect x="-74" y="132" width="148" height="48" fill="#c9a46a"/>
         <rect x="-74" y="132" width="148" height="48" fill="url(#cg-bamboo)"/>
         <rect x="-58" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        <rect x="-18" y="142" width="26" height="38" fill="#5a4028" rx="1"/>
+        <rect x="-11" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
         <rect x="26" y="146" width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>
-        {/* Ground-floor balcony: corner posts and railing, open at the door */}
+        {/* Ground-floor balcony: corner posts and railing, open at the left-side entrance */}
         {[-95, 91].map(x => <rect key={x} x={x} y="132" width="4" height="48" fill="#6a4a2a"/>)}
-        <line x1="-96" y1="166" x2="-22" y2="166" stroke="#6a4a2a" strokeWidth="1.5"/>
-        <line x1="12" y1="166" x2="96" y2="166" stroke="#6a4a2a" strokeWidth="1.5"/>
-        {[...Array.from({ length: 10 }, (_, i) => -90 + i * 7.5), ...Array.from({ length: 11 }, (_, i) => 16 + i * 7.5)].map(x => (
+        <line x1="-78" y1="166" x2="96" y2="166" stroke="#6a4a2a" strokeWidth="1.5"/>
+        {Array.from({ length: 23 }, (_, i) => -75 + i * 7.5).map(x => (
           <line key={x} x1={x} y1="166" x2={x} y2="180" stroke="#6a4a2a" strokeWidth="1"/>
         ))}
+        {/* Entrance in the left wall, seen edge-on */}
+        <rect x="-78" y="142" width="4" height="38" fill="#5a4028"/>
         {/* Upper floor and its balcony */}
         <rect x="-98" y="126" width="196" height="6" fill="#8a6a44"/>
         <rect x="-66" y="84" width="132" height="42" fill="#d4b37a"/>
