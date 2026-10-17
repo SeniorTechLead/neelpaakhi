@@ -415,7 +415,9 @@ export function ChangGharSVG() {
         const ufl = [deck[0], U], ufr = [deck[1], U];
         // Roof corners (eaves) and ridge
         const eFL = [144, T + 2], eFR = [346, T + 2], eBL = at(eFL, 1), eBR = at(eFR, 1);
-        const rL = [192, 110], rR = [272, 110];
+        // Pyramid roof: all four slopes meet at a single point above the centre of the eaves
+        const apex = [(eFL[0] + eFR[0] + eBL[0] + eBR[0]) / 4, 102];
+        const rL = apex, rR = apex;
         const doorBot = (t) => at([gw[0], G], t);
         return (
           <g>
@@ -534,7 +536,7 @@ export function ChangGharSVG() {
                 </g>
               );
             })()}
-            {/* Hip roof: right and front faces, then the left face */}
+            {/* Pyramid roof: right and front faces, then the left face */}
             <polygon points={pts(eFR, eBR, rR)} fill="#e2e0d9"/>
             <polygon points={pts(eFL, eFR, rR, rL)} fill="#f4f3ef"/>
             <polygon points={pts(eBL, eFL, rL)} fill="#d3d1c9"/>
