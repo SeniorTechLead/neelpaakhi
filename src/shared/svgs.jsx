@@ -721,10 +721,18 @@ export function ChangGharSVG() {
         }
         // West stringer and east handrail
         out.push(<polygon key="str" points={pts(P(tF, 0), P(t1, rise), P(t1, rise - 6), P(tF + 0.08, 0))} fill="#7a5a34"/>);
-        out.push(<line key="hr" x1={P(tF, 12, W)[0]} y1={P(tF, 12, W)[1]} x2={P(t1, rise + 12, W)[0]} y2={P(t1, rise + 12, W)[1]} stroke={post} strokeWidth="1.5"/>);
-        [0.15, 0.4, 0.65, 0.9].forEach((u, i) => {
-          const t = tF + (t1 - tF) * u;
-          out.push(<line key={`b${i}`} x1={P(t, zAt(t) + 12, W)[0]} y1={P(t, zAt(t) + 12, W)[1]} x2={P(t, zAt(t), W)[0]} y2={P(t, zAt(t), W)[1]} stroke={post} strokeWidth="1"/>);
+        // Railings on both sides of the flight: handrail, bottom rail, and closely spaced balusters
+        [0, W].forEach((dx, side) => {
+          out.push(<line key={`hr${side}`} x1={P(tF, 12, dx)[0]} y1={P(tF, 12, dx)[1]} x2={P(t1, rise + 12, dx)[0]} y2={P(t1, rise + 12, dx)[1]} stroke={post} strokeWidth="1.5"/>);
+          out.push(<line key={`br${side}`} x1={P(tF, 2, dx)[0]} y1={P(tF, 2, dx)[1]} x2={P(t1, rise + 2, dx)[0]} y2={P(t1, rise + 2, dx)[1]} stroke={post} strokeWidth="0.8"/>);
+          Array.from({ length: 15 }, (_, j) => (j + 0.5) / 15).forEach((u, j) => {
+            const t = tF + (t1 - tF) * u;
+            out.push(<line key={`b${side}-${j}`} x1={P(t, zAt(t) + 12, dx)[0]} y1={P(t, zAt(t) + 12, dx)[1]} x2={P(t, zAt(t), dx)[0]} y2={P(t, zAt(t), dx)[1]} stroke={post} strokeWidth="0.8"/>);
+          });
+        });
+        // Balusters on the landing railing
+        Array.from({ length: 5 }, (_, j) => t1 + ((t2 - t1) * (j + 0.5)) / 5).forEach((t, j) => {
+          out.push(<line key={`lb${j}`} x1={P(t, rise + 12, W)[0]} y1={P(t, rise + 12, W)[1]} x2={P(t, rise, W)[0]} y2={P(t, rise, W)[1]} stroke={post} strokeWidth="0.8"/>);
         });
         return out;
       })()}
