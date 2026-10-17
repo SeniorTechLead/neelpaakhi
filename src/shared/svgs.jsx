@@ -61,10 +61,12 @@ export function ChangGharSVG() {
       {[[-80,150,22],[-30,148,20],[20,150,22],[150,146,24],[250,150,20],[370,148,24],[430,150,20]].map(([cx,cy,r],i) => (
         <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
       ))}
+      {/* Paved road behind the north wall, leading to the gate and joining the side roads */}
+      <rect x="-90" y="146" width="550" height="54" fill="url(#cg-pavers)"/>
       {/* Compound wall to the north */}
-      <rect x="-90" y="158" width="550" height="42" fill="#ece6da"/>
-      <rect x="-90" y="155" width="550" height="4" fill="#cfc6b6"/>
-      {[-84, -12, 140, 204, 268, 332, 362, 430].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
+      <rect x="-84" y="158" width="452" height="42" fill="#ece6da"/>
+      <rect x="-84" y="155" width="452" height="4" fill="#cfc6b6"/>
+      {[-84, -12, 140, 204, 268, 332, 362].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
       {/* 8 ft gate where the lane meets the wall */}
       <rect x="32" y="148" width="8" height="52" fill="#ddd5c6"/>
       <rect x="76" y="148" width="8" height="52" fill="#ddd5c6"/>
