@@ -562,7 +562,7 @@ export function ChangGharSVG() {
         const P = (t, z, dx = 0) => [362 + dx + D[0] * t, 286 + D[1] * t - z];
         const n = 22, rise = 74, h = rise / n;            // ~6.5 in per step
         const tF = -1.0, t1 = 0.45, t2 = 0.75, ds = (t1 - tF) / n, W = 16, toHouse = -28;
-        const wood = "#f7efee", post = "#d9c6c4";   // painted white with a slight pink tint; risers and posts a shade deeper
+        const wood = "#8a6a44", post = "#6a4a2a";
         const zAt = (t) => rise * (t - tF) / (t1 - tF);
         const out = [];
         // Posts under the flight and the landing
@@ -572,7 +572,7 @@ export function ChangGharSVG() {
         });
         out.push(<line key="pl" x1={P(t2, rise, W)[0]} y1={P(t2, rise, W)[1]} x2={P(t2, 0, W)[0]} y2={P(t2, 0, W)[1]} stroke={post} strokeWidth="2"/>);
         // Landing (with its front face), then the gate into the upper floor
-        out.push(<polygon key="land" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t2, rise, W), P(t2, rise, toHouse))} fill="#efe3e1"/>);
+        out.push(<polygon key="land" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t2, rise, W), P(t2, rise, toHouse))} fill="#a07c50"/>);
         out.push(<polygon key="landf" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t1, rise - 4, W), P(t1, rise - 4, toHouse))} fill={wood}/>);
         const g1 = t1 + 0.06, g2 = t2 - 0.06;
         out.push(<polygon key="gate" points={pts(P(g1, rise + 2, toHouse), P(g2, rise + 2, toHouse), P(g2, rise + 13, toHouse), P(g1, rise + 13, toHouse))} fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="0.8"/>);
@@ -586,7 +586,7 @@ export function ChangGharSVG() {
           out.push(<polygon key={`t${i}`} points={pts(P(a, z), P(a, z, W), P(a + ds, z, W), P(a + ds, z))} fill={wood}/>);
         }
         // West stringer and east handrail
-        out.push(<polygon key="str" points={pts(P(tF, 0), P(t1, rise), P(t1, rise - 6), P(tF + 0.08, 0))} fill="#e3d2d0"/>);
+        out.push(<polygon key="str" points={pts(P(tF, 0), P(t1, rise), P(t1, rise - 6), P(tF + 0.08, 0))} fill="#7a5a34"/>);
         out.push(<line key="hr" x1={P(tF, 12, W)[0]} y1={P(tF, 12, W)[1]} x2={P(t1, rise + 12, W)[0]} y2={P(t1, rise + 12, W)[1]} stroke={post} strokeWidth="1.5"/>);
         [0.15, 0.4, 0.65, 0.9].forEach((u, i) => {
           const t = tF + (t1 - tF) * u;
@@ -653,18 +653,18 @@ export function ChangGharSVG() {
                 <polygon key="branch" points={pts([ns(69, 258, q2[1]), q2[1]], q2, q1, [ns(69, 258, q1[1]), q1[1]])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>,
               ];
               for (let k = 3; k >= 1; k--) {
-                out.push(<polygon key={`r${k}`} points={band(outline(o(k)), outline(o(k), R))} fill="#7a5a34"/>);
-                out.push(<polygon key={`t${k}`} points={band(outline(o(k - 1), R), outline(o(k)))} fill="#b89a70"/>);
+                out.push(<polygon key={`r${k}`} points={band(outline(o(k)), outline(o(k), R))} fill="#e6d3d1"/>);
+                out.push(<polygon key={`t${k}`} points={band(outline(o(k - 1), R), outline(o(k)))} fill="#f8f0ef"/>);
               }
-              out.push(<polygon key="r0" points={band(outline(o(0)), outline(o(0), R))} fill="#7a5a34"/>);
+              out.push(<polygon key="r0" points={band(outline(o(0)), outline(o(0), R))} fill="#e6d3d1"/>);
               // Walkway carried up the steps from the branch road to the door
               const edgeAt = (k, t, d = 0) => {
                 const e = outline(o(k), d);
                 return [e[1][0] + (e[0][0] - e[1][0]) * t, e[1][1] + (e[0][1] - e[1][1]) * t];
               };
               for (let k = 3; k >= 0; k--) {
-                out.push(<polygon key={`wk${k}`} points={pts(edgeAt(k, 0.3, R), edgeAt(k, 0.62, R), edgeAt(k, 0.62), edgeAt(k, 0.3))} fill="#cbb994"/>);
-                if (k > 0) out.push(<polygon key={`wt${k}`} points={pts(edgeAt(k, 0.3), edgeAt(k, 0.62), edgeAt(k - 1, 0.62, R), edgeAt(k - 1, 0.3, R))} fill="#e2d4b4"/>);
+                out.push(<polygon key={`wk${k}`} points={pts(edgeAt(k, 0.3, R), edgeAt(k, 0.62, R), edgeAt(k, 0.62), edgeAt(k, 0.3))} fill="#e6d3d1"/>);
+                if (k > 0) out.push(<polygon key={`wt${k}`} points={pts(edgeAt(k, 0.3), edgeAt(k, 0.62), edgeAt(k - 1, 0.62, R), edgeAt(k - 1, 0.3, R))} fill="#f8f0ef"/>);
               }
               // Flowering plants all along both sides of the path to the entrance
               const plant = (bx, by, k, sc) => out.push(flowerPlant(bx, by, k, sc, `e${k}`));
