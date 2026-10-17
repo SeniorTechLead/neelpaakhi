@@ -486,7 +486,7 @@ export function ChangGharSVG() {
               const NE = [xE(yN), yN], NW = [xW(yN), yN], SE = [xE(yS2), yS2], SW = [xW(yS2), yS2];
               const up = ([x, y], z) => [x, y - z];
               const lerp = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
-              const Hn = 78, Hv = 34, pole = "#2f5a3a";   // ball-stop nets about 18 ft, just under the 20 ft lights
+              const Hn = 78, Hv = 34, pole = "#f4f3ef";   // white iron posts   // ball-stop nets about 18 ft, just under the 20 ft lights
               const mesh = (p, q, k) => (
                 <g key={k}>
                   <polygon points={pts(p, q, up(q, Hn), up(p, Hn))} fill="url(#cg-mesh)"/>
