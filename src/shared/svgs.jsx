@@ -7,7 +7,7 @@ export function ChangGharSVG() {
   const at = ([x, y], t) => [x + D[0] * t, y + D[1] * t];
   const pts = (...ps) => ps.map(([x, y]) => `${x},${y}`).join(" ");
   return (
-    <svg viewBox="0 0 400 300" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
+    <svg viewBox="-50 -15 500 375" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -26,17 +26,17 @@ export function ChangGharSVG() {
           <stop offset="100%" stopColor="#2a5a6a"/>
         </linearGradient>
       </defs>
-      <rect width="400" height="300" fill="url(#cg-sky)"/>
+      <rect x="-50" y="-15" width="500" height="375" fill="url(#cg-sky)"/>
       {/* Whole scene lifted so the foreground clears the caption */}
       <g transform="translate(0, -52)">
       {/* Treetops beyond the compound */}
-      {[[20,150,22],[150,146,24],[250,150,20],[370,148,24]].map(([cx,cy,r],i) => (
+      {[[-30,148,20],[20,150,22],[150,146,24],[250,150,20],[370,148,24],[430,150,20]].map(([cx,cy,r],i) => (
         <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
       ))}
       {/* Compound wall to the north */}
-      <rect x="0" y="158" width="400" height="42" fill="#ece6da"/>
-      <rect x="0" y="155" width="400" height="4" fill="#cfc6b6"/>
-      {[140, 204, 268, 332].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
+      <rect x="-50" y="158" width="500" height="42" fill="#ece6da"/>
+      <rect x="-50" y="155" width="500" height="4" fill="#cfc6b6"/>
+      {[-12, 140, 204, 268, 332, 396].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
       {/* 8 ft gate where the lane meets the wall */}
       <rect x="32" y="148" width="8" height="52" fill="#ddd5c6"/>
       <rect x="76" y="148" width="8" height="52" fill="#ddd5c6"/>
@@ -44,9 +44,9 @@ export function ChangGharSVG() {
       <line x1="58" y1="162" x2="58" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
       {[168, 175, 182, 189].map(y => <line key={y} x1="40" y1={y} x2="76" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
       {/* Garden ground */}
-      <rect x="0" y="198" width="400" height="160" fill="#7aaa6e"/>
+      <rect x="-50" y="198" width="500" height="216" fill="#7aaa6e"/>
       {/* Main road from the gate, parallel to the house's side walls */}
-      <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 352), 352], [ns(47, 200, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 414), 414], [ns(47, 200, 414), 414])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       {/* Trees along the main road */}
       {[214, 238].map((by, i) => {
         const x = ns(69, 200, by) + 12;
@@ -59,7 +59,7 @@ export function ChangGharSVG() {
       })}
       {/* Fish pond: long side parallel to the main road, on its left */}
       {(() => {
-        const r = (y) => ns(37, 200, y), l = (y) => r(y) - 40;
+        const r = (y) => ns(-5, 200, y), l = (y) => r(y) - 40;
         return (
           <g>
             <polygon points={pts([l(208) - 4, 208], [r(208) + 4, 208], [r(296) + 4, 296], [l(296) - 4, 296])} fill="#a89a88"/>
@@ -73,6 +73,19 @@ export function ChangGharSVG() {
                 <path d="M-3.5,0 L-6.5,-2 L-6.5,2 Z" fill={i === 1 ? "#f5f0e8" : "#d4743a"}/>
               </g>
             ))}
+          </g>
+        );
+      })()}
+      {/* Smaller courtyard between the pond and the main road, edged with flowers */}
+      {(() => {
+        const bl = [ns(5, 200, 226), 226], br = [ns(39, 200, 226), 226], fr = [ns(39, 200, 286), 286], fl = [ns(5, 200, 286), 286];
+        const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
+        const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
+        const dots = [...edge(bl, br, 6), ...edge(br, fr, 11), ...edge(fr, fl, 6), ...edge(fl, bl, 11)];
+        return (
+          <g>
+            <polygon points={pts(bl, br, fr, fl)} fill="#c8c4bc" stroke="#a8a49c" strokeWidth="1"/>
+            {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r="2" fill={colors[(i + 1) % colors.length]}/>)}
           </g>
         );
       })()}
@@ -301,7 +314,7 @@ export function ChangGharSVG() {
         );
       })()}
       {/* Road on the right to the foot of the staircase, parallel to the house */}
-      <polygon points={pts([378, 308], [394, 308], [ns(394, 308, 352), 352], [ns(378, 308, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([378, 308], [394, 308], [ns(394, 308, 414), 414], [ns(378, 308, 414), 414])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       </g>
     </svg>
   );
