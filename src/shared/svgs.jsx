@@ -80,6 +80,20 @@ export function ChangGharSVG() {
           </g>
         );
       })}
+      {/* Compound wall on the west, to the left of the tank, pond and small courtyard */}
+      {(() => {
+        const H = 42, x = (y) => ns(-84, 200, y), y0 = 200, y1 = 470;
+        const pillars = [236, 290, 350, 420];
+        return (
+          <g>
+            <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
+            <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
+            {pillars.map(y => (
+              <polygon key={y} points={pts([x(y) - 3, y - H - 4], [x(y + 6) + 3, y + 6 - H - 4], [x(y + 6) + 3, y + 6], [x(y) - 3, y])} fill="#d6cebf"/>
+            ))}
+          </g>
+        );
+      })()}
       {/* Tall white iron tower with two stacked blue tanks (unfiltered and filtered), between the wall and the pond */}
       {(() => {
         const white = "#f4f3ef", shade = "#d9d7d0", edge = "#a9a69e";
