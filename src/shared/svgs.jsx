@@ -48,7 +48,7 @@ export function ChangGharSVG() {
       {/* Main road from the gate, parallel to the house's side walls */}
       <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 414), 414], [ns(47, 200, 414), 414])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       {/* Trees along the main road */}
-      {[214, 238].map((by, i) => {
+      {[214, 268].map((by, i) => {
         const x = ns(69, 200, by) + 12;
         return (
           <g key={`t${i}`}>
@@ -76,12 +76,14 @@ export function ChangGharSVG() {
           </g>
         );
       })()}
-      {/* Smaller courtyard between the pond and the main road, edged with flowers */}
+      {/* The house and everything attached to it sit back near the north wall (under 5 ft away) */}
+      <g transform="translate(0, -58)">
+      {/* Smaller courtyard on the far side of the main courtyard, edged with flowers */}
       {(() => {
-        const bl = [ns(5, 200, 226), 226], br = [ns(39, 200, 226), 226], fr = [ns(39, 200, 286), 286], fl = [ns(5, 200, 286), 286];
+        const bl = [322, 300], br = [354, 300], fr = [ns(354, 300, 372), 372], fl = [ns(322, 300, 372), 372];
         const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
-        const dots = [...edge(bl, br, 6), ...edge(br, fr, 11), ...edge(fr, fl, 6), ...edge(fl, bl, 11)];
+        const dots = [...edge(bl, br, 6), ...edge(br, fr, 12), ...edge(fr, fl, 6), ...edge(fl, bl, 12)];
         return (
           <g>
             <polygon points={pts(bl, br, fr, fl)} fill="#c8c4bc" stroke="#a8a49c" strokeWidth="1"/>
@@ -91,7 +93,7 @@ export function ChangGharSVG() {
       })()}
       {/* Concrete forecourt in front of the house, edged with flowers */}
       {(() => {
-        const bl = [150, 293], br = [350, 293], fr = [ns(350, 293, 346), 346], fl = [ns(150, 293, 346), 346];
+        const bl = [150, 293], br = [312, 293], fr = [ns(312, 293, 380), 380], fl = [ns(150, 293, 380), 380];
         const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
         const dots = [...edge(bl, br, 34), ...edge(br, fr, 9), ...edge(fr, fl, 34), ...edge(fl, bl, 9)];
@@ -194,9 +196,9 @@ export function ChangGharSVG() {
               const foot = outline(o(3), R);
               // Branch road meets the outer step at the entrance door
               const along = (t) => [foot[1][0] + (foot[0][0] - foot[1][0]) * t, foot[1][1] + (foot[0][1] - foot[1][1]) * t];
-              const q1 = along(0.32), q2 = along(0.68);
+              const q1 = along(0.08), q2 = along(0.42);
               const out = [
-                <polygon key="branch" points={pts([ns(69, 200, q2[1]), q2[1]], q2, q1, [ns(69, 200, q1[1]), q1[1]])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>,
+                <polygon key="branch" points={pts([ns(69, 258, q2[1]), q2[1]], q2, q1, [ns(69, 258, q1[1]), q1[1]])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>,
               ];
               for (let k = 3; k >= 1; k--) {
                 out.push(<polygon key={`r${k}`} points={band(outline(o(k)), outline(o(k), R))} fill="#7a5a34"/>);
@@ -314,7 +316,8 @@ export function ChangGharSVG() {
         );
       })()}
       {/* Road on the right to the foot of the staircase, parallel to the house */}
-      <polygon points={pts([378, 308], [394, 308], [ns(394, 308, 414), 414], [ns(378, 308, 414), 414])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([378, 308], [394, 308], [ns(394, 308, 472), 472], [ns(378, 308, 472), 472])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      </g>
       </g>
     </svg>
   );
