@@ -44,6 +44,11 @@ export function ChangGharSVG() {
           <stop offset="0%" stopColor="rgb(120,170,200)" stopOpacity="0.6"/>
           <stop offset="100%" stopColor="rgb(190,228,245)" stopOpacity="0.4"/>
         </linearGradient>
+        {/* Paver blocks; skewed so the joints run along the roads (parallel to the house) */}
+        <pattern id="cg-pavers" width="8" height="5" patternUnits="userSpaceOnUse" patternTransform="skewX(36)">
+          <rect width="8" height="5" fill="#c4bdb1"/>
+          <path d="M0,0 H8 M0,2.5 H8 M2,0 V2.5 M6,2.5 V5" stroke="#aaa395" strokeWidth="0.45"/>
+        </pattern>
         <linearGradient id="cg-water" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#4a8a9a"/>
           <stop offset="100%" stopColor="#2a5a6a"/>
@@ -57,9 +62,9 @@ export function ChangGharSVG() {
         <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
       ))}
       {/* Compound wall to the north */}
-      <rect x="-90" y="158" width="550" height="42" fill="#ece6da"/>
-      <rect x="-90" y="155" width="550" height="4" fill="#cfc6b6"/>
-      {[-76, -12, 140, 204, 268, 332, 396].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
+      <rect x="-84" y="158" width="452" height="42" fill="#ece6da"/>
+      <rect x="-84" y="155" width="452" height="4" fill="#cfc6b6"/>
+      {[-84, -12, 140, 204, 268, 332, 362].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
       {/* 8 ft gate where the lane meets the wall */}
       <rect x="32" y="148" width="8" height="52" fill="#ddd5c6"/>
       <rect x="76" y="148" width="8" height="52" fill="#ddd5c6"/>
@@ -80,6 +85,16 @@ export function ChangGharSVG() {
           </g>
         );
       })}
+      {/* Block-paved roads outside the west and east walls */}
+      {(() => {
+        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 150, y1 = 470;
+        return (
+          <g>
+            <polygon points={pts([-90, y0], [west(y0), y0], [west(y1), y1], [-90, y1])} fill="url(#cg-pavers)"/>
+            <polygon points={pts([east(y0), y0], [460, y0], [460, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
+          </g>
+        );
+      })()}
       {/* Compound wall on the west, to the left of the tank, pond and small courtyard */}
       {(() => {
         const H = 42, x = (y) => ns(-84, 200, y), y0 = 200, y1 = 470;
