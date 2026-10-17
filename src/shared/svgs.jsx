@@ -76,9 +76,9 @@ export function ChangGharSVG() {
           <path d="M0,0 H8 M0,2.5 H8 M2,0 V2.5 M6,2.5 V5" stroke="#aaa395" strokeWidth="0.45"/>
         </pattern>
         <pattern id="cg-mesh" width="3" height="3" patternUnits="userSpaceOnUse">
-          {/* Fine light nylon netting: pale diamond mesh, mostly see-through */}
-          <rect width="3" height="3" fill="rgba(225,235,242,0.10)"/>
-          <path d="M0,0 L3,3 M3,0 L0,3" stroke="rgba(235,242,248,0.6)" strokeWidth="0.3"/>
+          {/* Fine light-blue nylon netting (as in the photo), mostly see-through */}
+          <rect width="3" height="3" fill="rgba(90,170,220,0.14)"/>
+          <path d="M0,0 L3,3 M3,0 L0,3" stroke="rgba(120,195,235,0.6)" strokeWidth="0.3"/>
         </pattern>
         <linearGradient id="cg-water" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#4a8a9a"/>
