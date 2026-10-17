@@ -46,7 +46,7 @@ export function ChangGharSVG() {
     .sort((p, q) => p.y - q.y)
     .map(({ x, y, i }) => flowerPlant(x, y, i, sc));
   return (
-    <svg viewBox="-110 -20 600 450" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
+    <svg viewBox="-100 -20 660 495" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -70,7 +70,7 @@ export function ChangGharSVG() {
           <stop offset="100%" stopColor="#2a5a6a"/>
         </linearGradient>
       </defs>
-      <rect x="-110" y="-20" width="600" height="450" fill="url(#cg-sky)"/>
+      <rect x="-110" y="-20" width="700" height="520" fill="url(#cg-sky)"/>
       {/* Whole scene lifted so the foreground clears the caption */}
       <g transform="translate(0, -52)">
       {/* Compound wall to the north */}
@@ -85,7 +85,7 @@ export function ChangGharSVG() {
       <line x1="58" y1="162" x2="58" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
       {[168, 175, 182, 189].map(y => <line key={y} x1="40" y1={y} x2="76" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
       {/* Garden ground */}
-      <rect x="-110" y="198" width="600" height="340" fill="#7aaa6e"/>
+      <rect x="-110" y="198" width="700" height="360" fill="#7aaa6e"/>
       {/* Main road from the gate, parallel to the house's side walls */}
       <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 380), 380], [ns(47, 200, 380), 380])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       {/* 14 ft internal road running west to east across the south of the compound,
@@ -143,7 +143,7 @@ export function ChangGharSVG() {
         return (
           <g>
             <polygon points={pts([-110, y0], [west(y0), y0], [west(y1), y1], [-110, y1])} fill="url(#cg-pavers)"/>
-            <polygon points={pts([east(y0), y0], [490, y0], [490, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
+            <polygon points={pts([east(y0), y0], [600, y0], [600, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
             {drain((y) => west(y) - 7, west)}
             {/* East drain: drawn just clear of the wall so it isn't hidden behind it */}
             {drain((y) => east(y) + wallLean, (y) => east(y) + wallLean + 7)}
@@ -158,7 +158,22 @@ export function ChangGharSVG() {
           <g>
             <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
             <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
-            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6)}
+            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6, 13, [x(372), x(442)])}
+            {/* Wide gate where the 14 ft internal road meets this wall */}
+            {(() => {
+              const g0 = 376, g1 = 438, gh = H - 4;
+              const slats = [0.2, 0.4, 0.6, 0.8];
+              return (
+                <g>
+                  <polygon points={pts([x(g0), g0], [x(g1), g1], [x(g1), g1 - gh], [x(g0), g0 - gh])} fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="1"/>
+                  {slats.map(t => <line key={t} x1={x(g0)} y1={g0 - gh * t} x2={x(g1)} y2={g1 - gh * t} stroke="#cfc6b6" strokeWidth="1.2"/>)}
+                  <line x1={x((g0 + g1) / 2)} y1={(g0 + g1) / 2} x2={x((g0 + g1) / 2)} y2={(g0 + g1) / 2 - gh} stroke="#b8b0a2" strokeWidth="1"/>
+                  {[g0 - 4, g1].map(y => (
+                    <polygon key={y} points={pts([x(y), y], [x(y + 5), y + 5], [x(y + 5), y + 5 - H - 6], [x(y), y - H - 6])} fill="#ddd5c6" stroke="#cfc6b6" strokeWidth="0.6"/>
+                  ))}
+                </g>
+              );
+            })()}
             {pillars.map(y => (
               <polygon key={y} points={pts([x(y) - 3, y - H - 4], [x(y + 6) + 3, y + 6 - H - 4], [x(y + 6) + 3, y + 6], [x(y) - 3, y])} fill="#d6cebf"/>
             ))}
@@ -284,7 +299,22 @@ export function ChangGharSVG() {
           <g>
             <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
             <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
-            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6)}
+            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6, 13, [x(372), x(442)])}
+            {/* Wide gate where the 14 ft internal road meets this wall */}
+            {(() => {
+              const g0 = 376, g1 = 438, gh = H - 4;
+              const slats = [0.2, 0.4, 0.6, 0.8];
+              return (
+                <g>
+                  <polygon points={pts([x(g0), g0], [x(g1), g1], [x(g1), g1 - gh], [x(g0), g0 - gh])} fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="1"/>
+                  {slats.map(t => <line key={t} x1={x(g0)} y1={g0 - gh * t} x2={x(g1)} y2={g1 - gh * t} stroke="#cfc6b6" strokeWidth="1.2"/>)}
+                  <line x1={x((g0 + g1) / 2)} y1={(g0 + g1) / 2} x2={x((g0 + g1) / 2)} y2={(g0 + g1) / 2 - gh} stroke="#b8b0a2" strokeWidth="1"/>
+                  {[g0 - 4, g1].map(y => (
+                    <polygon key={y} points={pts([x(y), y], [x(y + 5), y + 5], [x(y + 5), y + 5 - H - 6], [x(y), y - H - 6])} fill="#ddd5c6" stroke="#cfc6b6" strokeWidth="0.6"/>
+                  ))}
+                </g>
+              );
+            })()}
             {pillars.map(y => (
               <polygon key={y} points={pts([x(y) - 3, y - H - 4], [x(y + 6) + 3, y + 6 - H - 4], [x(y + 6) + 3, y + 6], [x(y) - 3, y])} fill="#d6cebf"/>
             ))}
