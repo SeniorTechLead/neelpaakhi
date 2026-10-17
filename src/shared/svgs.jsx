@@ -347,7 +347,7 @@ export function ChangGharSVG() {
               const foot = outline(o(3), R);
               // Branch road meets the outer step at the entrance door
               const along = (t) => [foot[1][0] + (foot[0][0] - foot[1][0]) * t, foot[1][1] + (foot[0][1] - foot[1][1]) * t];
-              const q1 = along(0.08), q2 = along(0.42);
+              const q1 = along(0.3), q2 = along(0.62);   // lined up with the door in the left wall
               const out = [
                 <polygon key="branch" points={pts([ns(69, 258, q2[1]), q2[1]], q2, q1, [ns(69, 258, q1[1]), q1[1]])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>,
               ];
@@ -356,6 +356,15 @@ export function ChangGharSVG() {
                 out.push(<polygon key={`t${k}`} points={band(outline(o(k - 1), R), outline(o(k)))} fill="#b89a70"/>);
               }
               out.push(<polygon key="r0" points={band(outline(o(0)), outline(o(0), R))} fill="#7a5a34"/>);
+              // Walkway carried up the steps from the branch road to the door
+              const edgeAt = (k, t, d = 0) => {
+                const e = outline(o(k), d);
+                return [e[1][0] + (e[0][0] - e[1][0]) * t, e[1][1] + (e[0][1] - e[1][1]) * t];
+              };
+              for (let k = 3; k >= 0; k--) {
+                out.push(<polygon key={`wk${k}`} points={pts(edgeAt(k, 0.3, R), edgeAt(k, 0.62, R), edgeAt(k, 0.62), edgeAt(k, 0.3))} fill="#cbb994"/>);
+                if (k > 0) out.push(<polygon key={`wt${k}`} points={pts(edgeAt(k, 0.3), edgeAt(k, 0.62), edgeAt(k - 1, 0.62, R), edgeAt(k - 1, 0.3, R))} fill="#e2d4b4"/>);
+              }
               // Flowering plants all along both sides of the path to the entrance
               const plant = (bx, by, k, sc) => out.push(flowerPlant(bx, by, k, sc, `e${k}`));
               const lerp = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
