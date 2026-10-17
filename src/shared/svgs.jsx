@@ -80,10 +80,10 @@ export function ChangGharSVG() {
           </g>
         );
       })}
-      {/* Tall white iron overhead water tank, between the wall and the pond */}
+      {/* Tall white iron tower with two stacked blue tanks (unfiltered and filtered), between the wall and the pond */}
       {(() => {
         const white = "#f4f3ef", shade = "#d9d7d0", edge = "#a9a69e";
-        const cx = -48, base = 205, top = 96;                 // stand footing and top of the legs
+        const cx = -48, base = 205, top = 118;                 // stand footing and top of the legs
         const legs = [[-14, 0], [14, 0], [-10, -6], [10, -6]];  // front pair, then the rear pair
         const xs = (dx) => cx + dx;
         return (
@@ -108,14 +108,37 @@ export function ChangGharSVG() {
             {Array.from({ length: 12 }, (_, i) => base - 8 - i * 9).map(y => (
               <line key={y} x1={xs(14 - (base - y) * 0.042)} y1={y} x2={xs(17 - (base - y) * 0.037)} y2={y} stroke={edge} strokeWidth="0.6"/>
             ))}
-            {/* Tank: cylinder with a domed lid */}
-            <rect x={xs(-19)} y={top - 40} width="38" height="40" fill={white} stroke={edge} strokeWidth="0.8"/>
-            <rect x={xs(9)} y={top - 40} width="10" height="40" fill={shade}/>
-            <ellipse cx={cx} cy={top} rx="19" ry="4" fill={shade} stroke={edge} strokeWidth="0.8"/>
-            {[top - 28, top - 14].map(y => <line key={y} x1={xs(-19)} y1={y} x2={xs(19)} y2={y} stroke={edge} strokeWidth="0.6"/>)}
-            <ellipse cx={cx} cy={top - 40} rx="19" ry="4" fill={white} stroke={edge} strokeWidth="0.8"/>
-            <path d={`M${xs(-19)},${top - 40} Q${cx},${top - 54} ${xs(19)},${top - 40}`} fill={white} stroke={edge} strokeWidth="0.8"/>
-            <rect x={xs(-3)} y={top - 52} width="6" height="4" fill={shade} stroke={edge} strokeWidth="0.6"/>
+            {/* Two blue tanks stacked in the iron frame: unfiltered below, filtered above */}
+            {(() => {
+              const blue = "#2f6db5", blueShade = "#24589a", rib = "#5b8fd0";
+              const w = 30, h = 26, gap = 6, plat = (y) => (
+                <rect x={xs(-20)} y={y} width="40" height="3.5" fill={shade} stroke={edge} strokeWidth="0.6"/>
+              );
+              const tank = (yBase, k) => (
+                <g key={k}>
+                  <rect x={xs(-w / 2)} y={yBase - h} width={w} height={h} rx="2" fill={blue}/>
+                  <rect x={xs(w / 2 - 8)} y={yBase - h} width="8" height={h} rx="2" fill={blueShade}/>
+                  {[yBase - h * 0.68, yBase - h * 0.36].map(y => <line key={y} x1={xs(-w / 2)} y1={y} x2={xs(w / 2)} y2={y} stroke={rib} strokeWidth="0.8"/>)}
+                  <path d={`M${xs(-w / 2)},${yBase - h} Q${cx},${yBase - h - 7} ${xs(w / 2)},${yBase - h}`} fill={blue}/>
+                  <rect x={xs(-3)} y={yBase - h - 7} width="6" height="3" rx="1" fill={blueShade}/>
+                </g>
+              );
+              const y1 = top, y2 = top - h - gap - 6;               // lower and upper platforms
+              return (
+                <g>
+                  {plat(y1)}
+                  {tank(y1, "lower")}
+                  {/* Frame posts and braces holding the upper platform */}
+                  {[-19, 19].map(dx => <line key={`up${dx}`} x1={xs(dx)} y1={y1} x2={xs(dx)} y2={y2} stroke={white} strokeWidth="2"/>)}
+                  <line x1={xs(-19)} y1={y1} x2={xs(19)} y2={y2 + 4} stroke={white} strokeWidth="0.9"/>
+                  {plat(y2)}
+                  {tank(y2, "upper")}
+                  {/* Pipe between the tanks, through a filter */}
+                  <line x1={xs(22)} y1={y2 - 6} x2={xs(22)} y2={y1 - 8} stroke={edge} strokeWidth="1.6"/>
+                  <rect x={xs(19.5)} y={(y1 + y2) / 2 - 8} width="5" height="8" rx="1" fill="#7f9aa8" stroke={edge} strokeWidth="0.5"/>
+                </g>
+              );
+            })()}
             {/* Footings */}
             {[legs[0], legs[1]].map(([dx], i) => <rect key={`ft${i}`} x={xs(dx) - 3} y={base - 1} width="6" height="3" fill={shade}/>)}
           </g>
@@ -150,6 +173,20 @@ export function ChangGharSVG() {
           <g>
             <polygon points={pts(bl, br, fr, fl)} fill="#c8c4bc" stroke="#a8a49c" strokeWidth="1"/>
             {plantEdges(dots, 0.5)}
+          </g>
+        );
+      })()}
+      {/* Compound wall on the east, to the right of the stairs, running front to back */}
+      {(() => {
+        const H = 42, x = (y) => ns(368, 200, y), y0 = 200, y1 = 470;
+        const pillars = [236, 290, 350, 420];
+        return (
+          <g>
+            <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
+            <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
+            {pillars.map(y => (
+              <polygon key={y} points={pts([x(y) - 3, y - H - 4], [x(y + 6) + 3, y + 6 - H - 4], [x(y + 6) + 3, y + 6], [x(y) - 3, y])} fill="#d6cebf"/>
+            ))}
           </g>
         );
       })()}
