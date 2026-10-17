@@ -76,14 +76,13 @@ export function ChangGharSVG() {
           </g>
         );
       })()}
-      {/* The house and everything attached to it sit back near the north wall (under 5 ft away) */}
-      <g transform="translate(0, -58)">
-      {/* Smaller courtyard on the far side of the main courtyard, edged with flowers */}
+      {/* Smaller courtyard left of the main road, continuing on from where the pond ends */}
       {(() => {
-        const bl = [322, 300], br = [354, 300], fr = [ns(354, 300, 372), 372], fl = [ns(322, 300, 372), 372];
+        const r = (y) => ns(-5, 200, y), l = (y) => r(y) - 40, y0 = 304, y1 = 360;
+        const bl = [l(y0), y0], br = [r(y0), y0], fr = [r(y1), y1], fl = [l(y1), y1];
         const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
-        const dots = [...edge(bl, br, 6), ...edge(br, fr, 12), ...edge(fr, fl, 6), ...edge(fl, bl, 12)];
+        const dots = [...edge(bl, br, 7), ...edge(br, fr, 10), ...edge(fr, fl, 7), ...edge(fl, bl, 10)];
         return (
           <g>
             <polygon points={pts(bl, br, fr, fl)} fill="#c8c4bc" stroke="#a8a49c" strokeWidth="1"/>
@@ -91,9 +90,11 @@ export function ChangGharSVG() {
           </g>
         );
       })()}
+      {/* The house and everything attached to it sit back near the north wall (under 5 ft away) */}
+      <g transform="translate(0, -58)">
       {/* Concrete forecourt in front of the house, edged with flowers */}
       {(() => {
-        const bl = [150, 293], br = [312, 293], fr = [ns(312, 293, 380), 380], fl = [ns(150, 293, 380), 380];
+        const bl = [150, 293], br = [350, 293], fr = [ns(350, 293, 380), 380], fl = [ns(150, 293, 380), 380];
         const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
         const dots = [...edge(bl, br, 34), ...edge(br, fr, 9), ...edge(fr, fl, 34), ...edge(fl, bl, 9)];
