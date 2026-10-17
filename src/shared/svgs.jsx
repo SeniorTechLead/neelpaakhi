@@ -86,6 +86,47 @@ export function ChangGharSVG() {
         );
       })()}
 
+      {/* Outside staircase on the right: a long, gentle flight running front to back
+          beside the house, a landing, then a gate turning left onto the upper floor */}
+      {(() => {
+        // P(t, z, dx): t = depth (0 = house front, + = further back), z = height above ground,
+        // dx = offset east of the stair's west edge
+        const P = (t, z, dx = 0) => [344 + dx + D[0] * t, 286 + D[1] * t - z];
+        const n = 22, rise = 74, h = rise / n;            // ~6.5 in per step
+        const tF = -1.0, t1 = 0.45, t2 = 0.75, ds = (t1 - tF) / n, W = 18, toHouse = -10;
+        const wood = "#8a6a44", post = "#6a4a2a";
+        const zAt = (t) => rise * (t - tF) / (t1 - tF);
+        const out = [];
+        // Posts under the flight and the landing
+        [-0.55, -0.1, t1].forEach((t, i) => {
+          out.push(<line key={`pw${i}`} x1={P(t, zAt(t))[0]} y1={P(t, zAt(t))[1]} x2={P(t, 0)[0]} y2={P(t, 0)[1]} stroke={post} strokeWidth="2"/>);
+          out.push(<line key={`pe${i}`} x1={P(t, zAt(t), W)[0]} y1={P(t, zAt(t), W)[1]} x2={P(t, 0, W)[0]} y2={P(t, 0, W)[1]} stroke={post} strokeWidth="2"/>);
+        });
+        out.push(<line key="pl" x1={P(t2, rise, W)[0]} y1={P(t2, rise, W)[1]} x2={P(t2, 0, W)[0]} y2={P(t2, 0, W)[1]} stroke={post} strokeWidth="2"/>);
+        // Landing (with its front face), then the gate into the upper floor
+        out.push(<polygon key="land" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t2, rise, W), P(t2, rise, toHouse))} fill="#a07c50"/>);
+        out.push(<polygon key="landf" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t1, rise - 4, W), P(t1, rise - 4, toHouse))} fill={wood}/>);
+        const g1 = t1 + 0.06, g2 = t2 - 0.06;
+        out.push(<polygon key="gate" points={pts(P(g1, rise + 2, toHouse), P(g2, rise + 2, toHouse), P(g2, rise + 13, toHouse), P(g1, rise + 13, toHouse))} fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="0.8"/>);
+        [g1, g2].forEach((t, i) => out.push(<line key={`gp${i}`} x1={P(t, rise, toHouse)[0]} y1={P(t, rise, toHouse)[1]} x2={P(t, rise + 16, toHouse)[0]} y2={P(t, rise + 16, toHouse)[1]} stroke={post} strokeWidth="2"/>));
+        // Landing railing: east and back edges
+        out.push(<polyline key="lr" points={pts(P(t1, rise + 12, W), P(t2, rise + 12, W), P(t2, rise + 12, toHouse))} fill="none" stroke={post} strokeWidth="1.5"/>);
+        // Treads and risers, far to near
+        for (let i = n - 1; i >= 0; i--) {
+          const a = tF + i * ds, z = (i + 1) * h;
+          out.push(<polygon key={`r${i}`} points={pts(P(a, z - h), P(a, z - h, W), P(a, z, W), P(a, z))} fill={post}/>);
+          out.push(<polygon key={`t${i}`} points={pts(P(a, z), P(a, z, W), P(a + ds, z, W), P(a + ds, z))} fill={wood}/>);
+        }
+        // West stringer and east handrail
+        out.push(<polygon key="str" points={pts(P(tF, 0), P(t1, rise), P(t1, rise - 6), P(tF + 0.08, 0))} fill="#7a5a34"/>);
+        out.push(<line key="hr" x1={P(tF, 12, W)[0]} y1={P(tF, 12, W)[1]} x2={P(t1, rise + 12, W)[0]} y2={P(t1, rise + 12, W)[1]} stroke={post} strokeWidth="1.5"/>);
+        [0.15, 0.4, 0.65, 0.9].forEach((u, i) => {
+          const t = tF + (t1 - tF) * u;
+          out.push(<line key={`b${i}`} x1={P(t, zAt(t) + 12, W)[0]} y1={P(t, zAt(t) + 12, W)[1]} x2={P(t, zAt(t), W)[0]} y2={P(t, zAt(t), W)[1]} stroke={post} strokeWidth="1"/>);
+        });
+        return out;
+      })()}
+
       {/* === The chang ghar === */}
       {(() => {
         const G = 262;                       // ground-floor deck level (front)
@@ -182,18 +223,11 @@ export function ChangGharSVG() {
               return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>;
             })}
 
-            {/* Outside staircase: straight up beside the house, then a landing left into the upper floor */}
-            <rect x="346" y={U} width="3" height={G - U + 6} fill={post}/>
-            <rect x="365" y={U} width="3" height={G - U + 6} fill={post}/>
-            {Array.from({ length: 8 }, (_, i) => <rect key={i} x="349" y={G - 2 - i * 6.5} width="16" height="3" fill={wood}/>)}
-            <rect x={deck[1]} y={U - 2} width="34" height="5" fill={wood}/>
-            <line x1={deck[1]} y1={U - 13} x2="370" y2={U - 13} stroke={post} strokeWidth="1.5"/>
-            <line x1="370" y1={U - 13} x2="370" y2={G + 6} stroke={post} strokeWidth="1.5"/>
           </g>
         );
       })()}
       {/* Road on the right to the foot of the staircase, parallel to the house */}
-      <polygon points={pts([346, 268], [368, 268], [ns(368, 268, 352), 352], [ns(346, 268, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([360, 308], [378, 308], [ns(378, 308, 352), 352], [ns(360, 308, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       </g>
     </svg>
   );
