@@ -205,7 +205,7 @@ export function ChangGharSVG() {
                   {plinth(-1.55, -0.75, 10, "pb1")}
                 </g>
               );
-              // Benches like the swing's (same size, slats and backrest), standing on legs with no roof
+              // Benches like the swing's (same size, slats and backrest), standing on legs under a white canopy
               const gardenBench = (ta, tb, k) => {
                 const zs2 = 7, zb2 = zs2 + (zb - zs), bx = -face * bw;
                 return (
@@ -217,6 +217,18 @@ export function ChangGharSVG() {
                     {[-2, 2].map(x => seg(P(x, ta, zs2), P(x, tb, zs2), 0.5, edge, `bs${x}`))}
                     <polygon points={pts(P(-bw, ta, zs2), P(bw, ta, zs2), P(bw, ta, zs2 - 2), P(-bw, ta, zs2 - 2))} fill={white} stroke={edge} strokeWidth="0.5"/>
                     {armrests(ta, tb, zs2)}
+                    {/* White canopy on four slim posts, like the swing's */}
+                    {(() => {
+                      const zt = 28, zr2 = zt + 7, w3 = 9, ra = ta + 0.05, rb = tb - 0.05;
+                      const corners = [[-w3, tb], [w3, tb], [-w3, ta], [w3, ta]];
+                      return (
+                        <g>
+                          {corners.map(([x, t], j) => seg(P(x, t, 0), P(x, t, zt), 1.4, white, `cp${j}`))}
+                          <polygon points={pts(P(-14, ra, zt), P(-14, rb, zt), P(0, rb, zr2), P(0, ra, zr2))} fill={shade} stroke={edge} strokeWidth="0.8"/>
+                          <polygon points={pts(P(14, ra, zt), P(14, rb, zt), P(0, rb, zr2), P(0, ra, zr2))} fill={white} stroke={edge} strokeWidth="0.8"/>
+                        </g>
+                      );
+                    })()}
                   </g>
                 );
               };
