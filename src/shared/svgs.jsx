@@ -153,6 +153,32 @@ export function ChangGharSVG() {
             {hedge(yN - 1, "n")}
             {hedge(yS + 9, "s")}
             {hedge(yS + 9 + G, "s2")}
+            {/* Iron swings beside the side paths, one on the west and one on the east */}
+            {[[sidePaths(506)[0][1] + 10, 506], [sidePaths(506)[1][0] - 40, 506]].map(([x0, yb], i) => {
+              const iron = "#34353b", w = 30, h = 34, d = 8;      // about 7 ft wide, 8 ft tall
+              const legs = (x) => (
+                <g key={x}>
+                  <line x1={x - d / 2} y1={yb} x2={x} y2={yb - h} stroke={iron} strokeWidth="1.6"/>
+                  <line x1={x + d / 2} y1={yb + 2} x2={x} y2={yb - h} stroke={iron} strokeWidth="1.6"/>
+                </g>
+              );
+              const sx = x0 + w / 2;
+              return (
+                <g key={`swing${i}`}>
+                  {legs(x0)}
+                  {legs(x0 + w)}
+                  <line x1={x0} y1={yb - h} x2={x0 + w} y2={yb - h} stroke={iron} strokeWidth="2"/>
+                  {/* Two seats hanging on chains */}
+                  {[sx - 7, sx + 7].map(cx => (
+                    <g key={cx}>
+                      <line x1={cx - 3} y1={yb - h} x2={cx - 3} y2={yb - 10} stroke="#6a6b70" strokeWidth="0.7"/>
+                      <line x1={cx + 3} y1={yb - h} x2={cx + 3} y2={yb - 10} stroke="#6a6b70" strokeWidth="0.7"/>
+                      <rect x={cx - 4} y={yb - 10.5} width="8" height="2" rx="0.5" fill={iron}/>
+                    </g>
+                  ))}
+                </g>
+              );
+            })}
           </g>
         );
       })()}
