@@ -88,11 +88,22 @@ export function ChangGharSVG() {
       <rect x="-290" y="-20" width="1180" height="880" fill="url(#cg-sky)"/>
       {/* Whole scene lifted so the foreground clears the caption */}
       <g transform="translate(0, -52)">
+      {/* 26 ft paved road behind the north wall, joining the west and east roads */}
+      {(() => {
+        const RW = 26 * 4.4, lean = 42 * K, yA = 200 - RW, yB = 200;
+        const wx = (y) => ns(-116, 200, y) - RW, ex = (y) => ns(400, 200, y) + lean + RW;
+        return (
+          <g>
+            <polygon points={pts([wx(yA), yA], [ex(yA), yA], [ex(yB), yB], [wx(yB), yB])} fill="url(#cg-pavers)"/>
+            <line x1={wx(yA)} y1={yA} x2={ex(yA)} y2={yA} stroke="#a49d90" strokeWidth="1.6"/>
+          </g>
+        );
+      })()}
       {/* Compound wall to the north */}
-      <rect x="-84" y="158" width="452" height="42" fill="#ece6da"/>
-      <rect x="-84" y="155" width="452" height="4" fill="#cfc6b6"/>
-      {[-84, -12, 140, 204, 268, 332, 362].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
-      {grill([-84, 155], [368, 155], "gn", 4.5, 13, [30, 86])}
+      <rect x="-116" y="158" width="516" height="42" fill="#ece6da"/>
+      <rect x="-116" y="155" width="516" height="4" fill="#cfc6b6"/>
+      {[-116, -12, 140, 204, 268, 332, 394].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
+      {grill([-116, 155], [400, 155], "gn", 4.5, 13, [30, 86])}
       {/* 8 ft gate where the lane meets the wall */}
       <rect x="32" y="148" width="8" height="52" fill="#ddd5c6"/>
       <rect x="76" y="148" width="8" height="52" fill="#ddd5c6"/>
@@ -107,7 +118,7 @@ export function ChangGharSVG() {
           lined with photinia and syzygium hedges (1 ft is about 4.4 px) */}
       {(() => {
         const yN = 376, yS = 438;                          // north and south edges of the road
-        const W = (y) => ns(-84, 200, y + 42), E = (y) => ns(368, 200, y);
+        const W = (y) => ns(-116, 200, y + 42), E = (y) => ns(400, 200, y);
         // Roads that cross the north hedges: the main road and the road from the stairs
         const crossings = (y) => [[ns(47, 200, y), ns(69, 200, y)], [ns(378, 308, y + 58), ns(394, 308, y + 58)]];
         const inGap = (x, y) => crossings(y).some(([g0, g1]) => x > g0 - 7 && x < g1 + 7);
@@ -260,7 +271,7 @@ export function ChangGharSVG() {
       })()}
       {/* Block-paved roads outside the west and east walls, with a drain along each wall */}
       {(() => {
-        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 196, y1 = 900;
+        const west = (y) => ns(-116, 200, y), east = (y) => ns(400, 200, y), y0 = 196, y1 = 900;
         const wallLean = 42 * K;      // the east wall's top edge sits this far right of its base
         const RW = 26 * 4.4;          // road width, 26 ft
         const drain = (xa, xb) => (
@@ -288,7 +299,7 @@ export function ChangGharSVG() {
       })()}
       {/* Compound wall on the west, to the left of the tank, pond and small courtyard */}
       {(() => {
-        const H = 42, x = (y) => ns(-84, 200, y), y0 = 200, y1 = 900;
+        const H = 42, x = (y) => ns(-116, 200, y), y0 = 200, y1 = 900;
         const pillars = [236, 290, 350, 420];
         return (
           <g>
@@ -430,7 +441,7 @@ export function ChangGharSVG() {
       })()}
       {/* Compound wall on the east, to the right of the stairs, running front to back */}
       {(() => {
-        const H = 42, x = (y) => ns(368, 200, y), y0 = 200, y1 = 900;
+        const H = 42, x = (y) => ns(400, 200, y), y0 = 200, y1 = 900;
         const pillars = [236, 290, 350, 420];
         return (
           <g>
@@ -479,8 +490,8 @@ export function ChangGharSVG() {
             </g>
           );
         };
-        const westX = (y) => ns(-84, 200, y + 42) + 13;
-        const eastX = (y) => ns(368, 200, y) - 10;
+        const westX = (y) => ns(-116, 200, y + 42) + 13;
+        const eastX = (y) => ns(400, 200, y) - 10;
         const trees = [
           ...[222, 262, 302, 342, 498, 538, 578, 618, 658, 698, 738, 778, 818].map(y => [westX(y), y]),
           ...[272, 312, 352, 498, 538, 578, 618, 658, 698, 738, 778, 818].map(y => [eastX(y), y]),
@@ -492,7 +503,7 @@ export function ChangGharSVG() {
             {(() => {
               const ftPx = 4.4, lenPx = 40 * ftPx, depPx = 20 * ftPx;
               const yN = 704, yS2 = yN + depPx;
-              const E2 = (y) => ns(368, 200, y), xE = (y) => (E2(y) - 42) - 3 * ftPx;   // 3 ft west of the east path   // 3 ft west of the east path
+              const E2 = (y) => ns(400, 200, y), xE = (y) => (E2(y) - 42) - 3 * ftPx;   // 3 ft west of the east path
               const xW = (y) => xE(y) - lenPx;
               const NE = [xE(yN), yN], NW = [xW(yN), yN], SE = [xE(yS2), yS2], SW = [xW(yS2), yS2];
               const up = ([x, y], z) => [x, y - z];
