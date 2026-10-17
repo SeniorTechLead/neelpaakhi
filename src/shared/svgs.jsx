@@ -584,10 +584,13 @@ export function ChangGharSVG() {
           Its beam runs east-west, so it swings north-south; the bench faces north, toward the field. */}
       {(() => {
         const white = "#f4f3ef", shade = "#dddbd4", edge = "#9d9a92";
-        const yb = 812, courtW = (ns(400, 200, 792) - 42) - 3 * 4.4 - 40 * 4.4, cx = courtW - 52;   // clear of the court's south-west corner
+        const yb = 812, Lu = 17;
+        // 10 ft clear between the court's south-west corner and the nearest (north-east) corner of the swing's plinth
+        const courtSW = (ns(400, 200, 792) - 42) - 3 * 4.4 - 40 * 4.4;
+        const cx = courtSW - 10 * 4.4 - (Lu + 5) + D[0] * 0.62;
         const P = (u, t, z) => [cx + u + D[0] * t, yb + D[1] * t - z];      // u: east-west, t: north-south
         const seg = (p, q, w, c, k) => <line key={k} x1={p[0]} y1={p[1]} x2={q[0]} y2={q[1]} stroke={c} strokeWidth={w} strokeLinecap="round"/>;
-        const Lu = 17, Z = 32, spT = 0.45, bwT = 0.22, zs = 10, zb = 20, u0 = -Lu + 3, u1 = Lu - 3;
+        const Z = 32, spT = 0.45, bwT = 0.22, zs = 10, zb = 20, u0 = -Lu + 3, u1 = Lu - 3;
         const frame = (u, k) => (
           <g key={k}>
             {seg(P(u, -spT, 0), P(u, 0, Z), 2.6, edge, "a")}{seg(P(u, spT, 0), P(u, 0, Z), 2.6, edge, "b")}
