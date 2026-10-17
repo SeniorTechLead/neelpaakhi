@@ -1,6 +1,6 @@
 export const rooms = [
   { name: "The Chang Ghar Suite", type: "suite",
-    desc: "A two-storey chang ghar, inspired by the traditional Assamese home and reimagined as a single private suite. Bamboo and timber, set in a walled garden beside a tree-lined lane, with balconies wrapping around both floors, a clear-roofed corner sit-out upstairs, and a long, gentle outside staircase to the upper floor. Rain shower, handwoven Assamese cotton bedlinen, and the whole retreat quiet around you. Morning birdsong is your alarm.",
+    desc: "A two-storey chang ghar, inspired by the traditional Assamese home and reimagined as a single private suite. Built on iron pillars, with tiled walls and floors downstairs, a teak floor upstairs, and a tin roof. Set in a walled garden beside a tree-lined lane, with balconies wrapping around both floors, a clear-roofed corner sit-out upstairs, and a long, gentle outside staircase to the upper floor. Rain shower, handwoven Assamese cotton bedlinen, and the whole retreat quiet around you. Morning birdsong is your alarm.",
     price: "7,500", originalPrice: "10,500" },
 ];
 
