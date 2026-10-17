@@ -153,26 +153,43 @@ export function ChangGharSVG() {
             {hedge(yN - 1, "n")}
             {hedge(yS + 9, "s")}
             {hedge(yS + 9 + G, "s2")}
-            {/* White iron canopy swings beside the side paths, facing each other across the lawn.
-                Seen side-on: the west swing faces east, the east swing faces west. */}
-            {[[sidePaths(506)[0][1] + 24, 506, 1], [sidePaths(506)[1][0] - 24, 506, -1]].map(([cx, yb, face], i) => {
-              const white = "#f4f3ef", edge = "#9d9a92", h = 34, spread = 13;
-              const top = yb - h, seatY = yb - 9, back = -face;   // backrest on the side away from the other swing
+            {/* White iron canopy swings beside the side paths, drawn in the same 3D view as the house.
+                Each swings east-west: A-frames at the north and south ends, a long iron bench hanging
+                from a north-south beam, and a pitched white canopy. They face each other across the lawn. */}
+            {[[sidePaths(506)[0][1] + 22, 506, 1], [sidePaths(506)[1][0] - 30, 506, -1]].map(([cx, yb, face], i) => {
+              const white = "#f4f3ef", shade = "#dddbd4", edge = "#9d9a92";
+              const L = 0.42, Z = 32, sp = 12;                       // bench length (north-south), beam height, leg spread
+              const P = (x, t, z) => [cx + x + D[0] * t, yb + D[1] * t - z];
+              const seg = (p, q, w, c = white, k) => <line key={k} x1={p[0]} y1={p[1]} x2={q[0]} y2={q[1]} stroke={c} strokeWidth={w} strokeLinecap="round"/>;
+              const frame = (t, k) => (
+                <g key={k}>
+                  {seg(P(-sp, t, 0), P(0, t, Z), 2.6, edge, "a")}{seg(P(sp, t, 0), P(0, t, Z), 2.6, edge, "b")}
+                  {seg(P(-sp, t, 0), P(0, t, Z), 1.7, white, "c")}{seg(P(sp, t, 0), P(0, t, Z), 1.7, white, "d")}
+                  {seg(P(-sp * 0.3, t, Z * 0.72), P(sp * 0.3, t, Z * 0.72), 1.2, white, "e")}
+                </g>
+              );
+              const t0 = 0.05, t1 = L - 0.05, bw = 6, zs = 10, zb = 20;
+              const backX = -face * bw;                              // backrest on the side facing away from the other swing
+              const bench = (
+                <g>
+                  {[t0, t1].map(t => [seg(P(0, t, Z), P(-bw, t, zs), 0.8, edge, `h1${t}`), seg(P(0, t, Z), P(bw, t, zs), 0.8, edge, `h2${t}`)])}
+                  <polygon points={pts(P(backX, t0, zs), P(backX, t1, zs), P(backX, t1, zb), P(backX, t0, zb))} fill={white} stroke={edge} strokeWidth="0.7"/>
+                  {[0.33, 0.66].map(u => seg(P(backX, t0, zs + (zb - zs) * u), P(backX, t1, zs + (zb - zs) * u), 0.5, edge, `bs${u}`))}
+                  <polygon points={pts(P(-bw, t0, zs), P(bw, t0, zs), P(bw, t1, zs), P(-bw, t1, zs))} fill={shade} stroke={edge} strokeWidth="0.7"/>
+                  {[-2, 2].map(x => seg(P(x, t0, zs), P(x, t1, zs), 0.5, edge, `ss${x}`))}
+                  <polygon points={pts(P(-bw, t0, zs), P(bw, t0, zs), P(bw, t0, zs - 2), P(-bw, t0, zs - 2))} fill={white} stroke={edge} strokeWidth="0.5"/>
+                </g>
+              );
+              const r0 = -0.06, r1 = L + 0.06, zr = Z + 7, ew = 15;
               return (
                 <g key={`swing${i}`}>
-                  {/* A-frame legs */}
-                  <line x1={cx - spread} y1={yb} x2={cx} y2={top} stroke={edge} strokeWidth="2.4"/>
-                  <line x1={cx + spread} y1={yb} x2={cx} y2={top} stroke={edge} strokeWidth="2.4"/>
-                  <line x1={cx - spread} y1={yb} x2={cx} y2={top} stroke={white} strokeWidth="1.6"/>
-                  <line x1={cx + spread} y1={yb} x2={cx} y2={top} stroke={white} strokeWidth="1.6"/>
-                  <line x1={cx - spread * 0.25} y1={yb - h * 0.78} x2={cx + spread * 0.25} y2={yb - h * 0.78} stroke={white} strokeWidth="1.2"/>
-                  {/* White canopy roof */}
-                  <polygon points={pts([cx - 18, top + 3], [cx, top - 8], [cx + 18, top + 3])} fill={white} stroke={edge} strokeWidth="0.9"/>
-                  {/* Hanging bench */}
-                  <line x1={cx - 5} y1={top + 1} x2={cx - 5} y2={seatY} stroke={edge} strokeWidth="0.7"/>
-                  <line x1={cx + 5} y1={top + 1} x2={cx + 5} y2={seatY} stroke={edge} strokeWidth="0.7"/>
-                  <rect x={cx - 8} y={seatY} width="16" height="3" fill={white} stroke={edge} strokeWidth="0.7"/>
-                  <rect x={cx + back * 8 - (back > 0 ? 3 : 0)} y={seatY - 11} width="3" height="14" fill={white} stroke={edge} strokeWidth="0.7"/>
+                  {frame(L, "back")}
+                  {seg(P(0, 0, Z), P(0, L, Z), 2, edge, "beam")}
+                  {bench}
+                  {frame(0, "front")}
+                  {/* Pitched white canopy, ridge running north-south */}
+                  <polygon points={pts(P(-ew, r0, Z), P(-ew, r1, Z), P(0, r1, zr), P(0, r0, zr))} fill={shade} stroke={edge} strokeWidth="0.8"/>
+                  <polygon points={pts(P(ew, r0, Z), P(ew, r1, Z), P(0, r1, zr), P(0, r0, zr))} fill={white} stroke={edge} strokeWidth="0.8"/>
                 </g>
               );
             })}
