@@ -62,9 +62,9 @@ export function ChangGharSVG() {
         <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
       ))}
       {/* Compound wall to the north */}
-      <rect x="-84" y="158" width="452" height="42" fill="#ece6da"/>
-      <rect x="-84" y="155" width="452" height="4" fill="#cfc6b6"/>
-      {[-84, -12, 140, 204, 268, 332, 362].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
+      <rect x="-90" y="158" width="550" height="42" fill="#ece6da"/>
+      <rect x="-90" y="155" width="550" height="4" fill="#cfc6b6"/>
+      {[-84, -12, 140, 204, 268, 332, 362, 430].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
       {/* 8 ft gate where the lane meets the wall */}
       <rect x="32" y="148" width="8" height="52" fill="#ddd5c6"/>
       <rect x="76" y="148" width="8" height="52" fill="#ddd5c6"/>
@@ -85,13 +85,24 @@ export function ChangGharSVG() {
           </g>
         );
       })}
-      {/* Block-paved roads outside the west and east walls */}
+      {/* Block-paved roads outside the west and east walls, with a drain along each wall */}
       {(() => {
-        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 150, y1 = 470;
+        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 200, y1 = 470;
+        const wallLean = 42 * K;      // the east wall's top edge sits this far right of its base
+        const drain = (xa, xb) => (
+          <g>
+            <polygon points={pts([xa(y0), y0], [xb(y0), y0], [xb(y1), y1], [xa(y1), y1])} fill="#56636a"/>
+            <polyline points={pts([xa(y0), y0], [xa(y1), y1])} fill="none" stroke="#8a8f90" strokeWidth="1"/>
+            <polyline points={pts([xb(y0), y0], [xb(y1), y1])} fill="none" stroke="#8a8f90" strokeWidth="1"/>
+          </g>
+        );
         return (
           <g>
             <polygon points={pts([-90, y0], [west(y0), y0], [west(y1), y1], [-90, y1])} fill="url(#cg-pavers)"/>
             <polygon points={pts([east(y0), y0], [460, y0], [460, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
+            {drain((y) => west(y) - 7, west)}
+            {/* East drain: drawn just clear of the wall so it isn't hidden behind it */}
+            {drain((y) => east(y) + wallLean, (y) => east(y) + wallLean + 7)}
           </g>
         );
       })()}
