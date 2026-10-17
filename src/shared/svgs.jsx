@@ -239,18 +239,19 @@ export function ChangGharSVG() {
               const pc = "url(#cg-awning)", iron = "#3e3f46";
               const ya = T + 8;                                     // fixed a little below the eaves
               const iFL = [deck[0], ya], iFR = [deck[1], ya], iBL = at(iFL, 1);
-              const south = [-D[0] * 0.4, -D[1] * 0.4], west = [-16, 0], east = [12, 0], drop = 14;
+              const south = [-D[0] * 0.22, -D[1] * 0.22], west = [-9, 0], east = [7, 0], drop = 8;
               const oFL = [iFL[0] + south[0] + west[0], iFL[1] + south[1] + drop];
               const oFR = [iFR[0] + south[0] + east[0], iFR[1] + south[1] + drop];
               const oBL = [iBL[0] + west[0], iBL[1] + drop];
               const mid = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
-              const railTop = U - 12;
+              // Height of the roof edge directly above a point (front eave is level; left eave recedes)
+              const eaveY = (x) => x >= eFL[0] ? eFL[1] : eBL[1] + (x - eBL[0]) * (eFL[1] - eBL[1]) / (eFL[0] - eBL[0]);
+              const hangers = [
+                ...[0, 0.2, 0.4, 0.6, 0.8, 1].map(t => mid(oFL, oFR, t)),
+                ...[0.5, 1].map(t => mid(oFL, oBL, t)),
+              ];
               return (
                 <g>
-                  {/* Brackets from the balcony posts up to the outer rail */}
-                  {[[fl, oFL], [fr, oFR], [at(fl, 1), oBL]].map(([p, q], i) => (
-                    <line key={`br${i}`} x1={p[0]} y1={railTop} x2={q[0]} y2={q[1]} stroke={iron} strokeWidth="1.2"/>
-                  ))}
                   <polygon points={pts(iBL, iFL, oFL, oBL)} fill={pc}/>
                   <polygon points={pts(iFL, iFR, oFR, oFL)} fill={pc}/>
                   {/* Rafters, from the house to the outer rail */}
@@ -264,6 +265,10 @@ export function ChangGharSVG() {
                   })}
                   <polyline points={pts(iBL, iFL, iFR)} fill="none" stroke={iron} strokeWidth="1.2"/>
                   <polyline points={pts(oBL, oFL, oFR)} fill="none" stroke={iron} strokeWidth="1.6"/>
+                  {/* Vertical iron hangers from the roof's edge down to the outer rail */}
+                  {hangers.map(([x, y], i) => (
+                    <line key={`h${i}`} x1={x} y1={eaveY(x)} x2={x} y2={y} stroke={iron} strokeWidth="1.1"/>
+                  ))}
                 </g>
               );
             })()}
