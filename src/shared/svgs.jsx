@@ -180,18 +180,33 @@ export function ChangGharSVG() {
           </g>
         );
       })()}
-      {/* Fish pond: long side parallel to the main road, on its left */}
+      {/* Fish pond: long side parallel to the main road, on its left, inside a raised wall
+          about 3 ft high and 1 ft thick (the 5 ft lane is 22 px, so 1 ft is about 4.4 px) */}
       {(() => {
         const r = (y) => ns(-4, 200, y), l = (y) => r(y) - 40;
+        const H = 13, T = 4.4, up = ([x, y], h) => [x, y - h];
+        // Outer corners at ground level (back-left, back-right, front-right, front-left)
+        const oBL = [l(208) - T, 208], oBR = [r(208) + T, 208], oFR = [r(296) + T, 296], oFL = [l(296) - T, 296];
+        const iBL = [l(212), 212], iBR = [r(212), 212], iFR = [r(292), 292], iFL = [l(292), 292];
+        const wd = 3;   // water sits a little below the top of the wall
+        const fy = (y) => y - (H - wd);
         return (
           <g>
-            <polygon points={pts([l(208) - 4, 208], [r(208) + 4, 208], [r(296) + 4, 296], [l(296) - 4, 296])} fill="#a89a88"/>
-            <polygon points={pts([l(212), 212], [r(212), 212], [r(292), 292], [l(292), 292])} fill="url(#cg-water)"/>
-            <ellipse cx={l(225) + 10} cy="225" rx="5" ry="3" fill="#5a8a4a"/>
-            <ellipse cx={l(255) + 28} cy="255" rx="4.5" ry="2.8" fill="#5a8a4a"/>
-            <ellipse cx={l(280) + 12} cy="280" rx="4" ry="2.5" fill="#5a8a4a"/>
+            {/* Outer faces you can see: the left side and the front */}
+            <polygon points={pts(oBL, oFL, up(oFL, H), up(oBL, H))} fill="#8f8270"/>
+            <polygon points={pts(oFL, oFR, up(oFR, H), up(oFL, H))} fill="#a3957f"/>
+            {/* Top of the wall */}
+            <polygon points={pts(up(oBL, H), up(oBR, H), up(oFR, H), up(oFL, H))} fill="#c2b49e"/>
+            {/* Inner faces you can see above the water: the back and the right side */}
+            <polygon points={pts(up(iBL, H), up(iBR, H), up(iBR, H - wd), up(iBL, H - wd))} fill="#8f8270"/>
+            <polygon points={pts(up(iBR, H), up(iFR, H), up(iFR, H - wd), up(iBR, H - wd))} fill="#7f7362"/>
+            {/* Water */}
+            <polygon points={pts(up(iBL, H - wd), up(iBR, H - wd), up(iFR, H - wd), up(iFL, H - wd))} fill="url(#cg-water)"/>
+            <ellipse cx={l(225) + 10} cy={fy(225)} rx="5" ry="3" fill="#5a8a4a"/>
+            <ellipse cx={l(255) + 28} cy={fy(255)} rx="4.5" ry="2.8" fill="#5a8a4a"/>
+            <ellipse cx={l(280) + 12} cy={fy(280)} rx="4" ry="2.5" fill="#5a8a4a"/>
             {[[238, 18, 1], [266, 24, -1], [258, 10, 1]].map(([y, dx, d], i) => (
-              <g key={`f${i}`} transform={`translate(${l(y) + dx},${y}) rotate(${d > 0 ? 54 : 234})`}>
+              <g key={`f${i}`} transform={`translate(${l(y) + dx},${fy(y)}) rotate(${d > 0 ? 54 : 234})`}>
                 <ellipse cx="0" cy="0" rx="4" ry="1.6" fill={i === 1 ? "#f5f0e8" : "#d4743a"}/>
                 <path d="M-3.5,0 L-6.5,-2 L-6.5,2 Z" fill={i === 1 ? "#f5f0e8" : "#d4743a"}/>
               </g>
