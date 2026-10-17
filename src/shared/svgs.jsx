@@ -24,6 +24,22 @@ export function ChangGharSVG() {
     out.push(<ellipse key={`soil${id}`} cx={bx} cy={by + 0.5} rx={7 * sc} ry={1.8 * sc} fill="#6a4a2a"/>);
     return <g key={`plant${id}`}>{out}</g>;
   };
+  // Iron grill on a wall top: round pipe pickets with spear tips between two rails
+  const grill = (p, q, key, step = 4.5, h = 13, skip) => {
+    const iron = "#2f3035", len = Math.hypot(q[0] - p[0], q[1] - p[1]), n = Math.max(2, Math.round(len / step));
+    const at2 = (t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
+    const out = [
+      <line key={`${key}b`} x1={p[0]} y1={p[1] - 1.5} x2={q[0]} y2={q[1] - 1.5} stroke={iron} strokeWidth="1"/>,
+      <line key={`${key}t`} x1={p[0]} y1={p[1] - h + 2} x2={q[0]} y2={q[1] - h + 2} stroke={iron} strokeWidth="0.9"/>,
+    ];
+    for (let i = 0; i <= n; i++) {
+      const [x, y] = at2(i / n);
+      if (skip && x > skip[0] && x < skip[1]) continue;
+      out.push(<line key={`${key}p${i}`} x1={x} y1={y} x2={x} y2={y - h} stroke={iron} strokeWidth="0.8"/>);
+      out.push(<path key={`${key}s${i}`} d={`M${x},${y - h - 3} L${x + 1.3},${y - h} L${x},${y - h + 0.8} L${x - 1.3},${y - h} Z`} fill={iron}/>);
+    }
+    return <g key={key}>{out}</g>;
+  };
   // Plants along the edges of a flat area, drawn back to front
   const plantEdges = (points, sc) => points
     .map(([x, y], i) => ({ x, y, i }))
@@ -61,6 +77,7 @@ export function ChangGharSVG() {
       <rect x="-84" y="158" width="452" height="42" fill="#ece6da"/>
       <rect x="-84" y="155" width="452" height="4" fill="#cfc6b6"/>
       {[-84, -12, 140, 204, 268, 332, 362].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
+      {grill([-84, 155], [368, 155], "gn", 4.5, 13, [30, 86])}
       {/* 8 ft gate where the lane meets the wall */}
       <rect x="32" y="148" width="8" height="52" fill="#ddd5c6"/>
       <rect x="76" y="148" width="8" height="52" fill="#ddd5c6"/>
@@ -141,6 +158,7 @@ export function ChangGharSVG() {
           <g>
             <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
             <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
+            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6)}
             {pillars.map(y => (
               <polygon key={y} points={pts([x(y) - 3, y - H - 4], [x(y + 6) + 3, y + 6 - H - 4], [x(y + 6) + 3, y + 6], [x(y) - 3, y])} fill="#d6cebf"/>
             ))}
@@ -266,6 +284,7 @@ export function ChangGharSVG() {
           <g>
             <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
             <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
+            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6)}
             {pillars.map(y => (
               <polygon key={y} points={pts([x(y) - 3, y - H - 4], [x(y + 6) + 3, y + 6 - H - 4], [x(y + 6) + 3, y + 6], [x(y) - 3, y])} fill="#d6cebf"/>
             ))}
