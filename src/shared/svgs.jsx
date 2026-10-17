@@ -74,10 +74,10 @@ export function ChangGharSVG() {
       })()}
       {/* Concrete forecourt in front of the house, edged with flowers */}
       {(() => {
-        const bl = [190, 292], br = [310, 292], fr = [ns(310, 292, 318), 318], fl = [ns(190, 292, 318), 318];
+        const bl = [150, 293], br = [350, 293], fr = [ns(350, 293, 346), 346], fl = [ns(150, 293, 346), 346];
         const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
-        const dots = [...edge(bl, br, 20), ...edge(br, fr, 4), ...edge(fr, fl, 20), ...edge(fl, bl, 4)];
+        const dots = [...edge(bl, br, 34), ...edge(br, fr, 9), ...edge(fr, fl, 34), ...edge(fl, bl, 9)];
         return (
           <g>
             <polygon points={pts(bl, br, fr, fl)} fill="#c8c4bc" stroke="#a8a49c" strokeWidth="1"/>
@@ -137,7 +137,14 @@ export function ChangGharSVG() {
         const T = 166;                       // top of upper walls / eaves
         const wood = "#8a6a44", post = "#6a4a2a";
         const railing = (a, b, y0, h, n, skip) => {
-          const out = [<line key="r" x1={a[0]} y1={a[1] - h} x2={b[0]} y2={b[1] - h} stroke={post} strokeWidth="1.5"/>];
+          // Grills are covered with light-blue polycarbonate (left open at the entrance, if any)
+          const lerp = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+          const panel = (t0, t1) => {
+            const p = lerp(t0), q = lerp(t1);
+            return <polygon key={`pc${t0}`} points={pts([p[0], p[1] - h], [q[0], q[1] - h], q, p)} fill="rgba(160,210,235,0.5)"/>;
+          };
+          const out = skip ? [panel(0, skip[0]), panel(skip[1], 1)] : [panel(0, 1)];
+          out.push(<line key="r" x1={a[0]} y1={a[1] - h} x2={b[0]} y2={b[1] - h} stroke={post} strokeWidth="1.5"/>);
           for (let i = 1; i < n; i++) {
             const t = i / n; if (skip && t > skip[0] && t < skip[1]) continue;
             const x = a[0] + (b[0] - a[0]) * t, y = a[1] + (b[1] - a[1]) * t;
