@@ -156,7 +156,7 @@ export function ChangGharSVG() {
             {/* White iron canopy swings beside the side paths, drawn in the same 3D view as the house.
                 Each swings east-west: A-frames at the north and south ends, a long iron bench hanging
                 from a north-south beam, and a pitched white canopy. They face each other across the lawn. */}
-            {[[sidePaths(506)[0][1] + 22, 506, 1], [sidePaths(506)[1][0] - 30, 506, -1]].map(([cx, yb, face], i) => {
+            {[[sidePaths(493)[0][1] + 22, 493, 1], [sidePaths(493)[1][0] - 30, 493, -1]].map(([cx, yb, face], i) => {
               const white = "#f4f3ef", shade = "#dddbd4", edge = "#9d9a92";
               const L = 0.42, Z = 32, sp = 12;                       // bench length (north-south), beam height, leg spread
               const P = (x, t, z) => [cx + x + D[0] * t, yb + D[1] * t - z];
@@ -181,8 +181,31 @@ export function ChangGharSVG() {
                 </g>
               );
               const r0 = -0.06, r1 = L + 0.06, zr = Z + 7, ew = 15;
+              // Tiled concrete pad under the swing and the two benches south of it
+              const pT0 = -1.02, pT1 = L + 0.14, pw = 19;
+              const pad = (
+                <g>
+                  <polygon points={pts(P(-pw, pT0, 0), P(pw, pT0, 0), P(pw, pT1, 0), P(-pw, pT1, 0))} fill="#d2cdc3" stroke="#aaa497" strokeWidth="0.8"/>
+                  {Array.from({ length: 6 }, (_, k) => -pw + (2 * pw * (k + 1)) / 7).map(x => seg(P(x, pT0, 0), P(x, pT1, 0), 0.4, "#b5afa2", `tx${x}`))}
+                  {Array.from({ length: 11 }, (_, k) => pT0 + ((pT1 - pT0) * (k + 1)) / 12).map(t => seg(P(-pw, t, 0), P(pw, t, 0), 0.4, "#b5afa2", `ty${t}`))}
+                </g>
+              );
+              // Plain iron garden benches (no roof), facing the same way as the swing
+              const gardenBench = (ta, tb, k) => {
+                const zs2 = 6, zb2 = 13, w2 = 5, bx = -face * w2;
+                return (
+                  <g key={k}>
+                    {[ta, tb].flatMap(t => [seg(P(-w2, t, 0), P(-w2, t, zs2), 1, edge, `l1${t}`), seg(P(w2, t, 0), P(w2, t, zs2), 1, edge, `l2${t}`)])}
+                    <polygon points={pts(P(bx, ta, zs2), P(bx, tb, zs2), P(bx, tb, zb2), P(bx, ta, zb2))} fill={white} stroke={edge} strokeWidth="0.7"/>
+                    {seg(P(bx, ta, (zs2 + zb2) / 2), P(bx, tb, (zs2 + zb2) / 2), 0.5, edge, "mid")}
+                    <polygon points={pts(P(-w2, ta, zs2), P(w2, ta, zs2), P(w2, tb, zs2), P(-w2, tb, zs2))} fill={shade} stroke={edge} strokeWidth="0.7"/>
+                    {[-1.7, 1.7].map(x => seg(P(x, ta, zs2), P(x, tb, zs2), 0.5, edge, `bs${x}`))}
+                  </g>
+                );
+              };
               return (
                 <g key={`swing${i}`}>
+                  {pad}
                   {frame(L, "back")}
                   {seg(P(0, 0, Z), P(0, L, Z), 2, edge, "beam")}
                   {bench}
@@ -190,6 +213,8 @@ export function ChangGharSVG() {
                   {/* Pitched white canopy, ridge running north-south */}
                   <polygon points={pts(P(-ew, r0, Z), P(-ew, r1, Z), P(0, r1, zr), P(0, r0, zr))} fill={shade} stroke={edge} strokeWidth="0.8"/>
                   <polygon points={pts(P(ew, r0, Z), P(ew, r1, Z), P(0, r1, zr), P(0, r0, zr))} fill={white} stroke={edge} strokeWidth="0.8"/>
+                  {gardenBench(-0.18, -0.5, "gb1")}
+                  {gardenBench(-0.62, -0.94, "gb2")}
                 </g>
               );
             })}
