@@ -24,7 +24,7 @@ export function ChangGharSVG() {
       </defs>
       <rect width="400" height="300" fill="url(#cg-sky)"/>
       {/* Whole scene lifted so the foreground clears the caption */}
-      <g transform="translate(0, -40)">
+      <g transform="translate(0, -52)">
       {/* Treetops beyond the compound */}
       {[[20,150,22],[150,146,24],[250,150,20],[370,148,24]].map(([cx,cy,r],i) => (
         <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
@@ -34,20 +34,18 @@ export function ChangGharSVG() {
       <rect x="0" y="155" width="400" height="4" fill="#cfc6b6"/>
       {[140, 204, 268, 332].map(x => <rect key={x} x={x} y="152" width="8" height="48" fill="#ddd5c6"/>)}
       {/* 8 ft gate where the lane meets the wall */}
-      <rect x="52" y="148" width="8" height="52" fill="#ddd5c6"/>
-      <rect x="96" y="148" width="8" height="52" fill="#ddd5c6"/>
-      <rect x="60" y="162" width="36" height="38" fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="1"/>
-      <line x1="78" y1="162" x2="78" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
-      {[168, 175, 182, 189].map(y => <line key={y} x1="60" y1={y} x2="96" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
+      <rect x="32" y="148" width="8" height="52" fill="#ddd5c6"/>
+      <rect x="76" y="148" width="8" height="52" fill="#ddd5c6"/>
+      <rect x="40" y="162" width="36" height="38" fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="1"/>
+      <line x1="58" y1="162" x2="58" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
+      {[168, 175, 182, 189].map(y => <line key={y} x1="40" y1={y} x2="76" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
       {/* Garden ground */}
-      <rect x="0" y="198" width="400" height="142" fill="#7aaa6e"/>
+      <rect x="0" y="198" width="400" height="160" fill="#7aaa6e"/>
       {/* Main road from the gate, parallel to the house's side walls */}
-      <polygon points={pts([67, 200], [89, 200], [ns(89, 200, 340), 340], [ns(67, 200, 340), 340])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
-      {/* Branch road from the main road to the forecourt */}
-      <polygon points={pts([ns(89, 200, 290), 290], [ns(178, 274, 290), 290], [ns(178, 274, 302), 302], [ns(89, 200, 302), 302])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 352), 352], [ns(47, 200, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       {/* Trees along the main road */}
       {[214, 238].map((by, i) => {
-        const x = ns(89, 200, by) + 12;
+        const x = ns(69, 200, by) + 12;
         return (
           <g key={`t${i}`}>
             <line x1={x} y1={by - 18} x2={x} y2={by} stroke="#6a4a2a" strokeWidth="2"/>
@@ -57,7 +55,7 @@ export function ChangGharSVG() {
       })}
       {/* Fish pond: long side parallel to the main road, on its left */}
       {(() => {
-        const r = (y) => ns(57, 200, y), l = (y) => r(y) - 40;
+        const r = (y) => ns(37, 200, y), l = (y) => r(y) - 40;
         return (
           <g>
             <polygon points={pts([l(208) - 4, 208], [r(208) + 4, 208], [r(296) + 4, 296], [l(296) - 4, 296])} fill="#a89a88"/>
@@ -76,7 +74,7 @@ export function ChangGharSVG() {
       })()}
       {/* Concrete forecourt in front of the house, edged with flowers */}
       {(() => {
-        const bl = [178, 274], br = [318, 274], fr = [ns(318, 274, 304), 304], fl = [ns(178, 274, 304), 304];
+        const bl = [190, 292], br = [310, 292], fr = [ns(310, 292, 318), 318], fl = [ns(190, 292, 318), 318];
         const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
         const dots = [...edge(bl, br, 20), ...edge(br, fr, 4), ...edge(fr, fl, 20), ...edge(fl, bl, 4)];
@@ -114,9 +112,38 @@ export function ChangGharSVG() {
         const doorBot = (t) => at([gw[0], G], t);
         return (
           <g>
-            {/* Ground deck (front edge + side surface) */}
+            {(() => {
+              // Three steps running corner to corner along the front and left sides
+              const slab = 6, R = 3, S = [2, 3], W = [-5, 0], bl0 = at(fl, 1);
+              const down = ([x, y], d) => [x, y + d];
+              const o = (k) => {
+                const dy = slab + k * R;
+                return {
+                  b: [bl0[0] + k * W[0], bl0[1] + dy],
+                  f: [fl[0] + k * (W[0] + S[0]), fl[1] + k * S[1] + dy],
+                  r: [fr[0] + k * S[0], fr[1] + k * S[1] + dy],
+                };
+              };
+              const outline = (q, d = 0) => [down(q.b, d), down(q.f, d), down(q.r, d)];
+              const band = (p, q) => pts(...p, ...q.reverse());
+              const foot = outline(o(3), R);
+              // Branch road meets the outer step at the entrance door
+              const along = (t) => [foot[1][0] + (foot[0][0] - foot[1][0]) * t, foot[1][1] + (foot[0][1] - foot[1][1]) * t];
+              const q1 = along(0.32), q2 = along(0.68);
+              const out = [
+                <polygon key="branch" points={pts([ns(69, 200, q2[1]), q2[1]], q2, q1, [ns(69, 200, q1[1]), q1[1]])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>,
+              ];
+              for (let k = 3; k >= 1; k--) {
+                out.push(<polygon key={`r${k}`} points={band(outline(o(k)), outline(o(k), R))} fill="#7a5a34"/>);
+                out.push(<polygon key={`t${k}`} points={band(outline(o(k - 1), R), outline(o(k)))} fill="#b89a70"/>);
+              }
+              out.push(<polygon key="r0" points={band(outline(o(0)), outline(o(0), R))} fill="#7a5a34"/>);
+              return out;
+            })()}
+            {/* Ground deck: top, then front and left faces */}
             <polygon points={pts(fl, fr, at(fr, 1), at(fl, 1))} fill="#a07c50"/>
-            <rect x={deck[0]} y={G} width={deck[1] - deck[0]} height="7" fill={wood}/>
+            <rect x={deck[0]} y={G} width={deck[1] - deck[0]} height="6" fill={wood}/>
+            <polygon points={pts(at(fl, 1), fl, [fl[0], G + 6], [at(fl, 1)[0], at(fl, 1)[1] + 6])} fill="#7a5a34"/>
             {/* Ground-floor left wall (with entrance) and front wall */}
             <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="#b08c5a"/>
             <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="url(#cg-bamboo)"/>
@@ -166,7 +193,7 @@ export function ChangGharSVG() {
         );
       })()}
       {/* Road on the right to the foot of the staircase, parallel to the house */}
-      <polygon points={pts([346, 268], [368, 268], [ns(368, 268, 340), 340], [ns(346, 268, 340), 340])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([346, 268], [368, 268], [ns(368, 268, 352), 352], [ns(346, 268, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       </g>
     </svg>
   );
