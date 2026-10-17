@@ -119,7 +119,7 @@ export function ChangGharSVG() {
       {/* Tall white iron tower with two stacked blue tanks (unfiltered and filtered), between the wall and the pond */}
       {(() => {
         const white = "#f4f3ef", shade = "#d9d7d0", edge = "#a9a69e";
-        const cx = -48, base = 205, top = 118;                 // stand footing and top of the legs
+        const cx = -26, base = 205, top = 118;                 // stand footing and top of the legs
         const legs = [[-14, 0], [14, 0], [-10, -6], [10, -6]];  // front pair, then the rear pair
         const xs = (dx) => cx + dx;
         return (
@@ -182,7 +182,7 @@ export function ChangGharSVG() {
       })()}
       {/* Fish pond: long side parallel to the main road, on its left */}
       {(() => {
-        const r = (y) => ns(-30, 200, y), l = (y) => r(y) - 40;
+        const r = (y) => ns(-4, 200, y), l = (y) => r(y) - 40;
         return (
           <g>
             <polygon points={pts([l(208) - 4, 208], [r(208) + 4, 208], [r(296) + 4, 296], [l(296) - 4, 296])} fill="#a89a88"/>
@@ -201,7 +201,7 @@ export function ChangGharSVG() {
       })()}
       {/* Smaller courtyard left of the main road, continuing on from where the pond ends */}
       {(() => {
-        const r = (y) => ns(22, 200, y), l = (y) => ns(-70, 200, y), y0 = 304, y1 = 360;
+        const r = (y) => ns(36, 200, y), l = (y) => ns(-44, 200, y), y0 = 304, y1 = 360;
         const bl = [l(y0), y0], br = [r(y0), y0], fr = [r(y1), y1], fl = [l(y1), y1];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
         const dots = [...edge(bl, br, 8), ...edge(br, fr, 5).slice(1), ...edge(fr, fl, 8).slice(1), ...edge(fl, bl, 5).slice(1, -1)];
