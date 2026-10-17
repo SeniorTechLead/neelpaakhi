@@ -258,7 +258,7 @@ export function ChangGharSVG() {
       {(() => {
         const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 196, y1 = 900;
         const wallLean = 42 * K;      // the east wall's top edge sits this far right of its base
-        const RW = 12 * 4.4;          // road width, about 12 ft
+        const RW = 26 * 4.4;          // road width, 26 ft
         const drain = (xa, xb) => (
           <g>
             <polygon points={pts([xa(y0), y0], [xb(y0), y0], [xb(y1), y1], [xa(y1), y1])} fill="#56636a"/>
@@ -271,7 +271,7 @@ export function ChangGharSVG() {
             {/* Beyond the roads: neighbouring land, kept plain and muted so the compound stays the focus */}
             <polygon points={pts([-290, y0], [west(y0) - RW, y0], [west(y1) - RW, y1], [-290, y1])} fill="#ddd8cc"/>
             <polygon points={pts([east(y0) + wallLean + RW, y0], [890, y0], [890, y1], [east(y1) + wallLean + RW, y1])} fill="#ddd8cc"/>
-            {/* Roads about 12 ft wide, with a kerb on the outer edge */}
+            {/* 26 ft roads, with a kerb on the outer edge */}
             <polygon points={pts([west(y0) - RW, y0], [west(y0), y0], [west(y1), y1], [west(y1) - RW, y1])} fill="url(#cg-pavers)"/>
             <polygon points={pts([east(y0), y0], [east(y0) + wallLean + RW, y0], [east(y1) + wallLean + RW, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
             <polyline points={pts([west(y0) - RW, y0], [west(y1) - RW, y1])} fill="none" stroke="#a49d90" strokeWidth="1.6"/>
