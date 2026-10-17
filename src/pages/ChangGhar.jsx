@@ -71,7 +71,7 @@ export default function ChangGhar() {
                       )}
                     </div>
                     <div style={{ fontFamily: font.body, fontSize: 9, letterSpacing: 2, color: P.bambooLight, marginTop: 6 }}>
-                      LAUNCH PRICE {"\u2014"} 33% OFF
+                      LAUNCH PRICE {"\u2014"} {Math.round((1 - parseFloat(r.price.replace(/,/g, "")) / parseFloat(r.originalPrice.replace(/,/g, ""))) * 100)}% OFF
                     </div>
                   </div>
                 </div>
