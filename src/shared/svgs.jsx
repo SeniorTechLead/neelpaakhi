@@ -52,7 +52,7 @@ export function ChangGharSVG() {
     .sort((p, q) => p.y - q.y)
     .map(({ x, y, i }) => flowerPlant(x, y, i, sc));
   return (
-    <svg viewBox="-178 -20 904 678" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
+    <svg viewBox="-236 -20 1040 780" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -72,15 +72,15 @@ export function ChangGharSVG() {
           <path d="M0,0 H8 M0,2.5 H8 M2,0 V2.5 M6,2.5 V5" stroke="#aaa395" strokeWidth="0.45"/>
         </pattern>
         <pattern id="cg-mesh" width="3" height="3" patternUnits="userSpaceOnUse">
-          <rect width="3" height="3" fill="rgba(40,42,48,0.10)"/>
-          <path d="M0,0 H3 M0,0 V3" stroke="rgba(40,42,48,0.45)" strokeWidth="0.35"/>
+          <rect width="3" height="3" fill="rgba(40,120,60,0.14)"/>
+          <path d="M0,0 H3 M0,0 V3" stroke="rgba(30,110,50,0.6)" strokeWidth="0.35"/>
         </pattern>
         <linearGradient id="cg-water" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#4a8a9a"/>
           <stop offset="100%" stopColor="#2a5a6a"/>
         </linearGradient>
       </defs>
-      <rect x="-200" y="-20" width="960" height="720" fill="url(#cg-sky)"/>
+      <rect x="-260" y="-20" width="1100" height="820" fill="url(#cg-sky)"/>
       {/* Whole scene lifted so the foreground clears the caption */}
       <g transform="translate(0, -52)">
       {/* Compound wall to the north */}
@@ -95,7 +95,7 @@ export function ChangGharSVG() {
       <line x1="58" y1="162" x2="58" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
       {[168, 175, 182, 189].map(y => <line key={y} x1="40" y1={y} x2="76" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
       {/* Garden ground */}
-      <rect x="-200" y="198" width="960" height="600" fill="#7aaa6e"/>
+      <rect x="-260" y="198" width="1100" height="680" fill="#7aaa6e"/>
       {/* Main road from the gate, parallel to the house's side walls */}
       <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 380), 380], [ns(47, 200, 380), 380])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       {/* 14 ft internal road running west to east across the south of the compound,
@@ -150,7 +150,7 @@ export function ChangGharSVG() {
             })}
             {/* 5 ft side paths south of the road, through the south hedges */}
             {[0, 1].map(i => {
-              const y0 = yS, y1 = 790, a0 = sidePaths(y0)[i], a1 = sidePaths(y1)[i];
+              const y0 = yS, y1 = 860, a0 = sidePaths(y0)[i], a1 = sidePaths(y1)[i];
               return <polygon key={`sp${i}`} points={pts([a0[0], y0], [a0[1], y0], [a1[1], y1], [a1[0], y1])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>;
             })}
             {hedge(yN - G, "n2")}
@@ -250,57 +250,12 @@ export function ChangGharSVG() {
                 </g>
               );
             })}
-            {/* Volleyball court, 40 ft east-west by 20 ft north-south (1 ft is about 4.4 px), south of the
-                east bench, its east end 3 ft from the east path. Enclosed by ball-stop netting with a centre net. */}
-            {(() => {
-              const ftPx = 4.4, lenPx = 40 * ftPx, depPx = 20 * ftPx;
-              const yN = 584, yS2 = yN + depPx;
-              const xE = (y) => sidePaths(y)[0 + 1][0] - 3 * ftPx;   // 3 ft west of the east path
-              const xW = (y) => xE(y) - lenPx;
-              const NE = [xE(yN), yN], NW = [xW(yN), yN], SE = [xE(yS2), yS2], SW = [xW(yS2), yS2];
-              const up = ([x, y], z) => [x, y - z];
-              const lerp = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
-              const Hn = 48, Hv = 34, pole = "#3a3b40";
-              const mesh = (p, q, k) => (
-                <g key={k}>
-                  <polygon points={pts(p, q, up(q, Hn), up(p, Hn))} fill="url(#cg-mesh)"/>
-                  <line x1={p[0]} y1={p[1] - Hn} x2={q[0]} y2={q[1] - Hn} stroke={pole} strokeWidth="0.9"/>
-                </g>
-              );
-              const poles = (p, q, n, k) => Array.from({ length: n + 1 }, (_, j) => lerp(p, q, j / n)).map((c, j) => (
-                <line key={`${k}${j}`} x1={c[0]} y1={c[1]} x2={c[0]} y2={c[1] - Hn} stroke={pole} strokeWidth="1.3"/>
-              ));
-              const inset = (t, u) => lerp(lerp(NW, NE, t), lerp(SW, SE, t), u);
-              const nN = inset(0.5, 0.04), nS = inset(0.5, 0.96);
-              return (
-                <g>
-                  {/* Court surface and lines */}
-                  <polygon points={pts(NW, NE, SE, SW)} fill="#d9b98a" stroke="#c3a272" strokeWidth="1"/>
-                  <polygon points={pts(inset(0.03, 0.06), inset(0.97, 0.06), inset(0.97, 0.94), inset(0.03, 0.94))} fill="none" stroke="#ffffff" strokeWidth="1.2"/>
-                  <line x1={nN[0]} y1={nN[1]} x2={nS[0]} y2={nS[1]} stroke="#ffffff" strokeWidth="1.2"/>
-                  {[0.33, 0.67].map(t => { const a1 = inset(t, 0.06), b1 = inset(t, 0.94); return <line key={t} x1={a1[0]} y1={a1[1]} x2={b1[0]} y2={b1[1]} stroke="#ffffff" strokeWidth="0.7" strokeDasharray="2 2"/>; })}
-                  {/* Ball-stop netting: back and sides first */}
-                  {mesh(NW, NE, "mn")}
-                  {mesh(NW, SW, "mw")}
-                  {mesh(NE, SE, "me")}
-                  {poles(NW, NE, 4, "pn")}
-                  {/* Centre net across the middle of the court */}
-                  {[nN, nS].map((c, j) => <line key={`vp${j}`} x1={c[0]} y1={c[1]} x2={c[0]} y2={c[1] - Hv} stroke={pole} strokeWidth="1.6"/>)}
-                  <polygon points={pts(up(nN, Hv), up(nS, Hv), up(nS, Hv - 9), up(nN, Hv - 9))} fill="url(#cg-mesh)" stroke="#f4f3ef" strokeWidth="0.9"/>
-                  {/* Front netting and poles */}
-                  {mesh(SW, SE, "ms")}
-                  {poles(SW, SE, 4, "ps")}
-                  {poles(NW, SW, 1, "pw")}
-                  {poles(NE, SE, 1, "pe")}
-                </g>
-              );
-            })()}
           </g>
         );
       })()}
       {/* Block-paved roads outside the west and east walls, with a drain along each wall */}
       {(() => {
-        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 196, y1 = 790;
+        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 196, y1 = 860;
         const wallLean = 42 * K;      // the east wall's top edge sits this far right of its base
         const drain = (xa, xb) => (
           <g>
@@ -311,8 +266,8 @@ export function ChangGharSVG() {
         );
         return (
           <g>
-            <polygon points={pts([-200, y0], [west(y0), y0], [west(y1), y1], [-200, y1])} fill="url(#cg-pavers)"/>
-            <polygon points={pts([east(y0), y0], [780, y0], [780, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
+            <polygon points={pts([-260, y0], [west(y0), y0], [west(y1), y1], [-260, y1])} fill="url(#cg-pavers)"/>
+            <polygon points={pts([east(y0), y0], [840, y0], [840, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
             {drain((y) => west(y) - 7, west)}
             {/* East drain: drawn just clear of the wall so it isn't hidden behind it */}
             {drain((y) => east(y) + wallLean, (y) => east(y) + wallLean + 7)}
@@ -321,7 +276,7 @@ export function ChangGharSVG() {
       })()}
       {/* Compound wall on the west, to the left of the tank, pond and small courtyard */}
       {(() => {
-        const H = 42, x = (y) => ns(-84, 200, y), y0 = 200, y1 = 790;
+        const H = 42, x = (y) => ns(-84, 200, y), y0 = 200, y1 = 860;
         const pillars = [236, 290, 350, 420];
         return (
           <g>
@@ -463,7 +418,7 @@ export function ChangGharSVG() {
       })()}
       {/* Compound wall on the east, to the right of the stairs, running front to back */}
       {(() => {
-        const H = 42, x = (y) => ns(368, 200, y), y0 = 200, y1 = 790;
+        const H = 42, x = (y) => ns(368, 200, y), y0 = 200, y1 = 860;
         const pillars = [236, 290, 350, 420];
         return (
           <g>
@@ -515,11 +470,73 @@ export function ChangGharSVG() {
         const westX = (y) => ns(-84, 200, y + 42) + 13;
         const eastX = (y) => ns(368, 200, y) - 10;
         const trees = [
-          ...[222, 262, 302, 342, 498, 538, 578, 618, 658].map(y => [westX(y), y]),
-          ...[272, 312, 352, 498, 538, 578, 618, 658].map(y => [eastX(y), y]),
+          ...[222, 262, 302, 342, 498, 538, 578, 618, 658, 698, 738].map(y => [westX(y), y]),
+          ...[272, 312, 352, 498, 538, 578, 618, 658, 698, 738].map(y => [eastX(y), y]),
         ].sort((p, q) => p[1] - q[1]);
         return <g>{trees.map(([x, y], i) => palm(x, y, `palm${i}`))}</g>;
       })()}
+      {/* Volleyball court, 40 ft east-west by 20 ft north-south (1 ft is about 4.4 px), south of the
+                east bench, its east end 3 ft from the east path. Enclosed by ball-stop netting with a centre net. */}
+            {(() => {
+              const ftPx = 4.4, lenPx = 40 * ftPx, depPx = 20 * ftPx;
+              const yN = 650, yS2 = yN + depPx;
+              const E2 = (y) => ns(368, 200, y), xE = (y) => (E2(y) - 42) - 3 * ftPx;   // 3 ft west of the east path   // 3 ft west of the east path
+              const xW = (y) => xE(y) - lenPx;
+              const NE = [xE(yN), yN], NW = [xW(yN), yN], SE = [xE(yS2), yS2], SW = [xW(yS2), yS2];
+              const up = ([x, y], z) => [x, y - z];
+              const lerp = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
+              const Hn = 48, Hv = 34, pole = "#2f5a3a";
+              const mesh = (p, q, k) => (
+                <g key={k}>
+                  <polygon points={pts(p, q, up(q, Hn), up(p, Hn))} fill="url(#cg-mesh)"/>
+                  <line x1={p[0]} y1={p[1] - Hn} x2={q[0]} y2={q[1] - Hn} stroke={pole} strokeWidth="0.9"/>
+                </g>
+              );
+              const poles = (p, q, n, k) => Array.from({ length: n + 1 }, (_, j) => lerp(p, q, j / n)).map((c, j) => (
+                <line key={`${k}${j}`} x1={c[0]} y1={c[1]} x2={c[0]} y2={c[1] - Hn} stroke={pole} strokeWidth="1.3"/>
+              ));
+              const inset = (t, u) => lerp(lerp(NW, NE, t), lerp(SW, SE, t), u);
+              // 20 ft (about 88 px) floodlight on each corner, lamp angled toward the court
+              const light = ([x, y], dir, k) => {
+                const top = y - 20 * ftPx, c = inset(0.5, 0.5);
+                const ang = Math.atan2(c[1] - top, c[0] - x);            // aim at the middle of the court
+                const ca = Math.cos(ang), sa = Math.sin(ang);
+                const R = (u, v) => [x + ca * u - sa * v, top + sa * u + ca * v];
+                return (
+                  <g key={k}>
+                    <line x1={x} y1={y} x2={x} y2={top} stroke="#6a6c72" strokeWidth="2.2"/>
+                    <polygon points={pts(R(0, -4), R(11, -5), R(11, 5), R(0, 4))} fill="#3d3f45"/>
+                    <polygon points={pts(R(11, -4.5), R(12.5, -4.5), R(12.5, 4.5), R(11, 4.5))} fill="#fff6c8"/>
+                  </g>
+                );
+              };
+              const nN = inset(0.5, 0.04), nS = inset(0.5, 0.96);
+              return (
+                <g>
+                  {/* Court surface and lines */}
+                  <polygon points={pts(NW, NE, SE, SW)} fill="#d9b98a" stroke="#c3a272" strokeWidth="1"/>
+                  <polygon points={pts(inset(0.03, 0.06), inset(0.97, 0.06), inset(0.97, 0.94), inset(0.03, 0.94))} fill="none" stroke="#ffffff" strokeWidth="1.2"/>
+                  <line x1={nN[0]} y1={nN[1]} x2={nS[0]} y2={nS[1]} stroke="#ffffff" strokeWidth="1.2"/>
+                  {[0.33, 0.67].map(t => { const a1 = inset(t, 0.06), b1 = inset(t, 0.94); return <line key={t} x1={a1[0]} y1={a1[1]} x2={b1[0]} y2={b1[1]} stroke="#ffffff" strokeWidth="0.7" strokeDasharray="2 2"/>; })}
+                  {/* Ball-stop netting: back and sides first */}
+                  {mesh(NW, NE, "mn")}
+                  {mesh(NW, SW, "mw")}
+                  {mesh(NE, SE, "me")}
+                  {poles(NW, NE, 4, "pn")}
+                  {/* Centre net across the middle of the court */}
+                  {[nN, nS].map((c, j) => <line key={`vp${j}`} x1={c[0]} y1={c[1]} x2={c[0]} y2={c[1] - Hv} stroke={pole} strokeWidth="1.6"/>)}
+                  <polygon points={pts(up(nN, Hv), up(nS, Hv), up(nS, Hv - 9), up(nN, Hv - 9))} fill="url(#cg-mesh)" stroke="#f4f3ef" strokeWidth="0.9"/>
+                  {/* Front netting and poles */}
+                  {mesh(SW, SE, "ms")}
+                  {poles(SW, SE, 4, "ps")}
+                  {poles(NW, SW, 1, "pw")}
+                  {poles(NE, SE, 1, "pe")}
+                  {/* Palms on the east side would hide the eastern lamp heads, so draw the lights in front */}
+                  {light(NW, 1, "lnw")}{light(NE, -1, "lne")}
+                  {light(SW, 1, "lsw")}{light(SE, -1, "lse")}
+                </g>
+              );
+            })()}
       {/* The house and everything attached to it sit back near the north wall (under 5 ft away) */}
       <g transform="translate(0, -58)">
       {/* Concrete forecourt in front of the house, edged with flowers */}
