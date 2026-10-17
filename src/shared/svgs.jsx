@@ -58,6 +58,10 @@ export function ChangGharSVG() {
           <stop offset="0%" stopColor="#a9cfe0"/>
           <stop offset="100%" stopColor="#e8e2d2"/>
         </linearGradient>
+        <pattern id="cg-tiles" width="8" height="8" patternUnits="userSpaceOnUse">
+          <rect width="8" height="8" fill="#f6f5f1"/>
+          <path d="M0,0 H8 M0,0 V8" stroke="#d6d3cb" strokeWidth="0.5"/>
+        </pattern>
         <pattern id="cg-bamboo" width="6" height="30" patternUnits="userSpaceOnUse">
           <line x1="2" y1="0" x2="2" y2="30" stroke="#5a4028" strokeWidth="0.5" opacity="0.35"/>
           <line x1="4.5" y1="0" x2="4.5" y2="30" stroke="#8a6a44" strokeWidth="0.4" opacity="0.3"/>
@@ -562,7 +566,7 @@ export function ChangGharSVG() {
         const P = (t, z, dx = 0) => [362 + dx + D[0] * t, 286 + D[1] * t - z];
         const n = 22, rise = 74, h = rise / n;            // ~6.5 in per step
         const tF = -1.0, t1 = 0.45, t2 = 0.75, ds = (t1 - tF) / n, W = 16, toHouse = -28;
-        const wood = "#8a6a44", post = "#6a4a2a";
+        const wood = "#f4f3ef", post = "#cfccc4";   // painted white; risers and posts in a light shade
         const zAt = (t) => rise * (t - tF) / (t1 - tF);
         const out = [];
         // Posts under the flight and the landing
@@ -572,7 +576,7 @@ export function ChangGharSVG() {
         });
         out.push(<line key="pl" x1={P(t2, rise, W)[0]} y1={P(t2, rise, W)[1]} x2={P(t2, 0, W)[0]} y2={P(t2, 0, W)[1]} stroke={post} strokeWidth="2"/>);
         // Landing (with its front face), then the gate into the upper floor
-        out.push(<polygon key="land" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t2, rise, W), P(t2, rise, toHouse))} fill="#a07c50"/>);
+        out.push(<polygon key="land" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t2, rise, W), P(t2, rise, toHouse))} fill="#e8e6e0"/>);
         out.push(<polygon key="landf" points={pts(P(t1, rise, toHouse), P(t1, rise, W), P(t1, rise - 4, W), P(t1, rise - 4, toHouse))} fill={wood}/>);
         const g1 = t1 + 0.06, g2 = t2 - 0.06;
         out.push(<polygon key="gate" points={pts(P(g1, rise + 2, toHouse), P(g2, rise + 2, toHouse), P(g2, rise + 13, toHouse), P(g1, rise + 13, toHouse))} fill="#f7f4ee" stroke="#b8b0a2" strokeWidth="0.8"/>);
@@ -586,7 +590,7 @@ export function ChangGharSVG() {
           out.push(<polygon key={`t${i}`} points={pts(P(a, z), P(a, z, W), P(a + ds, z, W), P(a + ds, z))} fill={wood}/>);
         }
         // West stringer and east handrail
-        out.push(<polygon key="str" points={pts(P(tF, 0), P(t1, rise), P(t1, rise - 6), P(tF + 0.08, 0))} fill="#7a5a34"/>);
+        out.push(<polygon key="str" points={pts(P(tF, 0), P(t1, rise), P(t1, rise - 6), P(tF + 0.08, 0))} fill="#dcd9d1"/>);
         out.push(<line key="hr" x1={P(tF, 12, W)[0]} y1={P(tF, 12, W)[1]} x2={P(t1, rise + 12, W)[0]} y2={P(t1, rise + 12, W)[1]} stroke={post} strokeWidth="1.5"/>);
         [0.15, 0.4, 0.65, 0.9].forEach((u, i) => {
           const t = tF + (t1 - tF) * u;
@@ -681,11 +685,11 @@ export function ChangGharSVG() {
             <rect x={deck[0]} y={G} width={deck[1] - deck[0]} height="6" fill={wood}/>
             <polygon points={pts(at(fl, 1), fl, [fl[0], G + 6], [at(fl, 1)[0], at(fl, 1)[1] + 6])} fill="#7a5a34"/>
             {/* Ground-floor left wall (with entrance) and front wall */}
-            <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="#b08c5a"/>
-            <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="url(#cg-bamboo)"/>
+            <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="#e4e2dc"/>
+            <polygon points={pts([gw[0], U], [gw[0], G], at([gw[0], G], 1), at([gw[0], U], 1))} fill="url(#cg-tiles)" opacity="0.85"/>
             <polygon points={pts(doorBot(0.3), doorBot(0.62), [doorBot(0.62)[0], doorBot(0.62)[1] - 36], [doorBot(0.3)[0], doorBot(0.3)[1] - 36])} fill="#5a4028"/>
-            <rect x={gw[0]} y={U} width={gw[1] - gw[0]} height={G - U} fill="#c9a46a"/>
-            <rect x={gw[0]} y={U} width={gw[1] - gw[0]} height={G - U} fill="url(#cg-bamboo)"/>
+            <rect x={gw[0]} y={U} width={gw[1] - gw[0]} height={G - U} fill="#f6f5f1"/>
+            <rect x={gw[0]} y={U} width={gw[1] - gw[0]} height={G - U} fill="url(#cg-tiles)"/>
             {[188, 234, 280].map(x => <rect key={x} x={x} y={U + 14} width="22" height="20" fill="#3f5f6a" opacity="0.75" rx="1"/>)}
             {/* Ground-floor balcony railings: front, and left side (open at the entrance) */}
             {railing(at(fl, 1), fl, 0, 13, 6, [0.25, 0.7])}
@@ -697,10 +701,10 @@ export function ChangGharSVG() {
             <polygon points={pts(ufl, ufr, at(ufr, 1), at(ufl, 1))} fill="#a07c50"/>
             <rect x={deck[0]} y={U} width={deck[1] - deck[0]} height="6" fill={wood}/>
             {/* Upper-floor left and front walls */}
-            <polygon points={pts([uw[0], T], [uw[0], U], at([uw[0], U], 1), at([uw[0], T], 1))} fill="#b8966a"/>
-            <polygon points={pts([uw[0], T], [uw[0], U], at([uw[0], U], 1), at([uw[0], T], 1))} fill="url(#cg-bamboo)"/>
-            <rect x={uw[0]} y={T} width={uw[1] - uw[0]} height={U - T} fill="#d4b37a"/>
-            <rect x={uw[0]} y={T} width={uw[1] - uw[0]} height={U - T} fill="url(#cg-bamboo)"/>
+            <polygon points={pts([uw[0], T], [uw[0], U], at([uw[0], U], 1), at([uw[0], T], 1))} fill="#e4e2dc"/>
+            <polygon points={pts([uw[0], T], [uw[0], U], at([uw[0], U], 1), at([uw[0], T], 1))} fill="url(#cg-tiles)" opacity="0.85"/>
+            <rect x={uw[0]} y={T} width={uw[1] - uw[0]} height={U - T} fill="#f6f5f1"/>
+            <rect x={uw[0]} y={T} width={uw[1] - uw[0]} height={U - T} fill="url(#cg-tiles)"/>
             {[196, 235, 274].map(x => <rect key={x} x={x} y={T + 10} width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>)}
             {/* Upper balcony railings: front and left side */}
             {railing(at(ufl, 1), ufl, 0, 12, 6, null, true)}
