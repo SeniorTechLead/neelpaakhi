@@ -268,14 +268,46 @@ export function ChangGharSVG() {
         );
         return (
           <g>
-            {/* Beyond the roads: neighbouring land, kept plain and muted so the compound stays the focus */}
-            <polygon points={pts([-290, y0], [west(y0) - RW, y0], [west(y1) - RW, y1], [-290, y1])} fill="#ddd8cc"/>
-            <polygon points={pts([east(y0) + wallLean + RW, y0], [890, y0], [890, y1], [east(y1) + wallLean + RW, y1])} fill="#ddd8cc"/>
+            {/* Beyond the roads: empty neighbouring plots of bare ground */}
+            <polygon points={pts([-290, y0], [west(y0) - RW, y0], [west(y1) - RW, y1], [-290, y1])} fill="#d6cdb3"/>
+            <polygon points={pts([east(y0) + wallLean + RW, y0], [890, y0], [890, y1], [east(y1) + wallLean + RW, y1])} fill="#d6cdb3"/>
             {/* 26 ft roads, with a kerb on the outer edge */}
             <polygon points={pts([west(y0) - RW, y0], [west(y0), y0], [west(y1), y1], [west(y1) - RW, y1])} fill="url(#cg-pavers)"/>
             <polygon points={pts([east(y0), y0], [east(y0) + wallLean + RW, y0], [east(y1) + wallLean + RW, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
             <polyline points={pts([west(y0) - RW, y0], [west(y1) - RW, y1])} fill="none" stroke="#a49d90" strokeWidth="1.6"/>
             <polyline points={pts([east(y0) + wallLean + RW, y0], [east(y1) + wallLean + RW, y1])} fill="none" stroke="#a49d90" strokeWidth="1.6"/>
+            {/* Empty neighbouring plots behind low boundary walls (about 4 ft) along the far side of each road */}
+            {(() => {
+              const Hl = 18, wX = (y) => west(y) - RW, eX = (y) => east(y) + wallLean + RW;
+              const lowWall = (x, k) => (
+                <g key={k}>
+                  <polygon points={pts([x(y0), y0 - Hl], [x(y1), y1 - Hl], [x(y1), y1], [x(y0), y0])} fill="#e6e0d3"/>
+                  <polygon points={pts([x(y0), y0 - Hl - 2], [x(y1), y1 - Hl - 2], [x(y1), y1 - Hl], [x(y0), y0 - Hl])} fill="#cfc6b6"/>
+                </g>
+              );
+              // Low walls dividing the plots, running east-west
+              const divider = (xa, xb, y, k) => (
+                <g key={k}>
+                  <polygon points={pts([xa, y - Hl], [xb, y - Hl], [xb, y], [xa, y])} fill="#ddd6c8"/>
+                  <polygon points={pts([xa, y - Hl - 2], [xb, y - Hl - 2], [xb, y - Hl], [xa, y - Hl])} fill="#cfc6b6"/>
+                </g>
+              );
+              const tufts = [[-250, 300], [-200, 380], [-230, 520], [-150, 600], [-260, 700], [-120, 760],
+                             [740, 260], [820, 340], [780, 470], [860, 560], [700, 650], [830, 760]];
+              return (
+                <g>
+                  {tufts.map(([x, y], i) => (
+                    <g key={`tf${i}`} fill="#a9ae84">
+                      <ellipse cx={x} cy={y} rx="9" ry="3"/><ellipse cx={x + 14} cy={y + 4} rx="6" ry="2"/>
+                    </g>
+                  ))}
+                  {[330, 560, 790].map((y, i) => divider(-290, wX(y), y, `dw${i}`))}
+                  {[300, 530, 760].map((y, i) => divider(eX(y), 890, y, `de${i}`))}
+                  {lowWall(wX, "nw")}
+                  {lowWall(eX, "ne")}
+                </g>
+              );
+            })()}
             {drain((y) => west(y) - 7, west)}
             {/* East drain: drawn just clear of the wall so it isn't hidden behind it */}
             {drain((y) => east(y) + wallLean, (y) => east(y) + wallLean + 7)}
