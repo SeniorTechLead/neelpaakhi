@@ -72,8 +72,9 @@ export function ChangGharSVG() {
           <path d="M0,0 H8 M0,2.5 H8 M2,0 V2.5 M6,2.5 V5" stroke="#aaa395" strokeWidth="0.45"/>
         </pattern>
         <pattern id="cg-mesh" width="3" height="3" patternUnits="userSpaceOnUse">
-          <rect width="3" height="3" fill="rgba(40,120,60,0.14)"/>
-          <path d="M0,0 H3 M0,0 V3" stroke="rgba(30,110,50,0.6)" strokeWidth="0.35"/>
+          {/* Fine green nylon netting: soft diamond mesh, mostly see-through */}
+          <rect width="3" height="3" fill="rgba(40,130,60,0.05)"/>
+          <path d="M0,0 L3,3 M3,0 L0,3" stroke="rgba(30,120,55,0.5)" strokeWidth="0.3"/>
         </pattern>
         <linearGradient id="cg-water" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#4a8a9a"/>
@@ -485,7 +486,7 @@ export function ChangGharSVG() {
               const NE = [xE(yN), yN], NW = [xW(yN), yN], SE = [xE(yS2), yS2], SW = [xW(yS2), yS2];
               const up = ([x, y], z) => [x, y - z];
               const lerp = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
-              const Hn = 48, Hv = 34, pole = "#2f5a3a";
+              const Hn = 78, Hv = 34, pole = "#2f5a3a";   // ball-stop nets about 18 ft, just under the 20 ft lights
               const mesh = (p, q, k) => (
                 <g key={k}>
                   <polygon points={pts(p, q, up(q, Hn), up(p, Hn))} fill="url(#cg-mesh)"/>
