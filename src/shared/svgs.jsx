@@ -52,13 +52,13 @@ export function ChangGharSVG() {
     .sort((p, q) => p.y - q.y)
     .map(({ x, y, i }) => flowerPlant(x, y, i, sc));
   return (
-    <svg viewBox="-266 -20 1120 840" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
+    <svg viewBox="-330 -20 1306 980" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
           <stop offset="100%" stopColor="#e8e2d2"/>
         </linearGradient>
-        <linearGradient id="cg-sky-fade" gradientUnits="userSpaceOnUse" x1="0" y1="-20" x2="0" y2="860">
+        <linearGradient id="cg-sky-fade" gradientUnits="userSpaceOnUse" x1="0" y1="-20" x2="0" y2="980">
           <stop offset="0%" stopColor="#a9cfe0"/>
           <stop offset="100%" stopColor="#e8e2d2"/>
         </linearGradient>
@@ -85,7 +85,7 @@ export function ChangGharSVG() {
           <stop offset="100%" stopColor="#2a5a6a"/>
         </linearGradient>
       </defs>
-      <rect x="-290" y="-20" width="1180" height="880" fill="url(#cg-sky)"/>
+      <rect x="-360" y="-20" width="1380" height="1000" fill="url(#cg-sky)"/>
       {/* Whole scene lifted so the foreground clears the caption */}
       <g transform="translate(0, -52)">
       {/* 26 ft paved road behind the north wall, joining the west and east roads */}
@@ -111,7 +111,7 @@ export function ChangGharSVG() {
       <line x1="58" y1="162" x2="58" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
       {[168, 175, 182, 189].map(y => <line key={y} x1="40" y1={y} x2="76" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
       {/* Garden ground */}
-      <rect x="-290" y="198" width="1180" height="720" fill="#7aaa6e"/>
+      <rect x="-360" y="198" width="1380" height="690" fill="#7aaa6e"/>
       {/* Main road from the gate, parallel to the house's side walls */}
       <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 380), 380], [ns(47, 200, 380), 380])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>
       {/* Garden lights: short white bollards with black bands, along both edges of the main road */}
@@ -181,9 +181,11 @@ export function ChangGharSVG() {
             })}
             {/* 5 ft side paths south of the road, through the south hedges */}
             {[0, 1].map(i => {
-              const y0 = yS, y1 = 900, a0 = sidePaths(y0)[i], a1 = sidePaths(y1)[i];
+              const y0 = yS, y1 = 848, a0 = sidePaths(y0)[i], a1 = sidePaths(y1)[i];
               return <polygon key={`sp${i}`} points={pts([a0[0], y0], [a0[1], y0], [a1[1], y1], [a1[0], y1])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>;
             })}
+            {/* 5 ft internal path along the south, joining the west and east side paths */}
+            <polygon points={pts([sidePaths(826)[0][0], 826], [sidePaths(826)[1][1], 826], [sidePaths(848)[1][1], 848], [sidePaths(848)[0][0], 848])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>
             {hedge(yN - G, "n2")}
             {hedge(yN - 1, "n")}
             {hedge(yS + 9, "s")}
@@ -286,7 +288,7 @@ export function ChangGharSVG() {
       })()}
       {/* Block-paved roads outside the west and east walls, with a drain along each wall */}
       {(() => {
-        const west = (y) => ns(-116, 200, y), east = (y) => ns(400, 200, y), y0 = 196, y1 = 900;
+        const west = (y) => ns(-116, 200, y), east = (y) => ns(400, 200, y), y0 = 196, y1 = 1000;
         const wallLean = 42 * K;      // the east wall's top edge sits this far right of its base
         const RW = 26 * 4.4;          // road width, 26 ft
         const drain = (xa, xb) => (
@@ -299,8 +301,8 @@ export function ChangGharSVG() {
         return (
           <g>
             {/* Beyond the roads: nothing drawn; it blends into the sky so the compound stands on its own */}
-            <polygon points={pts([-290, y0], [west(y0) - RW, y0], [west(y1) - RW, y1], [-290, y1])} fill="url(#cg-sky-fade)"/>
-            <polygon points={pts([east(y0) + wallLean + RW, y0], [890, y0], [890, y1], [east(y1) + wallLean + RW, y1])} fill="url(#cg-sky-fade)"/>
+            <polygon points={pts([-360, y0], [west(y0) - RW, y0], [west(y1) - RW, y1], [-360, y1])} fill="url(#cg-sky-fade)"/>
+            <polygon points={pts([east(y0) + wallLean + RW, y0], [1020, y0], [1020, y1], [east(y1) + wallLean + RW, y1])} fill="url(#cg-sky-fade)"/>
             {/* 26 ft roads, with a kerb on the outer edge */}
             <polygon points={pts([west(y0) - RW, y0], [west(y0), y0], [west(y1), y1], [west(y1) - RW, y1])} fill="url(#cg-pavers)"/>
             <polygon points={pts([east(y0), y0], [east(y0) + wallLean + RW, y0], [east(y1) + wallLean + RW, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
@@ -314,7 +316,7 @@ export function ChangGharSVG() {
       })()}
       {/* Compound wall on the west, to the left of the tank, pond and small courtyard */}
       {(() => {
-        const H = 42, x = (y) => ns(-116, 200, y), y0 = 200, y1 = 900;
+        const H = 42, x = (y) => ns(-116, 200, y), y0 = 200, y1 = 888;
         const pillars = [236, 290, 350, 420];
         return (
           <g>
@@ -456,7 +458,7 @@ export function ChangGharSVG() {
       })()}
       {/* Compound wall on the east, to the right of the stairs, running front to back */}
       {(() => {
-        const H = 42, x = (y) => ns(400, 200, y), y0 = 200, y1 = 900;
+        const H = 42, x = (y) => ns(400, 200, y), y0 = 200, y1 = 888;
         const pillars = [236, 290, 350, 420];
         return (
           <g>
@@ -581,7 +583,7 @@ export function ChangGharSVG() {
       {/* Four 20 ft light poles, striped black and white, at the corners of the south field, aimed at its centre */}
       {(() => {
         const W = (y) => ns(-116, 200, y + 42), E = (y) => ns(400, 200, y);
-        const yA = 478, yB = 800, H = 20 * 4.4;
+        const yA = 478, yB = 818, H = 20 * 4.4;
         const corners = [[W(yA) + 48, yA], [E(yA) - 48, yA], [W(yB) + 48, yB], [E(yB) - 48, yB]];
         const cx = (corners[0][0] + corners[1][0] + corners[2][0] + corners[3][0]) / 4, cy = (yA + yB) / 2;
         return (
@@ -598,6 +600,30 @@ export function ChangGharSVG() {
                 </g>
               );
             })}
+          </g>
+        );
+      })()}
+      {/* Row of ficus trees, then 4 ft further south, the south wall with its iron grill */}
+      {(() => {
+        const yF = 870, yW = 888, H = 42;
+        const xw = ns(-116, 200, yW), xe = ns(400, 200, yW);
+        const trees = [];
+        for (let x = ns(-116, 200, yF + 42) + 14; x < ns(400, 200, yF) - 10; x += 20) trees.push(x);
+        return (
+          <g>
+            {trees.map((x, i) => (
+              <g key={`fc${i}`}>
+                <line x1={x} y1={yF} x2={x} y2={yF - 40} stroke="#6a5a48" strokeWidth="2.2"/>
+                <ellipse cx={x} cy={yF - 52} rx="12" ry="18" fill={i % 2 ? "#3c6e38" : "#356533"}/>
+                <ellipse cx={x - 3} cy={yF - 59} rx="5" ry="7" fill="#4f8a46"/>
+              </g>
+            ))}
+            <rect x={xw} y={yW - H} width={xe - xw} height={H} fill="#ece6da"/>
+            <rect x={xw} y={yW - H - 3} width={xe - xw} height="4" fill="#cfc6b6"/>
+            {Array.from({ length: 9 }, (_, i) => xw + (xe - xw) * i / 8).map(x => (
+              <rect key={x} x={x - 4} y={yW - H - 6} width="8" height={H + 6} fill="#ddd5c6"/>
+            ))}
+            {grill([xw, yW - H - 3], [xe, yW - H - 3], "gs", 4.5)}
           </g>
         );
       })()}
