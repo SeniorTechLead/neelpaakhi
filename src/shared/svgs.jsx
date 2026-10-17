@@ -206,6 +206,25 @@ export function ChangGharSVG() {
                 out.push(<polygon key={`t${k}`} points={band(outline(o(k - 1), R), outline(o(k)))} fill="#b89a70"/>);
               }
               out.push(<polygon key="r0" points={band(outline(o(0)), outline(o(0), R))} fill="#7a5a34"/>);
+              // Flowering plants on both sides of the entrance, where the branch road meets the steps
+              const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#c86ad4', '#f5f0e8'];
+              [along(-0.04), along(0.58)].forEach(([x, y], k) => {
+                const bx = x - 9, by = y + 3;
+                // [x offset, height, lean]
+                [[-6, 12, -2], [-3, 16, -1], [0, 18, 0], [3, 15, 1.5], [6, 11, 2.5]].forEach(([dx, h, lean], i) => {
+                  const sx = bx + dx, tx = sx + lean, ty = by - h;
+                  const c = colors[(i + k * 2) % colors.length];
+                  out.push(<line key={`st${k}-${i}`} x1={sx} y1={by} x2={tx} y2={ty} stroke="#3f6b3a" strokeWidth="1"/>);
+                  out.push(<ellipse key={`lf${k}-${i}a`} cx={sx + lean * 0.4 - 2} cy={by - h * 0.4} rx="2.4" ry="1" fill="#4a8a44" transform={`rotate(-30 ${sx + lean * 0.4 - 2} ${by - h * 0.4})`}/>);
+                  out.push(<ellipse key={`lf${k}-${i}b`} cx={sx + lean * 0.6 + 2} cy={by - h * 0.65} rx="2.4" ry="1" fill="#4a8a44" transform={`rotate(30 ${sx + lean * 0.6 + 2} ${by - h * 0.65})`}/>);
+                  [0, 72, 144, 216, 288].forEach((deg) => {
+                    const r = (deg * Math.PI) / 180;
+                    out.push(<circle key={`pt${k}-${i}-${deg}`} cx={tx + Math.cos(r) * 1.6} cy={ty + Math.sin(r) * 1.6} r="1.3" fill={c}/>);
+                  });
+                  out.push(<circle key={`ce${k}-${i}`} cx={tx} cy={ty} r="0.9" fill="#f2c14e"/>);
+                });
+                out.push(<ellipse key={`soil${k}`} cx={bx} cy={by + 0.5} rx="8" ry="2" fill="#6a4a2a"/>);
+              });
               return out;
             })()}
             {/* Ground deck: top, then front and left faces */}
