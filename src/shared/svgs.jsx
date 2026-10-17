@@ -83,7 +83,7 @@ export function ChangGharSVG() {
       })}
       {/* Block-paved roads outside the west and east walls, with a drain along each wall */}
       {(() => {
-        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 200, y1 = 470;
+        const west = (y) => ns(-84, 200, y), east = (y) => ns(368, 200, y), y0 = 196, y1 = 470;
         const wallLean = 42 * K;      // the east wall's top edge sits this far right of its base
         const drain = (xa, xb) => (
           <g>
