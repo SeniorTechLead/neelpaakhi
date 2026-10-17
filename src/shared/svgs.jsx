@@ -52,7 +52,7 @@ export function ChangGharSVG() {
     .sort((p, q) => p.y - q.y)
     .map(({ x, y, i }) => flowerPlant(x, y, i, sc));
   return (
-    <svg viewBox="-330 -20 1306 980" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
+    <svg viewBox="-190 -20 1247 935" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
         <linearGradient id="cg-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#a9cfe0"/>
@@ -85,7 +85,7 @@ export function ChangGharSVG() {
           <stop offset="100%" stopColor="#2a5a6a"/>
         </linearGradient>
       </defs>
-      <rect x="-360" y="-20" width="1380" height="1000" fill="url(#cg-sky)"/>
+      <rect x="-360" y="-20" width="1520" height="1000" fill="url(#cg-sky)"/>
       {/* Whole scene lifted so the foreground clears the caption */}
       <g transform="translate(0, -52)">
       {/* 26 ft paved road behind the north wall, joining the west and east roads */}
@@ -111,7 +111,7 @@ export function ChangGharSVG() {
       <line x1="58" y1="162" x2="58" y2="200" stroke="#b8b0a2" strokeWidth="1"/>
       {[168, 175, 182, 189].map(y => <line key={y} x1="40" y1={y} x2="76" y2={y} stroke="#cfc6b6" strokeWidth="1.2"/>)}
       {/* Garden ground */}
-      <rect x="-360" y="198" width="1380" height="690" fill="#7aaa6e"/>
+      <rect x="-360" y="198" width="1520" height="690" fill="#7aaa6e"/>
       {/* Main road from the gate, parallel to the house's side walls */}
       <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 380), 380], [ns(47, 200, 380), 380])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>
       {/* Garden lights: short white bollards with black bands, along both edges of the main road */}
@@ -302,7 +302,7 @@ export function ChangGharSVG() {
           <g>
             {/* Beyond the roads: nothing drawn; it blends into the sky so the compound stands on its own */}
             <polygon points={pts([-360, y0], [west(y0) - RW, y0], [west(y1) - RW, y1], [-360, y1])} fill="url(#cg-sky-fade)"/>
-            <polygon points={pts([east(y0) + wallLean + RW, y0], [1020, y0], [1020, y1], [east(y1) + wallLean + RW, y1])} fill="url(#cg-sky-fade)"/>
+            <polygon points={pts([east(y0) + wallLean + RW, y0], [1160, y0], [1160, y1], [east(y1) + wallLean + RW, y1])} fill="url(#cg-sky-fade)"/>
             {/* 26 ft roads, with a kerb on the outer edge */}
             <polygon points={pts([west(y0) - RW, y0], [west(y0), y0], [west(y1), y1], [west(y1) - RW, y1])} fill="url(#cg-pavers)"/>
             <polygon points={pts([east(y0), y0], [east(y0) + wallLean + RW, y0], [east(y1) + wallLean + RW, y1], [east(y1), y1])} fill="url(#cg-pavers)"/>
@@ -580,6 +580,49 @@ export function ChangGharSVG() {
                 </g>
               );
             })()}
+      {/* Third canopy swing, west of the volleyball court and almost touching the south 5 ft path.
+          Its beam runs east-west, so it swings north-south; the bench faces north, toward the field. */}
+      {(() => {
+        const white = "#f4f3ef", shade = "#dddbd4", edge = "#9d9a92";
+        const yb = 812, courtW = (ns(400, 200, 792) - 42) - 3 * 4.4 - 40 * 4.4, cx = courtW - 52;   // clear of the court's south-west corner
+        const P = (u, t, z) => [cx + u + D[0] * t, yb + D[1] * t - z];      // u: east-west, t: north-south
+        const seg = (p, q, w, c, k) => <line key={k} x1={p[0]} y1={p[1]} x2={q[0]} y2={q[1]} stroke={c} strokeWidth={w} strokeLinecap="round"/>;
+        const Lu = 17, Z = 32, spT = 0.45, bwT = 0.22, zs = 10, zb = 20, u0 = -Lu + 3, u1 = Lu - 3;
+        const frame = (u, k) => (
+          <g key={k}>
+            {seg(P(u, -spT, 0), P(u, 0, Z), 2.6, edge, "a")}{seg(P(u, spT, 0), P(u, 0, Z), 2.6, edge, "b")}
+            {seg(P(u, -spT, 0), P(u, 0, Z), 1.7, white, "c")}{seg(P(u, spT, 0), P(u, 0, Z), 1.7, white, "d")}
+          </g>
+        );
+        const pw = 0.62, plinth = (
+          <g>
+            <polygon points={pts(P(-Lu - 5, -pw, 0), P(Lu + 5, -pw, 0), P(Lu + 5, -pw, -2), P(-Lu - 5, -pw, -2))} fill="#b5afa2"/>
+            <polygon points={pts(P(-Lu - 5, -pw, 0), P(Lu + 5, -pw, 0), P(Lu + 5, pw, 0), P(-Lu - 5, pw, 0))} fill="#d2cdc3" stroke="#aaa497" strokeWidth="0.8"/>
+            {[-0.31, 0, 0.31].map(t => seg(P(-Lu - 5, t, 0), P(Lu + 5, t, 0), 0.4, "#b5afa2", `pt${t}`))}
+            {[-14, -4, 6, 16].map(u => seg(P(u, -pw, 0), P(u, pw, 0), 0.4, "#b5afa2", `pu${u}`))}
+          </g>
+        );
+        const back = -bwT;    // backrest on the south side, so the bench faces north
+        return (
+          <g>
+            {plinth}
+            {frame(Lu, "e")}
+            {seg(P(-Lu, 0, Z), P(Lu, 0, Z), 2, edge, "beam")}
+            {[u0, u1].flatMap(u => [seg(P(u, 0, Z), P(u, -bwT, zs), 0.8, edge, `h1${u}`), seg(P(u, 0, Z), P(u, bwT, zs), 0.8, edge, `h2${u}`)])}
+            <polygon points={pts(P(u0, -bwT, zs), P(u1, -bwT, zs), P(u1, bwT, zs), P(u0, bwT, zs))} fill={shade} stroke={edge} strokeWidth="0.7"/>
+            <polygon points={pts(P(u0, back, zs), P(u1, back, zs), P(u1, back, zb), P(u0, back, zb))} fill={white} stroke={edge} strokeWidth="0.7"/>
+            {[0.33, 0.66].map(v => seg(P(u0, back, zs + (zb - zs) * v), P(u1, back, zs + (zb - zs) * v), 0.5, edge, `bk${v}`))}
+            {[0, 1 / 3, 2 / 3, 1].map(v => {
+              const u = u0 + (u1 - u0) * v;
+              return <polyline key={`ar${v}`} points={pts(P(u, back, zs + 6), P(u, -back * 0.6, zs + 6), P(u, -back * 0.6, zs))} fill="none" stroke={edge} strokeWidth="0.9"/>;
+            })}
+            {frame(-Lu, "w")}
+            {/* Pitched white canopy, ridge running east-west */}
+            <polygon points={pts(P(-Lu - 3, 0.6, Z), P(Lu + 3, 0.6, Z), P(Lu + 3, 0, Z + 7), P(-Lu - 3, 0, Z + 7))} fill={shade} stroke={edge} strokeWidth="0.8"/>
+            <polygon points={pts(P(-Lu - 3, -0.6, Z), P(Lu + 3, -0.6, Z), P(Lu + 3, 0, Z + 7), P(-Lu - 3, 0, Z + 7))} fill={white} stroke={edge} strokeWidth="0.8"/>
+          </g>
+        );
+      })()}
       {/* Four 20 ft light poles, striped black and white, at the corners of the south field, aimed at its centre */}
       {(() => {
         const W = (y) => ns(-116, 200, y + 42), E = (y) => ns(400, 200, y);
