@@ -136,14 +136,14 @@ export function ChangGharSVG() {
         const U = 212;                       // upper-floor level
         const T = 166;                       // top of upper walls / eaves
         const wood = "#8a6a44", post = "#6a4a2a";
-        const railing = (a, b, y0, h, n, skip) => {
-          // Grills are covered with light-blue polycarbonate (left open at the entrance, if any)
+        const railing = (a, b, y0, h, n, skip, covered) => {
+          // Upper-floor grills are covered with light-blue polycarbonate
           const lerp = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
           const panel = (t0, t1) => {
             const p = lerp(t0), q = lerp(t1);
             return <polygon key={`pc${t0}`} points={pts([p[0], p[1] - h], [q[0], q[1] - h], q, p)} fill="rgba(160,210,235,0.5)"/>;
           };
-          const out = skip ? [panel(0, skip[0]), panel(skip[1], 1)] : [panel(0, 1)];
+          const out = !covered ? [] : skip ? [panel(0, skip[0]), panel(skip[1], 1)] : [panel(0, 1)];
           out.push(<line key="r" x1={a[0]} y1={a[1] - h} x2={b[0]} y2={b[1] - h} stroke={post} strokeWidth="1.5"/>);
           for (let i = 1; i < n; i++) {
             const t = i / n; if (skip && t > skip[0] && t < skip[1]) continue;
@@ -215,8 +215,8 @@ export function ChangGharSVG() {
             <rect x={uw[0]} y={T} width={uw[1] - uw[0]} height={U - T} fill="url(#cg-bamboo)"/>
             {[196, 235, 274].map(x => <rect key={x} x={x} y={T + 10} width="20" height="18" fill="#3f5f6a" opacity="0.75" rx="1"/>)}
             {/* Upper balcony railings: front and left side */}
-            {railing(at(ufl, 1), ufl, 0, 12, 6)}
-            {railing(ufl, ufr, 0, 12, 24)}
+            {railing(at(ufl, 1), ufl, 0, 12, 6, null, true)}
+            {railing(ufl, ufr, 0, 12, 24, null, true)}
             {[ufl, ufr, at(ufl, 1)].map(([x, y], i) => <rect key={i} x={x - 2} y={T} width="4" height={y - T} fill={post}/>)}
 
             {/* Hip roof: right and front faces, then the left face */}
@@ -229,6 +229,22 @@ export function ChangGharSVG() {
               const b = [rL[0] + (rR[0] - rL[0]) * t, rL[1]];
               return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>;
             })}
+            {/* Polycarbonate rain awning extending out below the roof edge, front and left */}
+            {(() => {
+              const pc = "rgba(160,210,235,0.5)", edge = "#7f9aa8";
+              const out = [-7, 11];                 // how far the awning reaches beyond the eaves
+              const fL = [eFL[0] + out[0], eFL[1] + out[1]], fR = [eFR[0] + 7, eFR[1] + out[1]];
+              const bL = [eBL[0] + out[0], eBL[1] + out[1] - 2];
+              return (
+                <g>
+                  <polygon points={pts(eBL, eFL, fL, bL)} fill={pc} stroke={edge} strokeWidth="0.8"/>
+                  <polygon points={pts(eFL, eFR, fR, fL)} fill={pc} stroke={edge} strokeWidth="0.8"/>
+                  {[0.2, 0.4, 0.6, 0.8].map(t => (
+                    <line key={t} x1={eFL[0] + (eFR[0] - eFL[0]) * t} y1={eFL[1]} x2={fL[0] + (fR[0] - fL[0]) * t} y2={fL[1]} stroke={edge} strokeWidth="0.5"/>
+                  ))}
+                </g>
+              );
+            })()}
 
           </g>
         );
