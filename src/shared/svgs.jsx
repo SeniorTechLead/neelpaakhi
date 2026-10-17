@@ -356,6 +356,7 @@ export function ChangGharSVG() {
         const U = 212;                       // upper-floor level
         const T = 166;                       // top of upper walls / eaves
         const wood = "#8a6a44", post = "#6a4a2a";
+        const grillWhite = "#f4f3ef";   // balcony grills are white
         const railing = (a, b, y0, h, n, skip, covered) => {
           // Upper-floor grills are covered with light-blue polycarbonate
           const lerp = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
@@ -364,11 +365,11 @@ export function ChangGharSVG() {
             return <polygon key={`pc${t0}`} points={pts([p[0], p[1] - h], [q[0], q[1] - h], q, p)} fill="rgba(160,210,235,0.5)"/>;
           };
           const out = !covered ? [] : skip ? [panel(0, skip[0]), panel(skip[1], 1)] : [panel(0, 1)];
-          out.push(<line key="r" x1={a[0]} y1={a[1] - h} x2={b[0]} y2={b[1] - h} stroke={post} strokeWidth="1.5"/>);
+          out.push(<line key="r" x1={a[0]} y1={a[1] - h} x2={b[0]} y2={b[1] - h} stroke={grillWhite} strokeWidth="1.5"/>);
           for (let i = 1; i < n; i++) {
             const t = i / n; if (skip && t > skip[0] && t < skip[1]) continue;
             const x = a[0] + (b[0] - a[0]) * t, y = a[1] + (b[1] - a[1]) * t;
-            out.push(<line key={i} x1={x} y1={y - h} x2={x} y2={y} stroke={post} strokeWidth="1"/>);
+            out.push(<line key={i} x1={x} y1={y - h} x2={x} y2={y} stroke={grillWhite} strokeWidth="1"/>);
           }
           return out;
         };
@@ -496,14 +497,14 @@ export function ChangGharSVG() {
               );
             })()}
             {/* Hip roof: right and front faces, then the left face */}
-            <polygon points={pts(eFR, eBR, rR)} fill="#8a6a36"/>
-            <polygon points={pts(eFL, eFR, rR, rL)} fill="#9a7a42"/>
-            <polygon points={pts(eBL, eFL, rL)} fill="#7a5a2e"/>
-            <path d={`M${pts(eBL, eFL, eFR)} M${pts(eFL, rL, rR, eFR)}`} fill="none" stroke={post} strokeWidth="1.5"/>
+            <polygon points={pts(eFR, eBR, rR)} fill="#e2e0d9"/>
+            <polygon points={pts(eFL, eFR, rR, rL)} fill="#f4f3ef"/>
+            <polygon points={pts(eBL, eFL, rL)} fill="#d3d1c9"/>
+            <path d={`M${pts(eBL, eFL, eFR)} M${pts(eFL, rL, rR, eFR)}`} fill="none" stroke="#a9a69e" strokeWidth="1.2"/>
             {[0.2, 0.4, 0.6, 0.8].map(t => {
               const a = [eFL[0] + (eFR[0] - eFL[0]) * t, eFL[1]];
               const b = [rL[0] + (rR[0] - rL[0]) * t, rL[1]];
-              return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>;
+              return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#c4c1b8" strokeWidth="0.6"/>;
             })}
 
           </g>
