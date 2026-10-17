@@ -91,9 +91,9 @@ export function ChangGharSVG() {
       {(() => {
         // P(t, z, dx): t = depth (0 = house front, + = further back), z = height above ground,
         // dx = offset east of the stair's west edge
-        const P = (t, z, dx = 0) => [344 + dx + D[0] * t, 286 + D[1] * t - z];
+        const P = (t, z, dx = 0) => [362 + dx + D[0] * t, 286 + D[1] * t - z];
         const n = 22, rise = 74, h = rise / n;            // ~6.5 in per step
-        const tF = -1.0, t1 = 0.45, t2 = 0.75, ds = (t1 - tF) / n, W = 18, toHouse = -10;
+        const tF = -1.0, t1 = 0.45, t2 = 0.75, ds = (t1 - tF) / n, W = 16, toHouse = -28;
         const wood = "#8a6a44", post = "#6a4a2a";
         const zAt = (t) => rise * (t - tF) / (t1 - tF);
         const out = [];
@@ -226,40 +226,32 @@ export function ChangGharSVG() {
           </g>
         );
       })()}
-      {/* Corner sit-out off the upper balcony, left of the stairs: iron frame, clear polycarbonate */}
+      {/* Corner sit-out: a small extension of the upper balcony toward the stairs,
+          iron frame with clear polycarbonate */}
       {(() => {
         const iron = "#3e3f46", glass = "rgba(200,228,240,0.35)";
-        const U = 212, x0 = 292, x1 = 334, tOut = -0.38;   // projects forward (south) from the balcony
+        const U = 212, x0 = 334, x1 = 350, ta = -0.02, tb = 0.32;   // east of the balcony corner, near the front
         const Q = (x, t, z = 0) => [x + D[0] * t, U + D[1] * t - z];
-        const H = 30;                                      // height to the polycarbonate roof
+        const H = 22;
         return (
           <g>
-            {/* Floor */}
-            <polygon points={pts(Q(x0, 0), Q(x1, 0), Q(x1, tOut), Q(x0, tOut))} fill="#5a5b62"/>
-            <polygon points={pts(Q(x0, tOut), Q(x1, tOut), Q(x1, tOut, -3), Q(x0, tOut, -3))} fill={iron}/>
-            {/* Clear side and front panels */}
-            <polygon points={pts(Q(x0, 0, H), Q(x0, tOut, H), Q(x0, tOut), Q(x0, 0))} fill={glass} stroke={iron} strokeWidth="0.6"/>
-            <polygon points={pts(Q(x0, tOut, H), Q(x1, tOut, H), Q(x1, tOut), Q(x0, tOut))} fill={glass} stroke={iron} strokeWidth="0.6"/>
-            {/* Iron railing */}
-            <polyline points={pts(Q(x0, 0, 11), Q(x0, tOut, 11), Q(x1, tOut, 11), Q(x1, 0, 11))} fill="none" stroke={iron} strokeWidth="1.4"/>
-            {Array.from({ length: 11 }, (_, i) => x0 + 4 * (i + 0.5)).map(x => (
-              <line key={x} x1={Q(x, tOut)[0]} y1={Q(x, tOut)[1]} x2={Q(x, tOut, 11)[0]} y2={Q(x, tOut, 11)[1]} stroke={iron} strokeWidth="0.8"/>
-            ))}
-            {/* Corner posts */}
-            {[[x0, tOut], [x1, tOut], [x0, 0], [x1, 0]].map(([x, t], i) => (
-              <line key={i} x1={Q(x, t)[0]} y1={Q(x, t)[1]} x2={Q(x, t, H)[0]} y2={Q(x, t, H)[1]} stroke={iron} strokeWidth="1.6"/>
-            ))}
-            {/* Polycarbonate roof, sloping gently forward */}
-            <polygon points={pts(Q(x0, 0, H + 3), Q(x1, 0, H + 3), Q(x1, tOut, H), Q(x0, tOut, H))} fill="rgba(210,235,245,0.55)" stroke={iron} strokeWidth="1"/>
+            <polygon points={pts(Q(x0, ta), Q(x1, ta), Q(x1, tb), Q(x0, tb))} fill="#5a5b62"/>
+            <polygon points={pts(Q(x0, ta), Q(x1, ta), Q(x1, ta, -3), Q(x0, ta, -3))} fill={iron}/>
+            <polygon points={pts(Q(x0, ta, H), Q(x1, ta, H), Q(x1, ta), Q(x0, ta))} fill={glass} stroke={iron} strokeWidth="0.6"/>
+            <polyline points={pts(Q(x0, ta, 10), Q(x1, ta, 10), Q(x1, tb, 10))} fill="none" stroke={iron} strokeWidth="1.3"/>
             {[0.25, 0.5, 0.75].map(u => {
               const x = x0 + (x1 - x0) * u;
-              return <line key={u} x1={Q(x, 0, H + 3)[0]} y1={Q(x, 0, H + 3)[1]} x2={Q(x, tOut, H)[0]} y2={Q(x, tOut, H)[1]} stroke={iron} strokeWidth="0.6"/>;
+              return <line key={u} x1={Q(x, ta)[0]} y1={Q(x, ta)[1]} x2={Q(x, ta, 10)[0]} y2={Q(x, ta, 10)[1]} stroke={iron} strokeWidth="0.8"/>;
             })}
+            {[[x1, ta], [x1, tb], [x0, ta]].map(([x, t], i) => (
+              <line key={i} x1={Q(x, t)[0]} y1={Q(x, t)[1]} x2={Q(x, t, H)[0]} y2={Q(x, t, H)[1]} stroke={iron} strokeWidth="1.4"/>
+            ))}
+            <polygon points={pts(Q(x0, ta, H), Q(x1, ta, H - 2), Q(x1, tb, H - 2), Q(x0, tb, H))} fill="rgba(210,235,245,0.6)" stroke={iron} strokeWidth="1"/>
           </g>
         );
       })()}
       {/* Road on the right to the foot of the staircase, parallel to the house */}
-      <polygon points={pts([360, 308], [378, 308], [ns(378, 308, 352), 352], [ns(360, 308, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([378, 308], [394, 308], [ns(394, 308, 352), 352], [ns(378, 308, 352), 352])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
       </g>
     </svg>
   );
