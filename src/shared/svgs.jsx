@@ -6,6 +6,29 @@ export function ChangGharSVG() {
   const ns = (x0, y0, y) => x0 + (y - y0) * K;
   const at = ([x, y], t) => [x + D[0] * t, y + D[1] * t];
   const pts = (...ps) => ps.map(([x, y]) => `${x},${y}`).join(" ");
+  // A small flowering plant: a clump of stems with leaves and blooms, standing at (bx, by)
+  const FLOWERS = ['#e86a8a', '#f2c14e', '#d94a4a', '#c86ad4', '#f5f0e8'];
+  const flowerPlant = (bx, by, k, sc, id = k) => {
+    const out = [];
+    [[-6, 12, -2], [-3, 16, -1], [0, 18, 0], [3, 15, 1.5], [6, 11, 2.5]].forEach(([dx, h, lean], i) => {
+      dx *= sc; h *= sc; lean *= sc;
+      const sx = bx + dx, tx = sx + lean, ty = by - h, lx = sx + lean * 0.5 + (i % 2 ? 1.8 : -1.8) * sc;
+      out.push(<line key={`st${id}-${i}`} x1={sx} y1={by} x2={tx} y2={ty} stroke="#3f6b3a" strokeWidth={Math.max(0.6, 0.9 * sc)}/>);
+      out.push(<ellipse key={`lf${id}-${i}`} cx={lx} cy={by - h * 0.5} rx={2.2 * sc} ry={0.9 * sc} fill="#4a8a44" transform={`rotate(${i % 2 ? 30 : -30} ${lx} ${by - h * 0.5})`}/>);
+      [0, 72, 144, 216, 288].forEach((deg) => {
+        const r = (deg * Math.PI) / 180;
+        out.push(<circle key={`pt${id}-${i}-${deg}`} cx={tx + Math.cos(r) * 1.5 * sc} cy={ty + Math.sin(r) * 1.5 * sc} r={1.2 * sc} fill={FLOWERS[(i + k * 2) % FLOWERS.length]}/>);
+      });
+      out.push(<circle key={`ce${id}-${i}`} cx={tx} cy={ty} r={0.8 * sc} fill="#f2c14e"/>);
+    });
+    out.push(<ellipse key={`soil${id}`} cx={bx} cy={by + 0.5} rx={7 * sc} ry={1.8 * sc} fill="#6a4a2a"/>);
+    return <g key={`plant${id}`}>{out}</g>;
+  };
+  // Plants along the edges of a flat area, drawn back to front
+  const plantEdges = (points, sc) => points
+    .map(([x, y], i) => ({ x, y, i }))
+    .sort((p, q) => p.y - q.y)
+    .map(({ x, y, i }) => flowerPlant(x, y, i, sc));
   return (
     <svg viewBox="-90 -20 550 412.5" style={{ width: "100%", height: "100%", display: "block" }} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two-storey chang ghar in a walled compound, with a lane, gate, fish pond, balconies on both floors, and an outside staircase">
       <defs>
@@ -57,6 +80,47 @@ export function ChangGharSVG() {
           </g>
         );
       })}
+      {/* Tall white iron overhead water tank, between the wall and the pond */}
+      {(() => {
+        const white = "#f4f3ef", shade = "#d9d7d0", edge = "#a9a69e";
+        const cx = -48, base = 205, top = 96;                 // stand footing and top of the legs
+        const legs = [[-14, 0], [14, 0], [-10, -6], [10, -6]];  // front pair, then the rear pair
+        const xs = (dx) => cx + dx;
+        return (
+          <g>
+            {/* Rear legs, then front legs */}
+            {[legs[2], legs[3], legs[0], legs[1]].map(([dx, dy], i) => (
+              <line key={`lg${i}`} x1={xs(dx)} y1={base + dy} x2={xs(dx * 0.7)} y2={top + dy * 0.5} stroke={i < 2 ? shade : white} strokeWidth={i < 2 ? 2 : 2.6}/>
+            ))}
+            {/* Cross-bracing on the front face */}
+            {[[base, base - 36], [base - 36, base - 72], [base - 72, top]].map(([y0, y1], i) => {
+              const w0 = 14 - (base - y0) * 0.042, w1 = 14 - (base - y1) * 0.042;
+              return (
+                <g key={`br${i}`}>
+                  <line x1={xs(-w0)} y1={y0} x2={xs(w1)} y2={y1} stroke={white} strokeWidth="1.1"/>
+                  <line x1={xs(w0)} y1={y0} x2={xs(-w1)} y2={y1} stroke={white} strokeWidth="1.1"/>
+                  <line x1={xs(-w1)} y1={y1} x2={xs(w1)} y2={y1} stroke={white} strokeWidth="1.4"/>
+                </g>
+              );
+            })}
+            {/* Ladder up the right leg */}
+            <line x1={xs(17)} y1={base} x2={xs(13)} y2={top - 4} stroke={edge} strokeWidth="0.8"/>
+            {Array.from({ length: 12 }, (_, i) => base - 8 - i * 9).map(y => (
+              <line key={y} x1={xs(14 - (base - y) * 0.042)} y1={y} x2={xs(17 - (base - y) * 0.037)} y2={y} stroke={edge} strokeWidth="0.6"/>
+            ))}
+            {/* Tank: cylinder with a domed lid */}
+            <rect x={xs(-19)} y={top - 40} width="38" height="40" fill={white} stroke={edge} strokeWidth="0.8"/>
+            <rect x={xs(9)} y={top - 40} width="10" height="40" fill={shade}/>
+            <ellipse cx={cx} cy={top} rx="19" ry="4" fill={shade} stroke={edge} strokeWidth="0.8"/>
+            {[top - 28, top - 14].map(y => <line key={y} x1={xs(-19)} y1={y} x2={xs(19)} y2={y} stroke={edge} strokeWidth="0.6"/>)}
+            <ellipse cx={cx} cy={top - 40} rx="19" ry="4" fill={white} stroke={edge} strokeWidth="0.8"/>
+            <path d={`M${xs(-19)},${top - 40} Q${cx},${top - 54} ${xs(19)},${top - 40}`} fill={white} stroke={edge} strokeWidth="0.8"/>
+            <rect x={xs(-3)} y={top - 52} width="6" height="4" fill={shade} stroke={edge} strokeWidth="0.6"/>
+            {/* Footings */}
+            {[legs[0], legs[1]].map(([dx], i) => <rect key={`ft${i}`} x={xs(dx) - 3} y={base - 1} width="6" height="3" fill={shade}/>)}
+          </g>
+        );
+      })()}
       {/* Fish pond: long side parallel to the main road, on its left */}
       {(() => {
         const r = (y) => ns(-30, 200, y), l = (y) => r(y) - 40;
@@ -80,13 +144,12 @@ export function ChangGharSVG() {
       {(() => {
         const r = (y) => ns(22, 200, y), l = (y) => ns(-70, 200, y), y0 = 304, y1 = 360;
         const bl = [l(y0), y0], br = [r(y0), y0], fr = [r(y1), y1], fl = [l(y1), y1];
-        const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
-        const dots = [...edge(bl, br, 16), ...edge(br, fr, 10), ...edge(fr, fl, 16), ...edge(fl, bl, 10)];
+        const dots = [...edge(bl, br, 8), ...edge(br, fr, 5).slice(1), ...edge(fr, fl, 8).slice(1), ...edge(fl, bl, 5).slice(1, -1)];
         return (
           <g>
             <polygon points={pts(bl, br, fr, fl)} fill="#c8c4bc" stroke="#a8a49c" strokeWidth="1"/>
-            {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r="2" fill={colors[(i + 1) % colors.length]}/>)}
+            {plantEdges(dots, 0.5)}
           </g>
         );
       })()}
@@ -94,14 +157,13 @@ export function ChangGharSVG() {
       <g transform="translate(0, -58)">
       {/* Concrete forecourt in front of the house, edged with flowers */}
       {(() => {
-        const bl = [150, 293], br = [350, 293], fr = [ns(350, 293, 380), 380], fl = [ns(150, 293, 380), 380];
-        const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#f5f0e8'];
+        const bl = [ns(150, 293, 303), 303], br = [ns(350, 293, 303), 303], fr = [ns(350, 293, 380), 380], fl = [ns(150, 293, 380), 380];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
-        const dots = [...edge(bl, br, 34), ...edge(br, fr, 9), ...edge(fr, fl, 34), ...edge(fl, bl, 9)];
+        const dots = [...edge(bl, br, 17), ...edge(br, fr, 5).slice(1), ...edge(fr, fl, 17).slice(1), ...edge(fl, bl, 5).slice(1, -1)];
         return (
           <g>
             <polygon points={pts(bl, br, fr, fl)} fill="#c8c4bc" stroke="#a8a49c" strokeWidth="1"/>
-            {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r="2.2" fill={colors[i % colors.length]}/>)}
+            {plantEdges(dots, 0.55)}
           </g>
         );
       })()}
@@ -207,22 +269,7 @@ export function ChangGharSVG() {
               }
               out.push(<polygon key="r0" points={band(outline(o(0)), outline(o(0), R))} fill="#7a5a34"/>);
               // Flowering plants all along both sides of the path to the entrance
-              const colors = ['#e86a8a', '#f2c14e', '#d94a4a', '#c86ad4', '#f5f0e8'];
-              const plant = (bx, by, k, sc) => {
-                [[-6, 12, -2], [-3, 16, -1], [0, 18, 0], [3, 15, 1.5], [6, 11, 2.5]].forEach(([dx, h, lean], i) => {
-                  dx *= sc; h *= sc; lean *= sc;
-                  const sx = bx + dx, tx = sx + lean, ty = by - h;
-                  const c = colors[(i + k * 2) % colors.length];
-                  out.push(<line key={`st${k}-${i}`} x1={sx} y1={by} x2={tx} y2={ty} stroke="#3f6b3a" strokeWidth="0.9"/>);
-                  out.push(<ellipse key={`lf${k}-${i}`} cx={sx + lean * 0.5 + (i % 2 ? 1.8 : -1.8)} cy={by - h * 0.5} rx={2.2 * sc} ry={0.9 * sc} fill="#4a8a44" transform={`rotate(${i % 2 ? 30 : -30} ${sx + lean * 0.5 + (i % 2 ? 1.8 : -1.8)} ${by - h * 0.5})`}/>);
-                  [0, 72, 144, 216, 288].forEach((deg) => {
-                    const r = (deg * Math.PI) / 180;
-                    out.push(<circle key={`pt${k}-${i}-${deg}`} cx={tx + Math.cos(r) * 1.5 * sc} cy={ty + Math.sin(r) * 1.5 * sc} r={1.2 * sc} fill={c}/>);
-                  });
-                  out.push(<circle key={`ce${k}-${i}`} cx={tx} cy={ty} r={0.8 * sc} fill="#f2c14e"/>);
-                });
-                out.push(<ellipse key={`soil${k}`} cx={bx} cy={by + 0.5} rx={7 * sc} ry={1.8 * sc} fill="#6a4a2a"/>);
-              };
+              const plant = (bx, by, k, sc) => out.push(flowerPlant(bx, by, k, sc, `e${k}`));
               const lerp = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
               const upperA = [ns(69, 258, q2[1]) + 4, q2[1]], upperB = q2;    // far side of the path
               const lowerA = [ns(69, 258, q1[1]) + 4, q1[1]], lowerB = q1;    // near side
