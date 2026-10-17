@@ -61,8 +61,6 @@ export function ChangGharSVG() {
       {[[-80,150,22],[-30,148,20],[20,150,22],[150,146,24],[250,150,20],[370,148,24],[430,150,20]].map(([cx,cy,r],i) => (
         <ellipse key={`b${i}`} cx={cx} cy={cy} rx={r} ry={r * 0.8} fill="#6f9a66" opacity="0.7"/>
       ))}
-      {/* Paved road behind the north wall, leading to the gate and joining the side roads */}
-      <rect x="-90" y="146" width="550" height="54" fill="url(#cg-pavers)"/>
       {/* Compound wall to the north */}
       <rect x="-84" y="158" width="452" height="42" fill="#ece6da"/>
       <rect x="-84" y="155" width="452" height="4" fill="#cfc6b6"/>
