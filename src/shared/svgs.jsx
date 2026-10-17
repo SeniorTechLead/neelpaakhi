@@ -505,8 +505,11 @@ export function ChangGharSVG() {
                 return (
                   <g key={k}>
                     <line x1={x} y1={y} x2={x} y2={top} stroke="#6a6c72" strokeWidth="2.2"/>
-                    <polygon points={pts(R(0, -4), R(11, -5), R(11, 5), R(0, 4))} fill="#3d3f45"/>
-                    <polygon points={pts(R(11, -4.5), R(12.5, -4.5), R(12.5, 4.5), R(11, 4.5))} fill="#fff6c8"/>
+                    {/* Arm reaching out over the court, lamp head tilted down along it, and a soft beam */}
+                    <line x1={x} y1={top} x2={R(9, 0)[0]} y2={R(9, 0)[1]} stroke="#6a6c72" strokeWidth="1.6"/>
+                    <polygon points={pts(R(14, -3.5), R(40, -16), R(40, 16), R(14, 3.5))} fill="rgba(255,246,200,0.22)"/>
+                    <polygon points={pts(R(6, -3), R(14, -5), R(14, 5), R(6, 3))} fill="#3d3f45"/>
+                    <polygon points={pts(R(13.2, -4.6), R(14.6, -4.6), R(14.6, 4.6), R(13.2, 4.6))} fill="#fff6c8"/>
                   </g>
                 );
               };
