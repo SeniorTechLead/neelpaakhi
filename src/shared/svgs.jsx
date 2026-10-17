@@ -28,10 +28,16 @@ export function ChangGharSVG() {
   const grill = (p, q, key, step = 4.5, h = 13, skip) => {
     const iron = "#2f3035", len = Math.hypot(q[0] - p[0], q[1] - p[1]), n = Math.max(2, Math.round(len / step));
     const at2 = (t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
-    const out = [
-      <line key={`${key}b`} x1={p[0]} y1={p[1] - 1.5} x2={q[0]} y2={q[1] - 1.5} stroke={iron} strokeWidth="1"/>,
-      <line key={`${key}t`} x1={p[0]} y1={p[1] - h + 2} x2={q[0]} y2={q[1] - h + 2} stroke={iron} strokeWidth="0.9"/>,
-    ];
+    // Rails run along the wall top, broken where the gate is
+    const tAt = (x) => (x - p[0]) / (q[0] - p[0]);
+    const spans = skip ? [[0, tAt(skip[0])], [tAt(skip[1]), 1]] : [[0, 1]];
+    const out = [];
+    spans.forEach(([t0, t1], j) => {
+      if (t1 <= t0) return;
+      const a = at2(Math.max(0, t0)), b = at2(Math.min(1, t1));
+      out.push(<line key={`${key}b${j}`} x1={a[0]} y1={a[1] - 1.5} x2={b[0]} y2={b[1] - 1.5} stroke={iron} strokeWidth="1"/>);
+      out.push(<line key={`${key}t${j}`} x1={a[0]} y1={a[1] - h + 2} x2={b[0]} y2={b[1] - h + 2} stroke={iron} strokeWidth="0.9"/>);
+    });
     for (let i = 0; i <= n; i++) {
       const [x, y] = at2(i / n);
       if (skip && x > skip[0] && x < skip[1]) continue;
@@ -158,10 +164,11 @@ export function ChangGharSVG() {
           <g>
             <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
             <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
-            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6, 13, [x(372), x(442)])}
+            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6, 13, x(0) < 0 ? [x(414), x(484)] : [x(372), x(442)])}
             {/* Wide gate where the 14 ft internal road meets this wall */}
             {(() => {
-              const g0 = 376, g1 = 438, gh = H - 4;
+              // The road meets the west wall along its top edge in this view, so that gate sits 42 px further along
+              const g0 = x(0) < 0 ? 418 : 376, g1 = g0 + 62, gh = H - 4;
               const slats = [0.2, 0.4, 0.6, 0.8];
               return (
                 <g>
@@ -299,10 +306,11 @@ export function ChangGharSVG() {
           <g>
             <polygon points={pts([x(y0), y0 - H], [x(y1), y1 - H], [x(y1), y1], [x(y0), y0])} fill="#e3dccd"/>
             <polygon points={pts([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], [x(y1), y1 - H], [x(y0), y0 - H])} fill="#cfc6b6"/>
-            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6, 13, [x(372), x(442)])}
+            {grill([x(y0), y0 - H - 3], [x(y1), y1 - H - 3], `g${x(0)}`, 3.6, 13, x(0) < 0 ? [x(414), x(484)] : [x(372), x(442)])}
             {/* Wide gate where the 14 ft internal road meets this wall */}
             {(() => {
-              const g0 = 376, g1 = 438, gh = H - 4;
+              // The road meets the west wall along its top edge in this view, so that gate sits 42 px further along
+              const g0 = x(0) < 0 ? 418 : 376, g1 = g0 + 62, gh = H - 4;
               const slats = [0.2, 0.4, 0.6, 0.8];
               return (
                 <g>
