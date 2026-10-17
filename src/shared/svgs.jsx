@@ -223,23 +223,13 @@ export function ChangGharSVG() {
             {railing(ufl, ufr, 0, 12, 24, null, true)}
             {[ufl, ufr, at(ufl, 1)].map(([x, y], i) => <rect key={i} x={x - 2} y={T} width="4" height={y - T} fill={post}/>)}
 
-            {/* Hip roof: right and front faces, then the left face */}
-            <polygon points={pts(eFR, eBR, rR)} fill="#8a6a36"/>
-            <polygon points={pts(eFL, eFR, rR, rL)} fill="#9a7a42"/>
-            <polygon points={pts(eBL, eFL, rL)} fill="#7a5a2e"/>
-            <path d={`M${pts(eBL, eFL, eFR)} M${pts(eFL, rL, rR, eFR)}`} fill="none" stroke={post} strokeWidth="1.5"/>
-            {[0.2, 0.4, 0.6, 0.8].map(t => {
-              const a = [eFL[0] + (eFR[0] - eFL[0]) * t, eFL[1]];
-              const b = [rL[0] + (rR[0] - rL[0]) * t, rL[1]];
-              return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>;
-            })}
             {/* Polycarbonate rain awning: fixed to the house just below the roof, sloping down and out
                 over the upper balcony on an iron frame */}
             {(() => {
               const pc = "url(#cg-awning)", iron = "#3e3f46";
               const ya = T + 8;                                     // fixed a little below the eaves
               const iFL = [deck[0], ya], iFR = [deck[1], ya], iBL = at(iFL, 1);
-              const south = [-D[0] * 0.22, -D[1] * 0.22], west = [-9, 0], east = [7, 0], drop = 8;
+              const south = [-D[0] * 0.22, -D[1] * 0.22], west = [-15, 0], east = [7, 0], drop = 8;
               const oFL = [iFL[0] + south[0] + west[0], iFL[1] + south[1] + drop];
               const oFR = [iFR[0] + south[0] + east[0], iFR[1] + south[1] + drop];
               const oBL = [iBL[0] + west[0], iBL[1] + drop];
@@ -248,7 +238,7 @@ export function ChangGharSVG() {
               const eaveY = (x) => x >= eFL[0] ? eFL[1] : eBL[1] + (x - eBL[0]) * (eFL[1] - eBL[1]) / (eFL[0] - eBL[0]);
               const hangers = [
                 ...[0, 0.2, 0.4, 0.6, 0.8, 1].map(t => mid(oFL, oFR, t)),
-                ...[0.5, 1].map(t => mid(oFL, oBL, t)),
+                mid(oFL, oBL, 0.5),
               ];
               return (
                 <g>
@@ -272,6 +262,16 @@ export function ChangGharSVG() {
                 </g>
               );
             })()}
+            {/* Hip roof: right and front faces, then the left face */}
+            <polygon points={pts(eFR, eBR, rR)} fill="#8a6a36"/>
+            <polygon points={pts(eFL, eFR, rR, rL)} fill="#9a7a42"/>
+            <polygon points={pts(eBL, eFL, rL)} fill="#7a5a2e"/>
+            <path d={`M${pts(eBL, eFL, eFR)} M${pts(eFL, rL, rR, eFR)}`} fill="none" stroke={post} strokeWidth="1.5"/>
+            {[0.2, 0.4, 0.6, 0.8].map(t => {
+              const a = [eFL[0] + (eFR[0] - eFL[0]) * t, eFL[1]];
+              const b = [rL[0] + (rR[0] - rL[0]) * t, rL[1]];
+              return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>;
+            })}
 
           </g>
         );
