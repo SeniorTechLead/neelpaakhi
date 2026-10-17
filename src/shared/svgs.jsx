@@ -99,8 +99,10 @@ export function ChangGharSVG() {
       {(() => {
         const yN = 376, yS = 438;                          // north and south edges of the road
         const W = (y) => ns(-84, 200, y + 42), E = (y) => ns(368, 200, y);
-        const gaps = [[ns(47, 200, yN) - 2, ns(69, 200, yN) + 2], [ns(378, 308, yN + 58) - 2, ns(394, 308, yN + 58) + 2]];
-        const inGap = (x) => gaps.some(([g0, g1]) => x > g0 - 5 && x < g1 + 5);
+        // Roads that cross the north hedges: the main road and the road from the stairs
+        const crossings = (y) => [[ns(47, 200, y), ns(69, 200, y)], [ns(378, 308, y + 58), ns(394, 308, y + 58)]];
+        const inGap = (x, y) => crossings(y).some(([g0, g1]) => x > g0 - 7 && x < g1 + 7);
+        const G = 22;                                      // 5 ft of carpet grass between paired hedges
         const bush = (x, yb, i, key) => i % 2 === 0 ? (
           <g key={key}>
             {/* Photinia: green with red new growth on top */}
@@ -120,7 +122,7 @@ export function ChangGharSVG() {
         const hedge = (yb, key) => {
           const out = [];
           for (let x = W(yb) + 5, i = 0; x < E(yb) - 4; x += 10, i++) {
-            if (key === "n" && inGap(x)) continue;
+            if (key.startsWith("n") && inGap(x, yb)) continue;
             out.push(bush(x, yb, i, `${key}${i}`));
           }
           return out;
@@ -130,8 +132,18 @@ export function ChangGharSVG() {
             <polygon points={pts([W(yN), yN], [E(yN), yN], [E(yS), yS], [W(yS), yS])} fill="#cfc8bb"/>
             <line x1={W(yN)} y1={yN} x2={E(yN)} y2={yN} stroke="#a8a193" strokeWidth="1"/>
             <line x1={W(yS)} y1={yS} x2={E(yS)} y2={yS} stroke="#a8a193" strokeWidth="1"/>
+            {/* Carpet grass between each pair of hedges, with the crossing roads drawn over it */}
+            {[[yN - G, yN - 1], [yS + 9, yS + 9 + G]].map(([y0, y1], i) => (
+              <polygon key={`cg${i}`} points={pts([W(y0), y0], [E(y0), y0], [E(y1), y1], [W(y1), y1])} fill="#8fca72"/>
+            ))}
+            {crossings(0).map((_, i) => {
+              const c0 = crossings(yN - G)[i], c1 = crossings(yN)[i];
+              return <polygon key={`cr${i}`} points={pts([c0[0], yN - G], [c0[1], yN - G], [c1[1], yN], [c1[0], yN])} fill="#d9c9a8"/>;
+            })}
+            {hedge(yN - G, "n2")}
             {hedge(yN - 1, "n")}
             {hedge(yS + 9, "s")}
+            {hedge(yS + 9 + G, "s2")}
           </g>
         );
       })()}
@@ -287,7 +299,7 @@ export function ChangGharSVG() {
       })()}
       {/* Smaller courtyard left of the main road, continuing on from where the pond ends */}
       {(() => {
-        const r = (y) => ns(36, 200, y), l = (y) => ns(-44, 200, y), y0 = 304, y1 = 360;
+        const r = (y) => ns(36, 200, y), l = (y) => ns(-44, 200, y), y0 = 304, y1 = 342;
         const bl = [l(y0), y0], br = [r(y0), y0], fr = [r(y1), y1], fl = [l(y1), y1];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
         const dots = [...edge(bl, br, 8), ...edge(br, fr, 5).slice(1), ...edge(fr, fl, 8).slice(1), ...edge(fl, bl, 5).slice(1, -1)];
