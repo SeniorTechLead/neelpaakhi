@@ -103,6 +103,9 @@ export function ChangGharSVG() {
         const crossings = (y) => [[ns(47, 200, y), ns(69, 200, y)], [ns(378, 308, y + 58), ns(394, 308, y + 58)]];
         const inGap = (x, y) => crossings(y).some(([g0, g1]) => x > g0 - 7 && x < g1 + 7);
         const G = 22;                                      // 5 ft of carpet grass between paired hedges
+        // South of the road, a 5 ft path runs along each side wall, just inside the palms (about 3 ft from the wall)
+        const sidePaths = (y) => [[W(y) + 20, W(y) + 42], [E(y) - 42, E(y) - 20]];
+        const onSidePath = (x, y) => sidePaths(y).some(([p0, p1]) => x > p0 - 6 && x < p1 + 6);
         const bush = (x, yb, i, key) => i % 2 === 0 ? (
           <g key={key}>
             {/* Photinia: green with red new growth on top */}
@@ -123,6 +126,7 @@ export function ChangGharSVG() {
           const out = [];
           for (let x = W(yb) + 5, i = 0; x < E(yb) - 4; x += 10, i++) {
             if (key.startsWith("n") && inGap(x, yb)) continue;
+            if (key.startsWith("s") && onSidePath(x, yb)) continue;
             out.push(bush(x, yb, i, `${key}${i}`));
           }
           return out;
@@ -139,6 +143,11 @@ export function ChangGharSVG() {
             {crossings(0).map((_, i) => {
               const c0 = crossings(yN - G)[i], c1 = crossings(yN)[i];
               return <polygon key={`cr${i}`} points={pts([c0[0], yN - G], [c0[1], yN - G], [c1[1], yN], [c1[0], yN])} fill="#d9c9a8"/>;
+            })}
+            {/* 5 ft side paths south of the road, through the south hedges */}
+            {[0, 1].map(i => {
+              const y0 = yS, y1 = 620, a0 = sidePaths(y0)[i], a1 = sidePaths(y1)[i];
+              return <polygon key={`sp${i}`} points={pts([a0[0], y0], [a0[1], y0], [a1[1], y1], [a1[0], y1])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>;
             })}
             {hedge(yN - G, "n2")}
             {hedge(yN - 1, "n")}
