@@ -229,19 +229,34 @@ export function ChangGharSVG() {
               const b = [rL[0] + (rR[0] - rL[0]) * t, rL[1]];
               return <line key={t} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#7a5a2a" strokeWidth="0.6" opacity="0.6"/>;
             })}
-            {/* Polycarbonate rain awning extending out below the roof edge, front and left */}
+            {/* Polycarbonate rain awning on an iron frame, set below the roof around the upper balcony */}
             {(() => {
-              const pc = "rgba(160,210,235,0.5)", edge = "#7f9aa8";
-              const out = [-7, 11];                 // how far the awning reaches beyond the eaves
-              const fL = [eFL[0] + out[0], eFL[1] + out[1]], fR = [eFR[0] + 7, eFR[1] + out[1]];
-              const bL = [eBL[0] + out[0], eBL[1] + out[1] - 2];
+              const pc = "rgba(160,210,235,0.5)", iron = "#3e3f46";
+              const ya = T + 14;                                    // where the frame meets the posts, below the eaves
+              const aFL = [deck[0], ya], aFR = [deck[1], ya], aBL = at(aFL, 1);
+              const sOut = [-D[0] * 0.3, -D[1] * 0.3];              // reaches forward (south) ...
+              const wOut = [-9, 0];                                 // ... and out to the west
+              const drop = 6;
+              const oFL = [aFL[0] + sOut[0] + wOut[0], aFL[1] + sOut[1] + drop];
+              const oFR = [aFR[0] + sOut[0], aFR[1] + sOut[1] + drop];
+              const oBL = [aBL[0] + wOut[0], aBL[1] + drop];
+              const strut = (p, q, k) => <line key={k} x1={p[0]} y1={p[1] + 12} x2={q[0]} y2={q[1]} stroke={iron} strokeWidth="1"/>;
+              const mid = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
               return (
                 <g>
-                  <polygon points={pts(eBL, eFL, fL, bL)} fill={pc} stroke={edge} strokeWidth="0.8"/>
-                  <polygon points={pts(eFL, eFR, fR, fL)} fill={pc} stroke={edge} strokeWidth="0.8"/>
-                  {[0.2, 0.4, 0.6, 0.8].map(t => (
-                    <line key={t} x1={eFL[0] + (eFR[0] - eFL[0]) * t} y1={eFL[1]} x2={fL[0] + (fR[0] - fL[0]) * t} y2={fL[1]} stroke={edge} strokeWidth="0.5"/>
-                  ))}
+                  <polygon points={pts(aBL, aFL, oFL, oBL)} fill={pc}/>
+                  <polygon points={pts(aFL, aFR, oFR, oFL)} fill={pc}/>
+                  {/* Iron frame: inner rail on the posts, outer rail, rafters and brackets */}
+                  <polyline points={pts(aBL, aFL, aFR)} fill="none" stroke={iron} strokeWidth="1.4"/>
+                  <polyline points={pts(oBL, oFL, oFR)} fill="none" stroke={iron} strokeWidth="1.4"/>
+                  {[0, 0.25, 0.5, 0.75, 1].map(t => {
+                    const p = mid(aFL, aFR, t), q = mid(oFL, oFR, t);
+                    return <g key={`f${t}`}><line x1={p[0]} y1={p[1]} x2={q[0]} y2={q[1]} stroke={iron} strokeWidth="1"/>{strut(p, q, `s${t}`)}</g>;
+                  })}
+                  {[0.5, 1].map(t => {
+                    const p = mid(aFL, aBL, t), q = mid(oFL, oBL, t);
+                    return <g key={`l${t}`}><line x1={p[0]} y1={p[1]} x2={q[0]} y2={q[1]} stroke={iron} strokeWidth="1"/>{strut(p, q, `ls${t}`)}</g>;
+                  })}
                 </g>
               );
             })()}
