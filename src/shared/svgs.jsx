@@ -76,9 +76,9 @@ export function ChangGharSVG() {
           <path d="M0,0 H8 M0,2.5 H8 M2,0 V2.5 M6,2.5 V5" stroke="#aaa395" strokeWidth="0.45"/>
         </pattern>
         <pattern id="cg-mesh" width="3" height="3" patternUnits="userSpaceOnUse">
-          {/* Fine green nylon netting: soft diamond mesh, mostly see-through */}
-          <rect width="3" height="3" fill="rgba(40,130,60,0.05)"/>
-          <path d="M0,0 L3,3 M3,0 L0,3" stroke="rgba(30,120,55,0.5)" strokeWidth="0.3"/>
+          {/* Fine light nylon netting: pale diamond mesh, mostly see-through */}
+          <rect width="3" height="3" fill="rgba(225,235,242,0.10)"/>
+          <path d="M0,0 L3,3 M3,0 L0,3" stroke="rgba(235,242,248,0.6)" strokeWidth="0.3"/>
         </pattern>
         <linearGradient id="cg-water" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#4a8a9a"/>
@@ -516,7 +516,12 @@ export function ChangGharSVG() {
                 </g>
               );
               const poles = (p, q, n, k) => Array.from({ length: n + 1 }, (_, j) => lerp(p, q, j / n)).map((c, j) => (
-                <line key={`${k}${j}`} x1={c[0]} y1={c[1]} x2={c[0]} y2={c[1] - Hn} stroke={pole} strokeWidth="1.3"/>
+                <g key={`${k}${j}`}>
+                  {/* Poles striped in black and white bands, with a hook at the top */}
+                  <line x1={c[0]} y1={c[1]} x2={c[0]} y2={c[1] - Hn} stroke="#f4f3ef" strokeWidth="1.8"/>
+                  <line x1={c[0]} y1={c[1]} x2={c[0]} y2={c[1] - Hn} stroke="#26272b" strokeWidth="1.8" strokeDasharray="4 4"/>
+                  <path d={`M${c[0]},${c[1] - Hn} q2,-2 0,-4`} fill="none" stroke="#26272b" strokeWidth="0.8"/>
+                </g>
               ));
               const inset = (t, u) => lerp(lerp(NW, NE, t), lerp(SW, SE, t), u);
               // 20 ft (about 88 px) floodlight on each corner, lamp angled toward the court
