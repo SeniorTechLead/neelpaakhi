@@ -202,7 +202,7 @@ export function ChangGharSVG() {
       {/* Tall white iron tower with two stacked blue tanks (unfiltered and filtered), between the wall and the pond */}
       {(() => {
         const white = "#f4f3ef", shade = "#d9d7d0", edge = "#a9a69e";
-        const cx = -26, base = 205, top = 118;                 // stand footing and top of the legs
+        const cx = 6, base = 205, top = 118;                 // stand footing and top of the legs
         const legs = [[-14, 0], [14, 0], [-10, -6], [10, -6]];  // front pair, then the rear pair
         const xs = (dx) => cx + dx;
         return (
@@ -266,7 +266,7 @@ export function ChangGharSVG() {
       {/* Fish pond: long side parallel to the main road, on its left, inside a raised wall
           about 3 ft high and 1 ft thick (the 5 ft lane is 22 px, so 1 ft is about 4.4 px) */}
       {(() => {
-        const r = (y) => ns(-4, 200, y), l = (y) => r(y) - 40;
+        const r = (y) => ns(26, 200, y), l = (y) => r(y) - 40;
         const H = 13, T = 4.4, up = ([x, y], h) => [x, y - h];
         // Outer corners at ground level (back-left, back-right, front-right, front-left)
         const oBL = [l(208) - T, 208], oBR = [r(208) + T, 208], oFR = [r(296) + T, 296], oFL = [l(296) - T, 296];
@@ -299,7 +299,7 @@ export function ChangGharSVG() {
       })()}
       {/* Smaller courtyard left of the main road, continuing on from where the pond ends */}
       {(() => {
-        const r = (y) => ns(36, 200, y), l = (y) => ns(-44, 200, y), y0 = 304, y1 = 342;
+        const r = (y) => ns(42, 200, y), l = (y) => ns(-20, 200, y), y0 = 304, y1 = 342;
         const bl = [l(y0), y0], br = [r(y0), y0], fr = [r(y1), y1], fl = [l(y1), y1];
         const edge = (p, q, n) => Array.from({ length: n + 1 }, (_, i) => [p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n]);
         const dots = [...edge(bl, br, 8), ...edge(br, fr, 5).slice(1), ...edge(fr, fl, 8).slice(1), ...edge(fl, bl, 5).slice(1, -1)];
@@ -340,6 +340,34 @@ export function ChangGharSVG() {
             ))}
           </g>
         );
+      })()}
+      {/* 10 ft foxtail palms along the inside of the west and east walls, about 3 ft from each wall
+          (1 ft is about 4.4 px). On the west, the ground meets the wall along the top of its face. */}
+      {(() => {
+        const palm = (x, y, key) => {
+          const h = 44, trunkTop = y - h + 10;
+          const fronds = [-70, -40, -15, 10, 35, 60, 85, 115, 140, 170, 200, 230];
+          return (
+            <g key={key}>
+              <path d={`M${x - 1.6},${y} L${x - 1},${trunkTop} L${x + 1},${trunkTop} L${x + 1.6},${y} Z`} fill="#9b9182"/>
+              {[0.2, 0.4, 0.6, 0.8].map(t => <line key={t} x1={x - 1.5} y1={y - (y - trunkTop) * t} x2={x + 1.5} y2={y - (y - trunkTop) * t} stroke="#7e7466" strokeWidth="0.5"/>)}
+              <rect x={x - 1.4} y={trunkTop - 3} width="2.8" height="4" fill="#6f9a52"/>
+              {fronds.map((deg, i) => {
+                const r = (deg * Math.PI) / 180, len = 11 + (i % 3);
+                const ex = x + Math.cos(r) * len, ey = trunkTop - 3 + Math.sin(r) * len * 0.6 + 3;
+                const mx = x + Math.cos(r) * len * 0.5, my = trunkTop - 3 - 5 + Math.sin(r) * len * 0.3;
+                return <path key={i} d={`M${x},${trunkTop - 3} Q${mx},${my} ${ex},${ey}`} fill="none" stroke={i % 2 ? "#3f7a3a" : "#4f8f44"} strokeWidth="3.2" strokeLinecap="round"/>;
+              })}
+            </g>
+          );
+        };
+        const westX = (y) => ns(-84, 200, y + 42) + 13;
+        const eastX = (y) => ns(368, 200, y) - 10;
+        const trees = [
+          ...[222, 262, 302, 342].map(y => [westX(y), y]),
+          ...[272, 312, 352].map(y => [eastX(y), y]),
+        ].sort((p, q) => p[1] - q[1]);
+        return <g>{trees.map(([x, y], i) => palm(x, y, `palm${i}`))}</g>;
       })()}
       {/* The house and everything attached to it sit back near the north wall (under 5 ft away) */}
       <g transform="translate(0, -58)">
