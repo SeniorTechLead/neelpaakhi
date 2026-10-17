@@ -113,7 +113,15 @@ export function ChangGharSVG() {
       {/* Garden ground */}
       <rect x="-290" y="198" width="1180" height="720" fill="#7aaa6e"/>
       {/* Main road from the gate, parallel to the house's side walls */}
-      <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 380), 380], [ns(47, 200, 380), 380])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([47, 200], [69, 200], [ns(69, 200, 380), 380], [ns(47, 200, 380), 380])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>
+      {/* Garden lights: short white bollards with black bands, along both edges of the main road */}
+      {[222, 262, 302, 342].flatMap(y => [[ns(47, 200, y) - 4, y], [ns(69, 200, y) + 4, y]]).map(([x, y], i) => (
+        <g key={`gl${i}`}>
+          <rect x={x - 1.6} y={y - 11} width="3.2" height="11" rx="0.6" fill="#f4f3ef" stroke="#b9b6ae" strokeWidth="0.4"/>
+          <rect x={x - 1.6} y={y - 6.5} width="3.2" height="2" fill="#26272b"/>
+          <rect x={x - 1.9} y={y - 12} width="3.8" height="1.6" rx="0.5" fill="#26272b"/>
+        </g>
+      ))}
       {/* 14 ft internal road running west to east across the south of the compound,
           lined with photinia and syzygium hedges (1 ft is about 4.4 px) */}
       {(() => {
@@ -148,6 +156,13 @@ export function ChangGharSVG() {
             if (key.startsWith("n") && inGap(x, yb)) continue;
             if (key.startsWith("s") && onSidePath(x, yb)) continue;
             out.push(bush(x, yb, i, `${key}${i}`));
+            out.push(
+              <g key={`${key}f${i}`} stroke="#c9a96b">
+                <line x1={x - 5} y1={yb - 1.5} x2={x + 5} y2={yb - 1.5} strokeWidth="0.9"/>
+                <line x1={x - 5} y1={yb - 5} x2={x + 5} y2={yb - 5} strokeWidth="0.9"/>
+                <line x1={x - 5} y1={yb + 1} x2={x - 5} y2={yb - 7} strokeWidth="1.1" stroke="#b8975a"/>
+              </g>
+            );
           }
           return out;
         };
@@ -162,12 +177,12 @@ export function ChangGharSVG() {
             ))}
             {crossings(0).map((_, i) => {
               const c0 = crossings(yN - G)[i], c1 = crossings(yN)[i];
-              return <polygon key={`cr${i}`} points={pts([c0[0], yN - G], [c0[1], yN - G], [c1[1], yN], [c1[0], yN])} fill="#d9c9a8"/>;
+              return <polygon key={`cr${i}`} points={pts([c0[0], yN - G], [c0[1], yN - G], [c1[1], yN], [c1[0], yN])} fill="#d3cfc6"/>;
             })}
             {/* 5 ft side paths south of the road, through the south hedges */}
             {[0, 1].map(i => {
               const y0 = yS, y1 = 900, a0 = sidePaths(y0)[i], a1 = sidePaths(y1)[i];
-              return <polygon key={`sp${i}`} points={pts([a0[0], y0], [a0[1], y0], [a1[1], y1], [a1[0], y1])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>;
+              return <polygon key={`sp${i}`} points={pts([a0[0], y0], [a0[1], y0], [a1[1], y1], [a1[0], y1])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>;
             })}
             {hedge(yN - G, "n2")}
             {hedge(yN - 1, "n")}
@@ -560,12 +575,32 @@ export function ChangGharSVG() {
                   {poles(SW, SE, 4, "ps")}
                   {poles(NW, SW, 1, "pw")}
                   {poles(NE, SE, 1, "pe")}
-                  {/* Palms on the east side would hide the eastern lamp heads, so draw the lights in front */}
-                  {light(NW, 1, "lnw")}{light(NE, -1, "lne")}
-                  {light(SW, 1, "lsw")}{light(SE, -1, "lse")}
                 </g>
               );
             })()}
+      {/* Four 20 ft light poles, striped black and white, at the corners of the south field, aimed at its centre */}
+      {(() => {
+        const W = (y) => ns(-116, 200, y + 42), E = (y) => ns(400, 200, y);
+        const yA = 478, yB = 800, H = 20 * 4.4;
+        const corners = [[W(yA) + 48, yA], [E(yA) - 48, yA], [W(yB) + 48, yB], [E(yB) - 48, yB]];
+        const cx = (corners[0][0] + corners[1][0] + corners[2][0] + corners[3][0]) / 4, cy = (yA + yB) / 2;
+        return (
+          <g>
+            {corners.map(([x, y], i) => {
+              const top = y - H, ang = Math.atan2(cy - top, cx - x), ca = Math.cos(ang), sa = Math.sin(ang);
+              const R = (u, v) => [x + ca * u - sa * v, top + sa * u + ca * v];
+              return (
+                <g key={`fl${i}`}>
+                  <line x1={x} y1={y} x2={x} y2={top} stroke="#f4f3ef" strokeWidth="2.4"/>
+                  <line x1={x} y1={y} x2={x} y2={top} stroke="#26272b" strokeWidth="2.4" strokeDasharray="6 6"/>
+                  <polygon points={pts(R(-1, -2), R(10, -6.5), R(10, 6.5), R(-1, 2))} fill="#3d3f45"/>
+                  <polygon points={pts(R(9, -6), R(11, -6), R(11, 6), R(9, 6))} fill="#fff6c8"/>
+                </g>
+              );
+            })}
+          </g>
+        );
+      })()}
       {/* The house and everything attached to it sit back near the north wall (under 5 ft away) */}
       <g transform="translate(0, -58)">
       {/* Concrete forecourt in front of the house, edged with flowers */}
@@ -677,7 +712,7 @@ export function ChangGharSVG() {
               const along = (t) => [foot[1][0] + (foot[0][0] - foot[1][0]) * t, foot[1][1] + (foot[0][1] - foot[1][1]) * t];
               const q1 = along(0.3), q2 = along(0.62);   // lined up with the door in the left wall
               const out = [
-                <polygon key="branch" points={pts([ns(69, 258, q2[1]), q2[1]], q2, q1, [ns(69, 258, q1[1]), q1[1]])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>,
+                <polygon key="branch" points={pts([ns(69, 258, q2[1]), q2[1]], q2, q1, [ns(69, 258, q1[1]), q1[1]])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>,
               ];
               for (let k = 3; k >= 1; k--) {
                 out.push(<polygon key={`r${k}`} points={band(outline(o(k)), outline(o(k), R))} fill="#e6d3d1"/>);
@@ -812,7 +847,7 @@ export function ChangGharSVG() {
         );
       })()}
       {/* Road on the right to the foot of the staircase, parallel to the house */}
-      <polygon points={pts([378, 308], [394, 308], [ns(394, 308, 438), 438], [ns(378, 308, 438), 438])} fill="#d9c9a8" stroke="#b8a888" strokeWidth="1"/>
+      <polygon points={pts([378, 308], [394, 308], [ns(394, 308, 438), 438], [ns(378, 308, 438), 438])} fill="#d3cfc6" stroke="#b3aea4" strokeWidth="1"/>
       </g>
       </g>
     </svg>
